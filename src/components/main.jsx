@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import '../App.css'
-import axios from 'axios'
 export const Main = ({loading, setLoading}) => {
     const [data, setData] = useState([])
     useEffect(() => {
         setLoading(true)
-        axios.get('https://mern-back-end-v2bx.onrender.com/api/nicotine/').then(res => res.json()).then(data => {
+        fetch('https://mern-back-end-v2bx.onrender.com/api/nicotine/', {mode: 'no-cors'}).then(res => res.json()).then(data => {
             setData(data.data)
             setLoading(false)
         })
