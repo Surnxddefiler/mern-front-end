@@ -27,7 +27,6 @@
       "react-app/jest"
     ]
   },
-  "proxy": "https://mern-back-end-v2bx.onrender.com:5000",
   "browserslist": {
     "production": [
       ">0.2%",
