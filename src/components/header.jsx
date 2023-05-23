@@ -10,6 +10,7 @@ import { Field, Formik} from 'formik';
 
 
 export const Header = ({ cart, setCart, setAmountsInCart }) => {
+    
     const [modal, setModal] = useState(false)
     return (
         <header className={`${modal ? 'h-screen' : ''} py-3 px-5  w-full bg-primary`}>
@@ -100,6 +101,11 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         setPayment(totalPayment);
     }, [cart]);
 
+    const tg=window.Telegram.WebApp
+
+    useEffect(()=>{
+        tg.ready
+    })
 
 
     return (
