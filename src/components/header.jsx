@@ -60,6 +60,7 @@ const handleUpdateAmount = async (arr) => {
             try {
                 await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { arr });
                 console.log('Значение amount успешно обновлено');
+                tg.sendData(JSON.stringify(arr))
             } catch (error) {
                 console.error(error);
             }

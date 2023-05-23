@@ -15,15 +15,13 @@ function App() {
 
   const [ammountInCart, setAmountsInCart] = useState(0);
 
-  
-  const tg = window.Telegram.WebApp
+
 
 
   return (
     tg.platform !=="unknown" && (
       <BrowserRouter>
         <Header cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} />
-        <div className='bg-black text-white'>{tg.platform}</div>
         <Routes>
           <Route path='/' exact element={<Main loading={loading} setLoading={setLoading} />} />
           <Route path='/product/:id' element={<Product loading={loading} setLoading={setLoading} setCart={setCart} cart={cart} ammountInCart={ammountInCart} setAmountsInCart={setAmountsInCart} />} />
