@@ -104,7 +104,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
             handleUpdateAmount(cart);
           });
         };
-      }, [cart, handleUpdateAmount]);
+      });
 
 
       useEffect(() => {
