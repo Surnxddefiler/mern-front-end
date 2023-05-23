@@ -15,13 +15,13 @@ function App() {
 
   const [ammountInCart, setAmountsInCart] = useState(0);
 
-  const isTg=true
+  const [isTg, setTg] = useState(false)
 
 
   const tg = window.Telegram.WebApp
 
   if (tg.platform !== "unknown") {
-    
+      setTg(true)
   }
 
   return (
