@@ -17,6 +17,7 @@ function App() {
 
   const [isTg, setTg] = useState(true)
 
+  setTg(true)
   const tg = window.Telegram.WebApp
 
   if (tg.platform !== "unknown") {
