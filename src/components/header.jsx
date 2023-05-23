@@ -59,11 +59,9 @@ const handleUpdateAmount = async (arr) => {
         }
         else {
             try {
-                const tg=window.Telegram.WebApp
+                
                 
                 await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { arr });
-                const sex = () => toast(`${tg}`)
-                return sex()
             } catch (error) {
                 console.error(error);
             }
@@ -84,6 +82,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         }
         console.log(val)
         console.log(cart)
+        const tg=window.Telegram.WebApp
+        tg.sendData({val})
     }
 
     const initialValue = {
