@@ -17,6 +17,7 @@ function App() {
 
 
 
+  const tg=window.Telegram.WebApp
 
   return (
     tg.platform !=="unknown" && (
