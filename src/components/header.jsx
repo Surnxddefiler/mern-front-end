@@ -10,6 +10,16 @@ import { Field, Formik} from 'formik';
 
 
 export const Header = ({ cart, setCart, setAmountsInCart }) => {
+    const tg=window.Telegram.WebApp
+    useEffect(() => {
+        if (arr.length==0) {
+            tg.MainButton.hide()
+        }
+        else {
+            tg.MainButton.show();
+        }
+    })
+
     const [modal, setModal] = useState(false)
     return (
         <header className={`${modal ? 'h-screen' : ''} py-3 px-5  w-full bg-primary`}>
@@ -71,14 +81,7 @@ const handleUpdateAmount = async (arr) => {
     }
 };
 
-useEffect(() => {
-    if (arr.length==0) {
-        tg.MainButton.hide()
-    }
-    else {
-        tg.MainButton.show();
-    }
-})
+
 
 useEffect(() => {
     tg.onEvent('mainButtonClicked', ()=>{onSendData(arr)})
