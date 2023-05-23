@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,16 +10,6 @@ import { Field, Formik} from 'formik';
 
 
 export const Header = ({ cart, setCart, setAmountsInCart }) => {
-    const tg=window.Telegram.WebApp
-    useEffect(() => {
-        if (arr.length==0) {
-            tg.MainButton.hide()
-        }
-        else {
-            tg.MainButton.show();
-        }
-    })
-
     const [modal, setModal] = useState(false)
     return (
         <header className={`${modal ? 'h-screen' : ''} py-3 px-5  w-full bg-primary`}>
@@ -73,7 +63,6 @@ const handleUpdateAmount = async (arr) => {
                 await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { arr });
                 console.log('Значение amount успешно обновлено');
                 tg.sendData(JSON.stringify(arr))
-                window.close()
             } catch (error) {
                 console.error(error);
             }
@@ -81,14 +70,6 @@ const handleUpdateAmount = async (arr) => {
     }
 };
 
-
-
-useEffect(() => {
-    tg.onEvent('mainButtonClicked', ()=>{onSendData(arr)})
-    return () => {
-        tg.offEvent('mainButtonClicked', ()=>{onSendData(arr)})
-    }
-})
 
 
 
