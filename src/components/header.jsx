@@ -108,7 +108,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
 
       useEffect(() => {
-        if (cart.length==0) {
+        if (cart.length===0) {
           tg.MainButton.hide();
         } else {
           tg.MainButton.show();
