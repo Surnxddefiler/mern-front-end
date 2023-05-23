@@ -15,17 +15,12 @@ function App() {
 
   const [ammountInCart, setAmountsInCart] = useState(0);
 
-  const [isTg, setTg] = useState(false)
-
-
+  
   const tg = window.Telegram.WebApp
 
-  if (tg.platform !== "unknown") {
-      setTg(true)
-  }
 
   return (
-    isTg && (
+    tg.platform !=="unknown" && (
       <BrowserRouter>
         <Header cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} />
         <div className='bg-black text-white'>{tg.platform}</div>
