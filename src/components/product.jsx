@@ -10,7 +10,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
 
     useEffect(() => {
         setLoading(true)
-        fetch('https://mern-back-end-v2bx.onrender.com/api/nicotine/' + linkId).then(res => res.json()).then(data => {
+        fetch('https://mern-back-end-y33v.onrender.com/api/nicotine/' + linkId).then(res => res.json()).then(data => {
             setData(data.data.product)
             setFilterName([data.data.firstFilter, data.data.secondFilter])
             setLoading(false)

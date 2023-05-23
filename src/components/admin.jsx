@@ -7,7 +7,7 @@ export const Admin = () => {
     const handleSubmit=async(e)=>{
         try{
             const notify = () => toast("успешно изменено");
-            await axios.post('https://mern-back-end-v2bx.onrender.com/api/nicotine/postProduct', { e });
+            await axios.post('https://mern-back-end-y33v.onrender.com/api/nicotine/postProduct', { e });
             return notify()
         }catch(e){
 
@@ -19,7 +19,7 @@ export const Admin = () => {
 
 
     useEffect(() => {
-        fetch('https://mern-back-end-v2bx.onrender.com/api/nicotine/').then(res => res.json()).then(data => {
+        fetch('https://mern-back-end-y33v.onrender.com/api/nicotine/').then(res => res.json()).then(data => {
             setData(data.data)
         })
     }, [])
@@ -27,7 +27,7 @@ export const Admin = () => {
 
     const onHandleChange=async(e)=>{
         try {
-            await axios.put('https://mern-back-end-v2bx.onrender.com/api/nicotine/changecost', { e });
+            await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/changecost', { e });
             console.log('Значение amount успешно обновлено');
         } catch (error) {
             const notify = () => toast("не нашло вкус");

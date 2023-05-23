@@ -58,7 +58,7 @@ const handleUpdateAmount = async (arr) => {
         }
         else {
             try {
-                await axios.put('https://mern-back-end-v2bx.onrender.com/api/nicotine/updateamount', { arr });
+                await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { arr });
                 console.log('Значение amount успешно обновлено');
             } catch (error) {
                 console.error(error);

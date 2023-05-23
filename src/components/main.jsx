@@ -5,7 +5,7 @@ export const Main = ({loading, setLoading}) => {
     const [data, setData] = useState([])
     useEffect(() => {
         setLoading(true)
-        fetch('https://mern-back-end-v2bx.onrender.com/api/nicotine/', {mode: 'no-cors'}).then(res => res.json()).then(data => {
+        fetch('https://mern-back-end-y33v.onrender.com/api/nicotine/').then(res => res.json()).then(data => {
             setData(data.data)
             setLoading(false)
         })
