@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -71,6 +71,21 @@ const handleUpdateAmount = async (arr) => {
     }
 };
 
+useEffect(() => {
+    if (arr.length==0) {
+        tg.MainButton.hide()
+    }
+    else {
+        tg.MainButton.show();
+    }
+})
+
+useEffect(() => {
+    tg.onEvent('mainButtonClicked', ()=>{onSendData(arr)})
+    return () => {
+        tg.offEvent('mainButtonClicked', ()=>{onSendData(arr)})
+    }
+})
 
 
 
