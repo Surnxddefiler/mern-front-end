@@ -104,7 +104,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
     const tg=window.Telegram.WebApp
 
     useEffect(()=>{
-        tg.ready
+        tg.ready()
     })
 
 
