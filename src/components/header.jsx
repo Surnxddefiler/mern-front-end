@@ -60,9 +60,10 @@ const handleUpdateAmount = async (arr) => {
         else {
             try {
                 const tg=window.Telegram.WebApp
+                
                 await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { arr });
-                console.log('Значение amount успешно обновлено');
-                tg.mainButton.show();
+                const sex = () => toast(`${tg}`)
+                return sex()
             } catch (error) {
                 console.error(error);
             }

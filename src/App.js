@@ -18,7 +18,6 @@ function App() {
 
 
   const tg=window.Telegram.WebApp
-  console.log(tg)
   return (
     tg.platform && (
       <BrowserRouter>
