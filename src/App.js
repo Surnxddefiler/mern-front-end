@@ -20,7 +20,7 @@ function App() {
   const tg=window.Telegram.WebApp
 
   return (
-    tg.platform !=="unknown" && (
+    tg.platform && (
       <BrowserRouter>
         <Header cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} />
         <Routes>
