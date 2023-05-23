@@ -10,21 +10,30 @@ import { Admin } from './components/admin';
 
 
 function App() {
-  const {cart, setCart}=useCart()
-  const [loading, setLoading]=useState(true)
+  const { cart, setCart } = useCart()
+  const [loading, setLoading] = useState(true)
 
   const [ammountInCart, setAmountsInCart] = useState(0);
 
-  
+  const [isTg, setTg] = useState(false)
+
+  const tg = window.Telegram.WebApp
+
+  if (tg.platform !== "unknown") {
+    setTg(true)
+  }
+
   return (
-    <BrowserRouter>
-    <Header cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart}/>
-    <Routes>
-    <Route path='/' exact element={<Main loading={loading} setLoading={setLoading}/>}/>
-    <Route path='/product/:id' element={<Product loading={loading} setLoading={setLoading} setCart={setCart} cart={cart} ammountInCart={ammountInCart} setAmountsInCart={setAmountsInCart}/>} />
-    <Route path='/admin' element={<Admin/>} />
-    </Routes>
-    </BrowserRouter>
+    isTg && (
+      <BrowserRouter>
+        <Header cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} />
+        <Routes>
+          <Route path='/' exact element={<Main loading={loading} setLoading={setLoading} />} />
+          <Route path='/product/:id' element={<Product loading={loading} setLoading={setLoading} setCart={setCart} cart={cart} ammountInCart={ammountInCart} setAmountsInCart={setAmountsInCart} />} />
+          <Route path='/admin' element={<Admin />} />
+        </Routes>
+      </BrowserRouter>
+    )
   );
 }
 
