@@ -43,7 +43,6 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 
 
 const handleUpdateAmount = async (arr) => {
-    
     const mnogo = (p) => toast(`на складе недостаточно товара ${p}`)
     const counts = {};
     const notify = () => toast("корзина пустая");
@@ -59,7 +58,6 @@ const handleUpdateAmount = async (arr) => {
         }
         else {
             try {
-                const tg=window.Telegram.WebApp
                 await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { arr });
                 console.log('Значение amount успешно обновлено');
                 tg.sendData(JSON.stringify(arr))
@@ -90,30 +88,6 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         place: "",
         time: ""
     }
-
-
-    const tg=window.Telegram.WebApp
-
-
-    useEffect(() => {
-        tg.onEvent("mainButtonClicked", () => {
-          handleUpdateAmount(cart);
-        });
-        return () => {
-          tg.offEvent("mainButtonClicked", () => {
-            handleUpdateAmount(cart);
-          });
-        };
-      });
-
-
-      useEffect(() => {
-        if (cart.length===0) {
-          tg.MainButton.hide();
-        } else {
-          tg.MainButton.show();
-        }
-      });
 
     //общее количевство денег
     const [pay, setPayment] = useState(0)
