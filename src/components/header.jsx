@@ -84,7 +84,6 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         console.log(cart)
         const tg=window.Telegram.WebApp
         tg.MainButton.show()
-        return notify()
     }
 
     const initialValue = {
