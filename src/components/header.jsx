@@ -73,13 +73,14 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         }
         console.log(val)
         console.log(cart)
+
         const tg=window.Telegram.WebApp
         tg.MainButton.show()
+        
         tg.onEvent('mainButtonClicked', async()=>{
-            tg.sendData(JSON.stringify({val, cart}))
             try {
+                tg.sendData(JSON.stringify({val, cart}))
                 await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { cart });
-                
             } catch (error) {
                 console.error(error);
             }
