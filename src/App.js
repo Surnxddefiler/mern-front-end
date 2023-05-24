@@ -22,6 +22,7 @@ function App() {
     tg.platform && (
       <BrowserRouter>
         <Header cart={cart} loading={loading} setLoading={setLoading} setCart={setCart} setAmountsInCart={setAmountsInCart} />
+        {tg.initData}
         <Routes>
           <Route path='/' exact element={<Main loading={loading} setLoading={setLoading} />} />
           <Route path='/product/:id' element={<Product loading={loading} setLoading={setLoading} setCart={setCart} cart={cart} ammountInCart={ammountInCart} setAmountsInCart={setAmountsInCart} />} />
