@@ -109,8 +109,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
     }, [cart]);
 
 
-const [other, setOther]=useState(false)
-    
+
 
     return (
         <div className="text-white mt-5">
@@ -137,14 +136,14 @@ const [other, setOther]=useState(false)
                     }}>
                         <div className="flex justify-center flex-col gap-5">
                             <Field className="bg-fifth placeholder:text-white p-5" placeholder={"телефон"} name={"phone"} />
-                            <Field onChange={(e)=>{e==="other" && setOther(true)}} className="bg-fifth placeholder:text-white p-5" as="select" name={"place"}>
+                            <Field className="bg-fifth placeholder:text-white p-5" as="select" name={"place"}>
                                 <option value="" disabled hidden key="">выберите место</option>
                                 <option className="p-5" value="центр" key="">центр</option>
                                 <option className="p-5" value="трц киев" key="">киев</option>
                                 <option className="p-5" value="центр" key="">демитекс</option>
-                                <option  className="p-5" value="other" key="">другое</option>
+                                <option  className="p-5" value="другое" key="">другое</option>
                             </Field>
-                            {other && <Field className="p-5 bg-fifth placeholder:text-white" type="place" name='place' placeholder={"ваша точка доставки"} />}
+                            <Field className="p-5 bg-fifth placeholder:text-white" type="place" name='place' placeholder={"ваша точка доставки (+10грн)"} />
                             
                             <Field className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
                         </div>
