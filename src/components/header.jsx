@@ -59,8 +59,6 @@ const handleUpdateAmount = async (arr) => {
         }
         else {
             try {
-                
-                
                 await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { arr });
             } catch (error) {
                 console.error(error);
@@ -74,6 +72,7 @@ const handleUpdateAmount = async (arr) => {
 
 const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
+    const tg=window.Telegram.WebApp
 
     const onSubmitForm = (val) => {
         if (val.phone === "" || val.time === "" || val.place === "") {
@@ -82,11 +81,11 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         }
         console.log(val)
         console.log(cart)
-        const tg=window.Telegram.WebApp
-        tg.MainButton.show()
-        tg.onEvent('mainButtonClicked', ()=>{
+        tg.onEvent('mainButtonClicked',(()=>{
+            handleUpdateAmount(cart)
             tg.sendData(JSON.stringify({val, cart}))
-        })
+        }))
+    
     }
 
     const initialValue = {
@@ -106,7 +105,16 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
     }, [cart]);
 
 
+    useEffect(()=>{
+        if(cart!==0){
+            tg.MainButton.show()
+        }
+        else{
+            tg.MainButton.hide()
+        }
+    })
 
+    
     return (
         <div className="text-white mt-5">
             {cart.map((obj, index) => {
