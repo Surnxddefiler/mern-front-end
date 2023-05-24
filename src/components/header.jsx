@@ -142,7 +142,7 @@ const [other, setOther]=useState(false)
                                 <option className="p-5" value="центр" key="">центр</option>
                                 <option className="p-5" value="трц киев" key="">киев</option>
                                 <option className="p-5" value="центр" key="">демитекс</option>
-                                <option onClick={setOther(true)} className="p-5" value="трц киев" key="">другое</option>
+                                <option onClick={()=>setOther(true)} className="p-5" value="" key="">другое</option>
                             </Field>
                             {other && <Field className="p-5 bg-fifth placeholder:text-white" type="place" name='place' placeholder={"ваша точка доставки"} />}
                             
