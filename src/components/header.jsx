@@ -84,7 +84,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         tg.MainButton.show();
         tg.onEvent('mainButtonClicked',(async()=>{
             await handleUpdateAmount(cart)
-            await tg.sendData(JSON.stringify({val, cart}))
+            tg.sendData(JSON.stringify({val, cart}))
         }))
     
     }
