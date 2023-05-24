@@ -4,13 +4,13 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from "react-router-dom";
-import { Field, Formik} from 'formik';
+import { Field, Formik } from 'formik';
 
 
 
 
 export const Header = ({ cart, setCart, setAmountsInCart }) => {
-    
+
     const [modal, setModal] = useState(false)
     return (
         <header className={`${modal ? 'h-screen' : ''} py-3 px-5  w-full bg-primary`}>
@@ -59,9 +59,9 @@ const handleUpdateAmount = async (arr) => {
         }
         else {
             try {
-                
-                
+
                 await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { arr });
+
             } catch (error) {
                 console.error(error);
             }
@@ -76,15 +76,36 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
 
     const onSubmitForm = (val) => {
-        if (val.phone === "" || val.time === "" || val.place === "") {
-            const notify = () => toast("заполните все поля");
-            return notify()
-        }
-        console.log(val)
-        console.log(cart)
-        
-        tg.onEvent('mainButtonClicked', ()=>{
-            tg.sendData(JSON.stringify({val, cart}))
+
+        tg.onEvent('mainButtonClicked', async () => {
+            if (val.phone === "" || val.time === "" || val.place === "") {
+                const notify = () => toast("заполните все поля");
+                return notify()
+            }
+
+            const mnogo = (p) => toast(`на складе недостаточно товара ${p}`)
+            const counts = {};
+
+            cart.forEach((obj) => {
+                counts[obj.name] = (counts[obj.name] || 0) + 1;
+            });
+            for (const obj of cart) {
+                if (counts[obj.name] > obj.ammount) {
+                    return mnogo(obj.name)
+                }
+                else {
+                    try {
+                        await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { cart });
+                        tg.sendData(JSON.stringify({ val, cart }))
+
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+            }
+
+
+            
         })
     }
 
@@ -104,13 +125,13 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         setPayment(totalPayment);
     }, [cart]);
 
-    useEffect(()=>{
-        if (cart.length!==0) {
+    useEffect(() => {
+        if (cart.length !== 0) {
             tg.MainButton.show()
         }
-        
-    })
-    const tg=window.Telegram.WebApp
+
+    }, [cart])
+    const tg = window.Telegram.WebApp
 
     return (
         <div className="text-white mt-5">
