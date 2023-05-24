@@ -80,11 +80,10 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
         tg.onEvent('mainButtonClicked', async()=>{
             try {
-                await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { cart });
+                await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { cart }).then(()=>{ tg.sendData(JSON.stringify({val, cart}))});
             } catch (error) {
                 console.error(error);
             }
-            tg.sendData(JSON.stringify({val, cart}))
         })
     }
 
