@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path='/' exact element={<Main loading={loading} setLoading={setLoading} />} />
           <Route path='/product/:id' element={<Product loading={loading} setLoading={setLoading} setCart={setCart} cart={cart} ammountInCart={ammountInCart} setAmountsInCart={setAmountsInCart} />} />
-          <Route path='/admin' element={<Admin />} />
+          <Route path='/admin' exact element={<Admin />} />
         </Routes>
       </BrowserRouter>
     )
