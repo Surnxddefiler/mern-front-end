@@ -86,7 +86,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
             handleUpdateAmount(cart)
             setTimeout(()=>{
                 tg.sendData(JSON.stringify({val, cart}))
-            }, 3000)
+            }, 100)
             
         }))
     
