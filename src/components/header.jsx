@@ -82,10 +82,9 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         }
         console.log(val)
         console.log(cart)
-        const tg=window.Telegram.WebApp
-        tg.MainButton.show()
+        
         tg.onEvent('mainButtonClicked', ()=>{
-            tg.sendData(JSON.stringify({val}))
+            tg.sendData(JSON.stringify({val, cart}))
         })
     }
 
@@ -105,7 +104,13 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         setPayment(totalPayment);
     }, [cart]);
 
-
+    useEffect(()=>{
+        if (cart.length!==0) {
+            tg.MainButton.show()
+        }
+        
+    })
+    const tg=window.Telegram.WebApp
 
     return (
         <div className="text-white mt-5">
