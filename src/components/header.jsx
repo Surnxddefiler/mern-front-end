@@ -130,7 +130,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
             tg.MainButton.show()
         }
 
-    }, [cart])
+    }, [cart,tg])
     const tg = window.Telegram.WebApp
 
     return (
