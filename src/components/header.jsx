@@ -109,8 +109,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
     }, [cart]);
 
 
-
-
+    console.log(initialValue)
     return (
         <div className="text-white mt-5">
             {cart.map((obj, index) => {
@@ -141,7 +140,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                                 <option className="p-5" value="центр" key="">центр</option>
                                 <option className="p-5" value="трц киев" key="">киев</option>
                                 <option className="p-5" value="центр" key="">демитекс</option>
-                                <option  className="p-5" value="другое" key="">другое</option>
+                                <option className="p-5" value="другое" key="">другое</option>
                             </Field>
                             <Field className="p-5 bg-fifth placeholder:text-white" type="place" name='place' placeholder={"ваша точка доставки (+10грн)"} />
                             
