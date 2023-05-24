@@ -82,9 +82,12 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         console.log(val)
         console.log(cart)
         tg.MainButton.show();
-        tg.onEvent('mainButtonClicked',(async()=>{
-            await handleUpdateAmount(cart)
-            tg.sendData(JSON.stringify({val, cart}))
+        tg.onEvent('mainButtonClicked',(()=>{
+            handleUpdateAmount(cart)
+            setTimeout(()=>{
+                tg.sendData(JSON.stringify({val, cart}))
+            }, 3000)
+            
         }))
     
     }
