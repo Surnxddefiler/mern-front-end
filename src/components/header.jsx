@@ -74,7 +74,8 @@ const handleUpdateAmount = async (arr) => {
 
 const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
-
+    const tg = window.Telegram.WebApp
+    
     const onSubmitForm = (val) => {
 
         tg.onEvent('mainButtonClicked', async () => {
@@ -131,7 +132,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         }
 
     }, [cart,tg])
-    const tg = window.Telegram.WebApp
+
 
     return (
         <div className="text-white mt-5">
