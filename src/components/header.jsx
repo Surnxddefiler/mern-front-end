@@ -14,7 +14,6 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
     const [modal, setModal] = useState(false)
     return (
         <header className={`${modal ? 'h-screen' : ''} py-3 px-5  w-full bg-primary`}>
-            
             <div className="justify-between flex items-center">
                 <NavLink to="/">
                     <img className={"w-12 rounded-2xl"} src="/logo2.jpg" alt="" />
@@ -58,6 +57,15 @@ const handleUpdateAmount = async (arr) => {
         if (counts[obj.name] > obj.ammount) {
             return mnogo(obj.name)
         }
+        else {
+            try {
+                
+                
+                await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { arr });
+            } catch (error) {
+                console.error(error);
+            }
+        }
     }
 };
 
@@ -74,16 +82,10 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         }
         console.log(val)
         console.log(cart)
-
         const tg=window.Telegram.WebApp
         tg.MainButton.show()
-
-        tg.onEvent('mainButtonClicked', async()=>{
-            try {
-                await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { cart }).then(()=>{ tg.sendData(JSON.stringify({val, cart}))});
-            } catch (error) {
-                console.error(error);
-            }
+        tg.onEvent('mainButtonClicked', ()=>{
+            tg.sendData(JSON.stringify({val, cart}))
         })
     }
 
