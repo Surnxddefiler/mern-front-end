@@ -57,7 +57,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
 
                 const ammount = (amm) => {
                     if (amm > 10) {
-                        return "больше 10"
+                        return "достаточно"
                     }
                     else if (amm < 10) {
                         return "мало"
@@ -74,10 +74,10 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                             <ToastContainer/>
                             </div>
                         </div>
-                        <div className="text-secondary">{filterName[1]}: {obj.nicotine}</div>
-                        <div className="text-third">Количество: {ammount(obj.ammount)} </div>
-                        <div className="text-fourth">{filterName[0]}: {obj.mark}</div>
-                        <div className="text-fifth" >стоимость: {obj.cost}₴</div>
+                        <div className="text-secondary">{filterName[1]} - {obj.nicotine}</div>
+                        <div className="text-third">Количество - {ammount(obj.ammount)} </div>
+                        <div className="text-fourth">{filterName[0]} - {obj.mark}</div>
+                        <div className="text-fifth" >стоимость - {obj.cost}₴</div>
 
                     </div>
                 )

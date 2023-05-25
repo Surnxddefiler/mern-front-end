@@ -40,7 +40,7 @@ export const Admin = () => {
         nicotine: "",
         cost: 1,
         mark: "",
-        ammount: 1
+        ammount: 1 
     }
     const initialChange={
         type: "",

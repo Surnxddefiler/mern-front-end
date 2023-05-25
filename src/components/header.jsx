@@ -13,7 +13,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
     
     const [modal, setModal] = useState(false)
     return (
-        <header className={`${modal ? 'h-screen' : ''} py-3 px-5  w-full bg-primary`}>
+        <header className={`${modal ? 'h-screen' : ''} py-3 px-5  w-screen overflow-auto bg-primary`}>
             <div className="justify-between flex items-center">
                 <NavLink to="/">
                     <img className={"w-12 rounded-2xl"} src="/logo2.jpg" alt="" />
@@ -74,6 +74,13 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
     const tg=window.Telegram.WebApp
 
+    useEffect(() => {
+        tg.MainButton.setParams({
+            text: 'подтвердить заказ'
+        })
+    })
+
+
     const onSubmitForm = (val) => {
         if (val.phone === "" || val.time === "" || val.place === "") {
             const notify = () => toast("заполните все поля");
@@ -109,7 +116,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
     }, [cart]);
 
 
-    console.log(initialValue)
+
     return (
         <div className="text-white mt-5">
             {cart.map((obj, index) => {
@@ -138,18 +145,18 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             <Field className="bg-fifth placeholder:text-white p-5" as="select" name={"place"}>
                                 <option value="" disabled hidden key="">выберите место</option>
                                 <option className="p-5" value="центр" key="">центр</option>
-                                <option className="p-5" value="трц киев" key="">киев</option>
-                                <option className="p-5" value="центр" key="">демитекс</option>
-                                <option className="p-5" value="другое" key="">другое</option>
+                                <option className="p-5" value="трц киев" key="">трц киев</option>
+                                <option className="p-5" value="демитекс" key="">дэмитекс</option>
+                                <option className="p-5" value="5 школа" key="">5 школа</option>
+                                <option className="p-5" value="демитекс" key="">институт связи</option>
+                                <option className="p-5" value="демитекс" key="">зыгина</option>
+                                <option className="p-5" value="демитекс" key="">сенная</option>
+                                <option className="p-5" value="другие" key="">доставка (10-80₴)</option>
                             </Field>
-                            <Field className="p-5 bg-fifth placeholder:text-white" type="place" name='place' placeholder={"ваша точка доставки (+10грн)"} />
-                            
                             <Field className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
                         </div>
                         <div>
-                            <button type="submit" onClick={() => { handleUpdateAmount(cart) }
-
-                            } className="text-2xl mt-5">
+                            <button type="submit" className="text-2xl mt-5">
                                 офрмить заказ
                             </button>
                             <ToastContainer />
