@@ -56,17 +56,17 @@ export const Admin = () => {
                         handleSubmit()
                     }}>
                         <h1 className="text-white">ДОБАВИТЬ НОВЫЙ ПРОДУКТ</h1>
-                        <Field className="" as="select" name={"type"}>
+                        <Field className="bg-fifth placeholder:text-white p-5" as="select" name={"type"}>
                             <option value="" disabled hidden key="">что добавить</option>
                             <option className="p-5" value="жидкости" key="">жидкости</option>
                             <option className="p-5" value="картриджи" key="">картриджи</option>
                             <option className="p-5" value="одноразки" key="">одноразки</option>
                         </Field>
-                        <Field className="" type="number" placeholder={"количество"} name={"ammount"} />
-                        <Field className="" placeholder={"название"} name={"name"} />
-                        <Field className="" placeholder={"никотин-тяги/сопротивление/никотин-объем"} name={"nicotine"} />
-                        <Field className="" placeholder={"марка"} name={"mark"} />
-                        <Field className="" type="number" placeholder={"цена"} name={"cost"} />
+                        <Field className="bg-fifth placeholder:text-white p-5" type="number" placeholder={"количество"} name={"ammount"} />
+                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"название"} name={"name"} />
+                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"никотин-тяги/сопротивление/никотин-объем"} name={"nicotine"} />
+                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"марка"} name={"mark"} />
+                        <Field className="bg-fifth placeholder:text-white p-5" type="number" placeholder={"цена"} name={"cost"} />
                         <div>
                             <button type="submit"  className="text-2xl text-white mt-5">
                                 добавить
