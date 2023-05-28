@@ -70,7 +70,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                         <div className="flex justify-between items-center">
                             <div className="text-2xl font-bold">{obj.name}</div>
                             <div>
-                            <i className="fa-solid fa-plus fa-2xl text-white" onClick={()=>{handleAddToCart(ammountInCart)}}></i>
+                            <i className="fa-solid fa-plus fa-2xl text-white active:text-red-500" onClick={()=>{handleAddToCart(ammountInCart)}}></i>
                             <ToastContainer/>
                             </div>
                         </div>
