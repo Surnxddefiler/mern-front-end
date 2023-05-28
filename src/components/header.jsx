@@ -4,13 +4,13 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from "react-router-dom";
-import { Field, Formik} from 'formik';
+import { Field, Formik } from 'formik';
 
 
 
 
 export const Header = ({ cart, setCart, setAmountsInCart }) => {
-    
+
     const [modal, setModal] = useState(false)
     return (
         <header className={`${modal ? 'h-screen' : ''} py-3 px-5  w-screen overflow-auto bg-primary`}>
@@ -72,7 +72,7 @@ const handleUpdateAmount = async (arr) => {
 
 const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
-    const tg=window.Telegram.WebApp
+    const tg = window.Telegram.WebApp
 
     useEffect(() => {
         tg.MainButton.setParams({
@@ -89,14 +89,14 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         console.log(val)
         console.log(cart)
         tg.MainButton.show();
-        tg.onEvent('mainButtonClicked',(()=>{
+        tg.onEvent('mainButtonClicked', (() => {
             handleUpdateAmount(cart)
-            setTimeout(()=>{
-                tg.sendData(JSON.stringify({val, cart}))
+            setTimeout(() => {
+                tg.sendData(JSON.stringify({ val, cart, place }))
             }, 1000)
-            
+
         }))
-    
+
     }
 
     const initialValue = {
@@ -115,7 +115,19 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         setPayment(totalPayment);
     }, [cart]);
 
-
+    //ончедж для доставки
+    const [place, setPlace] = useState("")
+    const [deliv, setDeliv] = useState(false)
+    const onChangePlace = (e) => {
+        setPlace(e.target.value)
+        if (e.target.value === "другое") {
+            setPlace("")
+            setDeliv(true)
+        }
+        else {
+            setPlace(e.target.value)
+        }
+    }
 
     return (
         <div className="text-white mt-5">
@@ -142,7 +154,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                     }}>
                         <div className="flex justify-center flex-col gap-5">
                             <Field className="bg-fifth placeholder:text-white p-5" placeholder={"телефон"} name={"phone"} />
-                            <Field className="bg-fifth placeholder:text-white p-5" as="select" name={"place"}>
+                            {!deliv && <select value={place} className="bg-fifth placeholder:text-white p-5" onChange={onChangePlace}>
                                 <option value="" disabled hidden key="">выберите место</option>
                                 <option className="p-5" value="центр" key="">центр</option>
                                 <option className="p-5" value="трц киев" key="">трц киев</option>
@@ -151,9 +163,15 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                                 <option className="p-5" value="демитекс" key="">институт связи</option>
                                 <option className="p-5" value="демитекс" key="">зыгина</option>
                                 <option className="p-5" value="демитекс" key="">сенная</option>
-                                <option className="p-5" value="другие" key="">доставка (10-80₴)</option>
-                            </Field>
+                                <option className="p-5" value="другое" key="">доставка (10-80₴)</option>
+                            </select>
+                            }
+                            {deliv && <div>
+                                <input placeholder="ваше место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
+                                <button className="ml-5" onClick={() => { setDeliv(false) }}>выбрать из существующих</button>
+                            </div>}
                             <Field className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
+
                         </div>
                         <div>
                             <button type="submit" className="text-2xl mt-5">
