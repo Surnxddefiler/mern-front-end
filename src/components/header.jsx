@@ -82,7 +82,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
 
     const onSubmitForm = (val) => {
-        if (val.phone === "" || val.time === "" || val.place === "") {
+        if (val.phone === "" || val.time === "" || place === "") {
             const notify = () => toast("заполните все поля");
             return notify()
         }
@@ -101,7 +101,6 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
     const initialValue = {
         phone: "",
-        place: "",
         time: ""
     }
 
