@@ -5,14 +5,19 @@ import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 export const Admin = () => {
     const handleSubmit=async(e)=>{
-        try{
-            const notify = () => toast("успешно изменено");
-            await axios.post('https://mern-back-end-y33v.onrender.com/api/nicotine/postProduct', { e })
-            return notify()
-        }catch(e){
-            const notify = () => toast("успешно не добавлено");
+        if(e.type==="" || e.name==="" || e.nicotine==="" || e.mark===""){
+            const notify = () => toast("не заполнены все строки");
             return notify()
         }
+        else{
+            try{
+                await axios.post('https://mern-back-end-y33v.onrender.com/api/nicotine/postProduct', { e })
+            }catch(e){
+                const notify = () => toast("успешно не добавлено");
+                return notify()
+            }
+        }
+        
     }
 
 
