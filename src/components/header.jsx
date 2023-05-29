@@ -73,7 +73,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
     useEffect(() => {
         tg.MainButton.setParams({
-            text: 'подтвердить заказ'
+            text: 'Подтвердить заказ'
         })
     })
 
@@ -143,11 +143,11 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             setAmountsInCart(prev => prev - 1)
                         }
                         }>
-                        удалить
+                        Удалить
                     </div>
                 </div>
             })}
-            <div className="text-2xl border-t-4 border-white">общая стоимость: {pay}₴</div>
+            <div className="text-2xl border-t-4 border-white">Стоимость заказа - {pay}₴</div>
             <Formik onSubmit={onSubmitForm} initialValues={initialValue}>
                 {({ handleSubmit }) => (
                     <form onSubmit={(e) => {
@@ -155,29 +155,29 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                         handleSubmit()
                     }}>
                         <div className="flex justify-center flex-col gap-5">
-                            <Field className="bg-fifth placeholder:text-white p-5" placeholder={"телефон"} name={"phone"} />
+                            <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона"} name={"phone"} />
                             {!deliv && <select value={place} className="bg-fifth placeholder:text-white p-5" onChange={onChangePlace}>
-                                <option value="" disabled hidden key="">выберите место</option>
-                                <option className="p-5" value="центр" key="">центр</option>
-                                <option className="p-5" value="трц киев" key="">трц киев</option>
+                                <option value="" disabled hidden key="">Точка выдачи -</option>
                                 <option className="p-5" value="демитекс" key="">дэмитекс</option>
-                                <option className="p-5" value="5 школа" key="">5 школа</option>
                                 <option className="p-5" value="демитекс" key="">институт связи</option>
-                                <option className="p-5" value="демитекс" key="">зыгина</option>
-                                <option className="p-5" value="демитекс" key="">сенная</option>
-                                <option className="p-5" value="другое" key="">доставка (10-80₴)</option>
+                                <option className="p-5" value="трц киев" key="">трц киев</option>
+                                <option className="p-5" value="зыгина" key="">зыгина</option>
+                                <option className="p-5" value="5 школа" key="">5 школа</option>
+                                <option className="p-5" value="сенная" key="">сенная</option>
+                                <option className="p-5" value="центр" key="">центр</option>
+                                <option className="p-5" value="другое" key="">Доставка от 10-ти ₴ до 80-ти ₴</option>
                             </select>
                             }
                             {deliv && <div>
-                                <input placeholder="ваше место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
-                                <button className="ml-5" onClick={() => { setDeliv(false) }}>выбрать из существующих</button>
+                                <input placeholder="Адрес / место доставки - " value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
+                                <button className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих</button>
                             </div>}
                             <Field className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
 
                         </div>
                         <div>
                             <button type="submit" className="text-2xl mt-5">
-                                офрмить заказ
+                            Оформить заказ
                             </button>
                             <ToastContainer />
                         </div>
