@@ -46,10 +46,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 const handleUpdateAmount = async (arr) => {
     const mnogo = (p) => toast(`на складе недостаточно товара ${p}`)
     const counts = {};
-    const notify = () => toast("корзина пустая");
-    if (arr.length === 0) {
-        return notify()
-    }
+
     arr.forEach((obj) => {
         counts[obj.name] = (counts[obj.name] || 0) + 1;
     });
@@ -86,12 +83,18 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
             const notify = () => toast("заполните все поля");
             return notify()
         }
+        
+        if (val.length === 0) {
+            const notify = () => toast("корзина пустая");
+            return notify()
+        }
         console.log(val)
         console.log(cart)
         tg.MainButton.show();
         tg.onEvent('mainButtonClicked', (() => {
             handleUpdateAmount(cart)
             setTimeout(() => {
+
                 tg.sendData(JSON.stringify({ val, cart, place }))
             }, 1000)
 

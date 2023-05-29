@@ -1,39 +1,39 @@
 import axios from "axios";
 import { Field, Formik } from "formik"
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify"
-
+import 'react-toastify/dist/ReactToastify.css';
 export const Admin = () => {
     const handleSubmit=async(e)=>{
         try{
             const notify = () => toast("успешно изменено");
-            await axios.post('https://mern-back-end-y33v.onrender.com/api/nicotine/postProduct', { e });
+            await axios.post('https://mern-back-end-y33v.onrender.com/api/nicotine/postProduct', { e })
             return notify()
         }catch(e){
-
+            const notify = () => toast("успешно не добавлено");
+            return notify()
         }
     }
 
 
-    const [data, setData] = useState([])
+    // const [data, setData] = useState([])
 
 
-    useEffect(() => {
-        fetch('https://mern-back-end-y33v.onrender.com/api/nicotine/').then(res => res.json()).then(data => {
-            setData(data.data)
-        })
-    }, [])
+    // useEffect(() => {
+    //     fetch('https://mern-back-end-y33v.onrender.com/api/nicotine/').then(res => res.json()).then(data => {
+    //         setData(data.data)
+    //     })
+    // }, [])
 
 
-    const onHandleChange=async(e)=>{
-        try {
-            await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/changecost', { e });
-            console.log('Значение amount успешно обновлено');
-        } catch (error) {
-            const notify = () => toast("не нашло вкус");
-            return notify
-        }
-    }
+    // const onHandleChange=async(e)=>{
+    //     try {
+    //         await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/changecost', { e });
+    //     } catch (error) {
+    //         const notify = () => toast("не нашло вкус");
+    //         return notify
+    //     }
+    // }
     const initialValue = {
         type: "",
         name: "",
@@ -42,14 +42,17 @@ export const Admin = () => {
         mark: "",
         ammount: 1 
     }
-    const initialChange={
-        type: "",
-        name: "",
-        cost: ""
-    }
+    // const initialChange={
+    //     type: "",
+    //     name: "",
+    //     cost: ""
+    // }
     return (
         <div>
-            <Formik initialValues={initialValue} onSubmit={handleSubmit}>
+            <Formik initialValues={initialValue} onSubmit={(values, { resetForm }) => {
+    handleSubmit(values);
+    resetForm({ values: '' }); // Reset the form fields
+}}>
                 {({ handleSubmit }) => (
                     <form className="flex flex-col justify-center gap-4 items-center" onSubmit={(e) => {
                         e.preventDefault();
@@ -68,7 +71,7 @@ export const Admin = () => {
                         <Field className="bg-fifth placeholder:text-white p-5" placeholder={"марка"} name={"mark"} />
                         <Field className="bg-fifth placeholder:text-white p-5" type="number" placeholder={"цена"} name={"cost"} />
                         <div>
-                            <button type="submit"  className="text-2xl text-white mt-5">
+                            <button type="submit"  className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
                                 добавить
                             </button>
                             <ToastContainer />
@@ -80,32 +83,35 @@ export const Admin = () => {
             
             <div>
                 
-                <Formik initialValues={initialChange} onSubmit={onHandleChange}>
+                {/* <Formik initialValues={initialChange} onSubmit={(values, { resetForm }) => {
+    onHandleChange(values);
+    resetForm({ values: '' }); // Reset the form fields
+}}>
                 {({ handleSubmit }) => (
-                    <form className="flex flex-col justify-center gap-4 items-center" onSubmit={(e) => {
+                    <form className="mt-5 flex flex-col justify-center gap-4 items-center" onSubmit={(e) => {
                         e.preventDefault();
                         handleSubmit()
                     }}>
-                        <h1>изменить цену</h1>
-                        <Field as="select" name="type">
+                        <h1 className="text-black text-2xl">изменить цену</h1>
+                        <Field className="bg-fifth placeholder:text-white p-5" as="select" name="type">
                             <option value="" disabled hidden>что изменить</option>
                             {data.map(obj=>{
                                 return <option value={obj.type} key="">{obj.type}</option>
                             })}
                         </Field>
-                        <Field placeholder="название продукта" name="name"/>
-                        <Field placeholder="новая цена" type="number" name="cost"/>
+                        <Field className="bg-fifth placeholder:text-white p-5" placeholder="название продукта" name="name"/>
+                        <Field className="bg-fifth placeholder:text-white p-5" placeholder="новая цена" type="number" name="cost"/>
 
                         <div>
-                            <button type="submit"  className="text-2xl text-white mt-5">
-                                добавить
+                            <button type="submit"  className="text-2xl text-white mt-5 bg-fifth placeholder:text-white p-5">
+                                изменить
                             </button>
                             <ToastContainer />
                         </div>
                     </form>
 
                 )}
-                </Formik>
+                </Formik> */}
             </div>
         </div>
     )
