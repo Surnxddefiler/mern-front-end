@@ -83,8 +83,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
             const notify = () => toast("заполните все поля");
             return notify()
         }
-        
-        if (val.length === 0) {
+
+        if (cart.length === 0) {
             const notify = () => toast("корзина пустая");
             return notify()
         }
