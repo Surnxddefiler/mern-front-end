@@ -13,7 +13,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 
     const [modal, setModal] = useState(false)
     return (
-        <header className={`${modal ? 'h-screen' : ''} py-3 px-5 sticky top-0 w-screen overflow-auto bg-primary`}>
+        <header className={`${modal ? 'h-screen' : 'sticky top-0'} py-3 px-5  w-screen overflow-auto bg-primary`}>
             <div className="justify-between flex items-center">
                 <NavLink to="/">
                     <img className={"w-12 rounded-2xl"} src="/logo2.jpg" alt="" />
