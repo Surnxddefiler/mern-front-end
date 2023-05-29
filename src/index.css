@@ -10,7 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #090a0f;
   background: url(../public/logo2.jpg)  0 50px/100% 100%;
-  min-height: 100vh;
+  height: 100%;
   backdrop-filter: blur(30px);
   overflow-x: hidden;
 }
