@@ -1,24 +1,36 @@
 import axios from "axios";
 import { Field, Formik } from "formik"
+import { useRef } from "react";
 // import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 export const Admin = () => {
-    const handleSubmit=async(e)=>{
-        if(e.type==="" || e.name==="" || e.nicotine==="" || e.mark===""){
+    const handleSubmit = async (e) => {
+        if (e.type === "" || e.name === "" || e.nicotine === "" || e.mark === "") {
             const notify = () => toast("не заполнены все строки");
             return notify()
         }
-        else{
-            try{
+        else {
+            try {
                 await axios.post('https://mern-back-end-y33v.onrender.com/api/nicotine/postProduct', { e })
-            }catch(e){
+            } catch (e) {
                 const notify = () => toast("успешно не добавлено");
                 return notify()
             }
         }
-        
+
     }
+
+    const nameRef = useRef(null);
+    const nicotineRef = useRef(null);
+    const markRef = useRef(null);
+    const costRef = useRef(null);
+    const handleKeyDown = (e, inputRef) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            inputRef.current.focus();
+        }
+    };
 
 
     // const [data, setData] = useState([])
@@ -45,7 +57,7 @@ export const Admin = () => {
         nicotine: "",
         cost: 1,
         mark: "",
-        ammount: 1 
+        ammount: 1
     }
     // const initialChange={
     //     type: "",
@@ -55,9 +67,9 @@ export const Admin = () => {
     return (
         <div>
             <Formik initialValues={initialValue} onSubmit={(values, { resetForm }) => {
-    handleSubmit(values);
-    resetForm({ values: '' }); // Reset the form fields
-}}>
+                handleSubmit(values);
+                resetForm({ values: '' }); // Reset the form fields
+            }}>
                 {({ handleSubmit }) => (
                     <form className="flex flex-col justify-center gap-4 items-center" onSubmit={(e) => {
                         e.preventDefault();
@@ -70,13 +82,13 @@ export const Admin = () => {
                             <option className="p-5" value="картриджи" key="">картриджи</option>
                             <option className="p-5" value="одноразки" key="">одноразки</option>
                         </Field>
-                        <Field className="bg-fifth placeholder:text-white p-5" type="number" placeholder={"количество"} name={"ammount"} />
-                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Вкус"} name={"name"} />
-                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Дополнение"} name={"nicotine"} />
-                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Марка"} name={"mark"} />
-                        <Field className="bg-fifth placeholder:text-white p-5" type="number" placeholder={"цена"} name={"cost"} />
+                        <Field className="bg-fifth placeholder:text-white p-5" type="number" placeholder={"количество"} name={"ammount"} onKeyDown={(e) => handleKeyDown(e, nameRef)} />
+                        <Field className="bg-fifth placeholder:text-white p-5" innerRef={nameRef} placeholder={"Вкус"} name={"name"} onKeyDown={(e) => handleKeyDown(e, nicotineRef)} />
+                        <Field className="bg-fifth placeholder:text-white p-5" innerRef={nicotineRef} placeholder={"Дополнение"} name={"nicotine"} onKeyDown={(e) => handleKeyDown(e, markRef)} />
+                        <Field className="bg-fifth placeholder:text-white p-5" innerRef={markRef} placeholder={"Марка"} name={"mark"} onKeyDown={(e) => handleKeyDown(e, costRef)} />
+                        <Field className="bg-fifth placeholder:text-white p-5" innerRef={costRef} type="number" placeholder={"цена"} name={"cost"} />
                         <div>
-                            <button type="submit"  className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
+                            <button type="submit" className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
                                 Добавить
                             </button>
                             <ToastContainer />
@@ -85,9 +97,9 @@ export const Admin = () => {
 
                 )}
             </Formik>
-            
+
             <div>
-                
+
                 {/* <Formik initialValues={initialChange} onSubmit={(values, { resetForm }) => {
     onHandleChange(values);
     resetForm({ values: '' }); // Reset the form fields
