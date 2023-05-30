@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,6 +10,7 @@ import { Field, Formik } from 'formik';
 
 
 export const Header = ({ cart, setCart, setAmountsInCart }) => {
+    
 
     const [modal, setModal] = useState(false)
     return (
@@ -71,6 +72,16 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
     const tg = window.Telegram.WebApp
 
+
+    const selectRef = useRef(null);
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            selectRef.current.focus();
+        }
+    };
+
+
     useEffect(() => {
         tg.MainButton.setParams({
             text: 'Подтвердить заказ'
@@ -94,7 +105,6 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         tg.onEvent('mainButtonClicked', (() => {
             handleUpdateAmount(cart)
             setTimeout(() => {
-
                 tg.sendData(JSON.stringify({ val, cart, place }))
             }, 1000)
 
@@ -155,8 +165,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                         handleSubmit()
                     }}>
                         <div className="flex justify-center flex-col gap-5">
-                            <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона"} name={"phone"} />
-                            {!deliv && <select value={place} className="bg-fifth placeholder:text-white p-5" onChange={onChangePlace}>
+                            <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона"} name={"phone"} onKeyDown={handleKeyDown} />
+                            {!deliv && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white p-5" onChange={onChangePlace}>
                                 <option value="" disabled hidden key="">Точка выдачи -</option>
                                 <option className="p-5" value="демитекс" key="">дэмитекс</option>
                                 <option className="p-5" value="демитекс" key="">институт связи</option>
@@ -177,7 +187,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                         </div>
                         <div>
                             <button type="submit" className="text-2xl mt-5">
-                            Оформить заказ
+                                Оформить заказ
                             </button>
                             <ToastContainer />
                         </div>

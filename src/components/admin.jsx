@@ -71,13 +71,13 @@ export const Admin = () => {
                             <option className="p-5" value="одноразки" key="">одноразки</option>
                         </Field>
                         <Field className="bg-fifth placeholder:text-white p-5" type="number" placeholder={"количество"} name={"ammount"} />
-                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"название"} name={"name"} />
-                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"никотин-тяги/сопротивление/никотин-объем"} name={"nicotine"} />
-                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"марка"} name={"mark"} />
+                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Вкус"} name={"name"} />
+                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Дополнение"} name={"nicotine"} />
+                        <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Марка"} name={"mark"} />
                         <Field className="bg-fifth placeholder:text-white p-5" type="number" placeholder={"цена"} name={"cost"} />
                         <div>
                             <button type="submit"  className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
-                                добавить
+                                Добавить
                             </button>
                             <ToastContainer />
                         </div>

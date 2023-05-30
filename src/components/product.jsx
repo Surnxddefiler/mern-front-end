@@ -8,6 +8,11 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     const [data, setData] = useState([])
     const [filterName, setFilterName] = useState([])
 
+
+    
+
+
+
     useEffect(() => {
         setLoading(true)
         fetch('https://mern-back-end-y33v.onrender.com/api/nicotine/' + linkId).then(res => res.json()).then(data => {
@@ -77,7 +82,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                         <div className="text-secondary">{filterName[1]} - {obj.nicotine}</div>
                         <div className="text-third">Количество - {ammount(obj.ammount)} </div>
                         <div className="text-fourth">{filterName[0]} - {obj.mark}</div>
-                        <div className="text-fifth" >стоимость - {obj.cost}₴</div>
+                        <div className="text-fifth" >стоимость - {obj.cost} ₴</div>
 
                     </div>
                 )
