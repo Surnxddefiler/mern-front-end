@@ -84,7 +84,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
     useEffect(() => {
         tg.MainButton.setParams({
-            text: 'Подтвердить заказ'
+            text: 'Подтвердить заказ',
+            color: 'rgba(254,56,117,255)'
         })
     })
 
