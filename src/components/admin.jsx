@@ -77,10 +77,10 @@ export const Admin = () => {
                     }}>
                         <h1 className="text-white">ДОБАВИТЬ НОВЫЙ ПРОДУКТ</h1>
                         <Field className="bg-fifth placeholder:text-white p-5" as="select" name={"type"}>
-                            <option value="" disabled hidden key="">что добавить</option>
-                            <option className="p-5" value="жидкости" key="">жидкости</option>
-                            <option className="p-5" value="картриджи" key="">картриджи</option>
-                            <option className="p-5" value="одноразки" key="">одноразки</option>
+                            <option value="" disabled hidden key="">Что добавить</option>
+                            <option className="p-5" value="жидкости" key="">Жидкости</option>
+                            <option className="p-5" value="картриджи" key="">Картриджи</option>
+                            <option className="p-5" value="одноразки" key="">Одноразки</option>
                         </Field>
                         <Field className="bg-fifth placeholder:text-white p-5" type="number" placeholder={"количество"} name={"ammount"} onKeyDown={(e) => handleKeyDown(e, nameRef)} />
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nameRef} placeholder={"Вкус"} name={"name"} onKeyDown={(e) => handleKeyDown(e, nicotineRef)} />

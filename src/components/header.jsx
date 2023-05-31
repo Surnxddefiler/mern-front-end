@@ -91,12 +91,12 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
     const onSubmitForm = (val) => {
         if (val.phone === "" || val.time === "" || place === "") {
-            const notify = () => toast("заполните все поля");
+            const notify = () => toast("Заполните все поля");
             return notify()
         }
 
         if (cart.length === 0) {
-            const notify = () => toast("корзина пустая");
+            const notify = () => toast("Корзина пустая");
             return notify()
         }
         console.log(val)
@@ -157,7 +157,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                     </div>
                 </div>
             })}
-            <div className="text-2xl border-t-4 border-white">Стоимость заказа - {pay}₴</div>
+            <div className="text-2xl border-t-4 border-white">Стоимость заказа - {pay} ₴</div>
             <Formik onSubmit={onSubmitForm} initialValues={initialValue}>
                 {({ handleSubmit }) => (
                     <form onSubmit={(e) => {
@@ -168,13 +168,13 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона"} name={"phone"} onKeyDown={handleKeyDown} />
                             {!deliv && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white p-5" onChange={onChangePlace}>
                                 <option value="" disabled hidden key="">Точка выдачи -</option>
-                                <option className="p-5" value="демитекс" key="">дэмитекс</option>
-                                <option className="p-5" value="демитекс" key="">институт связи</option>
-                                <option className="p-5" value="трц киев" key="">трц киев</option>
-                                <option className="p-5" value="зыгина" key="">зыгина</option>
-                                <option className="p-5" value="5 школа" key="">5 школа</option>
-                                <option className="p-5" value="сенная" key="">сенная</option>
-                                <option className="p-5" value="центр" key="">центр</option>
+                                <option className="p-5" value="демитекс" key="">• Дэмитекс</option>
+                                <option className="p-5" value="демитекс" key="">• Институт связи</option>
+                                <option className="p-5" value="трц киев" key="">• Трц киев</option>
+                                <option className="p-5" value="зыгина" key="">• Зыгина</option>
+                                <option className="p-5" value="5 школа" key="">• 5 школа</option>
+                                <option className="p-5" value="сенная" key="">• Сенная</option>
+                                <option className="p-5" value="центр" key="">• Центр</option>
                                 <option className="p-5" value="другое" key="">Доставка от 10-ти ₴ до 80-ти ₴</option>
                             </select>
                             }
