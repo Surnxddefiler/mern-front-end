@@ -14,7 +14,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 
     const [modal, setModal] = useState(false)
     return (
-        <header className={`${modal ? 'h-screen' : 'sticky top-0'} py-3 px-5  w-screen overflow-auto bg-primary`}>
+        <header className={`${modal ? 'h-screen' : 'sticky top-0'} py-3 px-5  w-screen overflow-hidden bg-primary`}>
             <div className="justify-between flex items-center">
                 <NavLink to="/">
                     <img className={"w-12 rounded-2xl"} src="/logo2.jpg" alt="" />
@@ -140,10 +140,11 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
     }
     return (
         <div className="text-white mt-5">
+            <div className="overflow-auto max-h-44">
             {cart.map((obj, index) => {
                 return <div className="flex justify-between mb-5 items-center">
                     <div className="w-1/3" > <span>{obj.mark}</span> <span>{obj.name}</span></div>
-                    <div className="w-1/3">{obj.cost}₴</div>
+                    <div className="w-1/3">{obj.cost} ₴</div>
                     <div
                         onClick={() => {
                             setCart((prevCart) => prevCart.filter((_, i) => i !== index))
@@ -154,6 +155,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                     </div>
                 </div>
             })}
+            </div>
             <div className="text-2xl border-t-4 border-white">Стоимость заказа - {pay} ₴</div>
             <Formik onSubmit={onSubmitForm} initialValues={initialValue}>
                 {({ handleSubmit }) => (
