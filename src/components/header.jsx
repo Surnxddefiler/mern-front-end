@@ -44,26 +44,26 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 
 
 
-const handleUpdateAmount = async (arr) => {
-    const mnogo = (p) => toast(`на складе недостаточно товара ${p}`)
-    const counts = {};
+// const handleUpdateAmount = async (arr) => {
+//     const mnogo = (p) => toast(`на складе недостаточно товара ${p}`)
+//     const counts = {};
 
-    arr.forEach((obj) => {
-        counts[obj.name] = (counts[obj.name] || 0) + 1;
-    });
-    for (const obj of arr) {
-        if (counts[obj.name] > obj.ammount) {
-            return mnogo(obj.name)
-        }
-        else {
-            try {
-                await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { arr });
-            } catch (error) {
-                console.error(error);
-            }
-        }
-    }
-};
+//     arr.forEach((obj) => {
+//         counts[obj.name] = (counts[obj.name] || 0) + 1;
+//     });
+//     for (const obj of arr) {
+//         if (counts[obj.name] > obj.ammount) {
+//             return mnogo(obj.name)
+//         }
+//         else {
+//             try {
+//                 await axios.put('https://mern-back-end-y33v.onrender.com/api/nicotine/updateamount', { arr });
+//             } catch (error) {
+//                 console.error(error);
+//             }
+//         }
+//     }
+// };
 
 
 
@@ -104,10 +104,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         console.log(cart)
         tg.MainButton.show();
         tg.onEvent('mainButtonClicked', (() => {
-            handleUpdateAmount(cart)
-            setTimeout(() => {
                 tg.sendData(JSON.stringify({ val, cart, place }))
-            }, 1000)
 
         }))
 
@@ -141,10 +138,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
             setPlace(e.target.value)
         }
     }
-    console.log(tg.initData)
     return (
         <div className="text-white mt-5">
-            <div>{tg.initData}</div>
             {cart.map((obj, index) => {
                 return <div className="flex justify-between mb-5 items-center">
                     <div className="w-1/3" > <span>{obj.mark}</span> <span>{obj.name}</span></div>

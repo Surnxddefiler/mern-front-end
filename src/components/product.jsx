@@ -56,18 +56,11 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                         const notify = () => toast("корзина полная");
                         return notify()
                     }
-                    setCart([...cart, { mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost, ammount: obj.ammount }]);
+                    setCart([...cart, { mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost }]);
                     setAmountsInCart(prev => prev + 1)
                 };
 
-                const ammount = (amm) => {
-                    if (amm > 10) {
-                        return "достаточно"
-                    }
-                    else if (amm < 10) {
-                        return "мало"
-                    }
-                }
+
 
                 return (
                     <div className="bg-primary my-5 flex flex-col justify-center px-5 py-5 rounded-3xl" >
@@ -80,7 +73,6 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                             </div>
                         </div>
                         <div className="text-secondary">{filterName[1]} - {obj.nicotine}</div>
-                        <div className="text-third">Количество - {ammount(obj.ammount)} </div>
                         <div className="text-fourth">{filterName[0]} - {obj.mark}</div>
                         <div className="text-fifth" >стоимость - {obj.cost} ₴</div>
 
