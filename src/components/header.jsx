@@ -143,6 +143,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
     return (
         <div className="text-white mt-5">
+            {tg.initData}
             {cart.map((obj, index) => {
                 return <div className="flex justify-between mb-5 items-center">
                     <div className="w-1/3" > <span>{obj.mark}</span> <span>{obj.name}</span></div>
