@@ -57,7 +57,6 @@ export const Admin = () => {
         nicotine: "",
         cost: 1,
         mark: "",
-        ammount: 1
     }
     // const initialChange={
     //     type: "",
@@ -82,7 +81,6 @@ export const Admin = () => {
                             <option className="p-5" value="картриджи" key="">Картриджи</option>
                             <option className="p-5" value="одноразки" key="">Одноразки</option>
                         </Field>
-                        <Field className="bg-fifth placeholder:text-white p-5" type="number" placeholder={"количество"} name={"ammount"} onKeyDown={(e) => handleKeyDown(e, nameRef)} />
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nameRef} placeholder={"Вкус"} name={"name"} onKeyDown={(e) => handleKeyDown(e, nicotineRef)} />
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nicotineRef} placeholder={"Дополнение"} name={"nicotine"} onKeyDown={(e) => handleKeyDown(e, markRef)} />
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={markRef} placeholder={"Марка"} name={"mark"} onKeyDown={(e) => handleKeyDown(e, costRef)} />
