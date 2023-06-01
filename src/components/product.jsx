@@ -9,7 +9,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     const [filterName, setFilterName] = useState([])
 
 
-    
+
 
 
 
@@ -27,59 +27,62 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     //
     return (
         <>
-        {loading? "":
-        <div className=" text-white mt-5">
-            <div className="bg-primary py-5  flex justify-between w-full px-5 rounded-3xl">
-                <select onChange={(e) => { setMark(e.target.value) }} className="p-2 bg-fifth rounded-2xl" name="" id="">
-                    <option value="" className="bg-fifth text-black" hidden key={"mark-hidden"} >{filterName[0]}</option>
-                    <option value="" className="bg-fifth text-black" key={"mark-none"} >-</option>
-                    {data.map((obj, i) => {
-                        return <option className="bg-fifth text-black" key={`mark-${i}`} value={`${obj.mark}`}>{obj.mark}</option>
-                    })}
-                </select>
-                <select onChange={(e) => { setTyagi(e.target.value) }} className="bg-fifth p-2 rounded-2xl" name="" id="">
-                    <option value="" className="bg-fifth text-black" hidden>{filterName[1]}</option>
-                    <option value="" className="bg-fifth text-black" >-</option>
-                    {data.map((obj) => {
-                        return <option className="bg-fifth text-black" value={`${obj.nicotine}`}>{obj.nicotine}</option>
-                    })}
-                </select>
-            </div>
-            {data.filter((obj) => {
-                const filter = obj.mark.toLowerCase()
-                const secondFilter = obj.nicotine.toLowerCase()
-                return filter.includes(mark.toLowerCase()) && secondFilter.includes(tyagi.toLowerCase())
-            }).map((obj) => {
-                //обаботчик для колечества в складе
-                const handleAddToCart = (ammountInCart) => {
-                    if (ammountInCart >= 50) {
-                        const notify = () => toast("корзина полная");
-                        return notify()
-                    }
-                    setCart([...cart, { mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost }]);
-                    setAmountsInCart(prev => prev + 1)
-                };
-
-
-
-                return (
-                    <div className="bg-primary my-5 flex flex-col justify-center px-5 py-5 rounded-3xl" >
-
-                        <div className="flex justify-between items-center">
-                            <div className="text-2xl font-bold">{obj.name}</div>
-                            <div>
-                            <i className="fa-solid fa-plus fa-2xl text-white active:text-red-500" onClick={()=>{handleAddToCart(ammountInCart)}}></i>
-                            <ToastContainer/>
-                            </div>
-                        </div>
-                        <div className="text-secondary">{filterName[1]} - {obj.nicotine}</div>
-                        <div className="text-fourth">{filterName[0]} - {obj.mark}</div>
-                        <div className="text-fifth" >стоимость - {obj.cost} ₴</div>
-
+            {loading ? "" :
+                <div className=" text-white mt-5">
+                    <div className="bg-primary py-5  flex justify-between w-full px-5 rounded-3xl">
+                        <select onChange={(e) => { setMark(e.target.value) }} className="p-2 bg-fifth rounded-2xl" name="" id="">
+                            <option value="" className="bg-fifth text-black" hidden key={"mark-hidden"} >{filterName[0]}</option>
+                            <option value="" className="bg-fifth text-black" key={"mark-none"} >-</option>
+                            {data.map((obj, i) => {
+                                return <option className="bg-fifth text-black" key={`mark-${i}`} value={`${obj.mark}`}>{obj.mark}</option>
+                            })}
+                        </select>
+                        <select onChange={(e) => { setTyagi(e.target.value) }} className="bg-fifth p-2 rounded-2xl" name="" id="">
+                            <option value="" className="bg-fifth text-black" hidden>{filterName[1]}</option>
+                            <option value="" className="bg-fifth text-black" >-</option>
+                            {data.map((obj) => {
+                                return <option className="bg-fifth text-black" value={`${obj.nicotine}`}>{obj.nicotine}</option>
+                            })}
+                        </select>
                     </div>
-                )
-            })}</div>
+                    <div className="last:pb-2">
+                    {data.filter((obj) => {
+                        const filter = obj.mark.toLowerCase()
+                        const secondFilter = obj.nicotine.toLowerCase()
+                        return filter.includes(mark.toLowerCase()) && secondFilter.includes(tyagi.toLowerCase())
+                    }).map((obj) => {
+                        //обаботчик для колечества в складе
+                        const handleAddToCart = (ammountInCart) => {
+                            if (ammountInCart >= 50) {
+                                const notify = () => toast("корзина полная");
+                                return notify()
+                            }
+                            setCart([...cart, { mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost }]);
+                            setAmountsInCart(prev => prev + 1)
+                        };
+
+
+
+                        return (
+                            <div className="bg-primary my-5 flex flex-col justify-center px-5 py-5 rounded-3xl" >
+
+                                <div className="flex justify-between items-center">
+                                    <div className="text-2xl font-bold">{obj.name}</div>
+                                    <div>
+                                        <i className="fa-solid fa-plus fa-2xl text-white active:text-red-500" onClick={() => { handleAddToCart(ammountInCart) }}></i>
+                                        <ToastContainer />
+                                    </div>
+                                </div>
+                                <div className="text-secondary">{filterName[1]} - {obj.nicotine}</div>
+                                <div className="text-fourth">{filterName[0]} - {obj.mark}</div>
+                                <div className="text-fifth" >стоимость - {obj.cost} ₴</div>
+
+                            </div>
+                        )
+                    })}
+                    </div>
+                </div>
             }
-            </>
+        </>
     )
 }
