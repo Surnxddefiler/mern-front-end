@@ -14,7 +14,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 
     const [modal, setModal] = useState(false)
     return (
-        <header className={`${modal ? 'h-screen sticky top-0' : 'sticky top-0'} py-3 px-5 w-s  overflow-hidden bg-primary`}>
+        <header className={`${modal ? 'h-screen sticky top-0' : 'sticky top-0'} py-3 px-5 w-s  overflow-auto bg-primary`}>
             <div className="justify-between flex items-center">
                 <NavLink to="/" onClick={()=>{
                     setModal(false)
@@ -142,7 +142,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
     }
     return (
         <div className="text-white mt-5">
-            <div className="overflow-auto max-h-32">
+            <div className="">
             {cart.map((obj, index) => {
                 return <div className="flex justify-between mb-5 items-center">
                     <div className="w-1/3" > <span>{obj.mark}</span> <span>{obj.name}</span></div>
