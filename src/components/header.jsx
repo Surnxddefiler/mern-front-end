@@ -114,7 +114,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
     const initialValue = {
         phone: "",
-        time: ""
+        time: "00:00"
     }
 
     //общее количевство денег
@@ -183,7 +183,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                                 <input placeholder="Адрес / место доставки - " value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
                                 <button className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих</button>
                             </div>}
-                            <div className="flex gap-3 items-center"><span className="text-xl text-white">Время: </span><Field className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} /></div>
+                            <Field className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
 
                         </div>
                         <div>

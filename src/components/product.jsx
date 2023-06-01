@@ -78,7 +78,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                                         </div>
                                     </div>
                                     <div className="text-secondary">{filterName[1]} - {obj.nicotine}</div>
-                                    <div className="text-fourth">{filterName[0]} - {obj.mark}</div>
+                                    <div className="text-fourth">{filterName[1]==="Сопротивление" ? "" : `${filterName[0]} - ${obj.mark}`}</div>
                                     <div className="text-fifth" >стоимость - {obj.cost} ₴</div>
 
                                 </div>
