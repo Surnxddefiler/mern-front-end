@@ -5,7 +5,7 @@ export const Main = ({loading, setLoading}) => {
     const [data, setData] = useState([])
     useEffect(() => {
         setLoading(true)
-        fetch('https://mern-back-end-y33v.onrender.com/api/nicotine/').then(res => res.json()).then(data => {
+        fetch('https://fuzzy-jay-drawers.cyclic.app/api/nicotine/').then(res => res.json()).then(data => {
             setData(data.data)
             setLoading(false)
         })

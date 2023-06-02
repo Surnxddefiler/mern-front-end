@@ -12,7 +12,7 @@ export const Admin = () => {
         }
         else {
             try {
-                await axios.post('https://mern-back-end-y33v.onrender.com/api/nicotine/postProduct', { e })
+                await axios.post('https://fuzzy-jay-drawers.cyclic.app/api/nicotine/postProduct', { e })
             } catch (e) {
                 const notify = () => toast("успешно не добавлено");
                 return notify()
