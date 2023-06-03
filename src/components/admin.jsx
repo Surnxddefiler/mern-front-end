@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Field, Formik } from "formik"
-import { useRef } from "react";
+import { useRef, useState } from "react";
 // import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
@@ -127,7 +127,55 @@ export const Admin = () => {
 
                 )}
                 </Formik> */}
+                <Delete/>
             </div>
+        </div>
+    )
+}
+// форма удаления
+const Delete=()=>{
+    const [data, setData]=useState([])
+    const onChangeValue=(e)=>{
+            fetch('https://fuzzy-jay-drawers.cyclic.app/api/nicotine/' + e.target.value).then(res=>res.json()).then((data)=>{
+                setData(data.data.product)
+            })
+        
+    }
+    const deleteOnClick=async(arr)=>{
+       
+        const newData = data.filter(
+            (obj) =>
+              obj.mark !== arr.mark &&
+              obj.name !== arr.name &&
+              obj.nicotine !== arr.nicotine
+          );
+          setData(newData);
+
+        try{
+            await axios.put('https://fuzzy-jay-drawers.cyclic.app/api/nicotine/updateamount', { arr });
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+    return(
+        <div className="flex justify-center flex-col items-center">
+        <h1 className="text-3xl my-5">что Удалить</h1>
+        <select className="bg-fifth placeholder:text-white p-5"  onChange={onChangeValue} name="" id="">
+                    <option value="" key="" disabled hidden>Что удалить?</option>
+                    <option value="646a7d448834fb372c5a751e" key="">Жидкости</option>
+                    <option value="646894d611e5b1bd7d4c57bd" key="">Картриджи</option>
+                    <option value="646886eb11e5b1bd7d4c57bb" key="">Одноразки</option>
+        </select>
+        <div className="mt-16 flex justify-center items-center flex-wrap gap-11">
+        {data.length!==0 &&
+        data.map((obj)=>{
+            return <div onClick={()=>{
+                deleteOnClick({mark: obj.mark, name: obj.name, nicotine: obj.nicotine })
+            }} className="bg-black p-6 rounded-lg text-white">{obj.mark} {obj.name} {obj.nicotine}</div>
+        })
+        }
+        </div>
         </div>
     )
 }
