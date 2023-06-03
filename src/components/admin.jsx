@@ -170,7 +170,7 @@ const Delete=()=>{
         <div className="mt-16 flex justify-center items-center flex-wrap gap-11">
         {data.length!==0 &&
         data.map((obj)=>{
-            return <div onClick={()=>{
+            return <div onDoubleClick={()=>{
                 deleteOnClick({mark: obj.mark, name: obj.name, nicotine: obj.nicotine })
             }} className="bg-black p-6 rounded-lg text-white">{obj.mark} {obj.name} {obj.nicotine}</div>
         })
