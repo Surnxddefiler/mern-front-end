@@ -15,7 +15,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
 
     useEffect(() => {
         setLoading(true)
-        fetch('https://fuzzy-jay-drawers.cyclic.app/api/nicotine/' + linkId).then(res => res.json()).then(data => {
+        fetch('https://mernnode-production.up.railway.app/api/nicotine/' + linkId).then(res => res.json()).then(data => {
             setData(data.data.product)
             setFilterName([data.data.firstFilter, data.data.secondFilter])
             setLoading(false)
