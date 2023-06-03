@@ -169,13 +169,13 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона"} name={"phone"} onKeyDown={handleKeyDown} />
                             {!deliv && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white p-5" onChange={onChangePlace}>
                                 <option value="" disabled hidden key="">Точка выдачи -</option>
-                                <option className="p-5" value="демитекс" key="">• Дэмитекс</option>
-                                <option className="p-5" value="демитекс" key="">• Институт связи</option>
-                                <option className="p-5" value="трц киев" key="">• Трц киев</option>
-                                <option className="p-5" value="зыгина" key="">• Зыгина</option>
-                                <option className="p-5" value="5 школа" key="">• 5 школа</option>
-                                <option className="p-5" value="сенная" key="">• Сенная</option>
-                                <option className="p-5" value="центр" key="">• Центр</option>
+                                <option className="p-5" value="• Дэмитекс" key="">• Дэмитекс</option>
+                                <option className="p-5" value="• Институт связи" key="">• Институт связи</option>
+                                <option className="p-5" value="• Трц киев" key="">• Трц киев</option>
+                                <option className="p-5" value="• Зыгина" key="">• Зыгина</option>
+                                <option className="p-5" value="• 5 школа" key="">• 5 школа</option>
+                                <option className="p-5" value="• Сенная" key="">• Сенная</option>
+                                <option className="p-5" value="• Центр" key="">• Центр</option>
                                 <option className="p-5" value="другое" key="">Доставка от 10-ти ₴ до 80-ти ₴</option>
                             </select>
                             }

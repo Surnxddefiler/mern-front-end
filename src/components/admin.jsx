@@ -162,7 +162,7 @@ const Delete=()=>{
         <div className="flex justify-center flex-col items-center">
         <h1 className="text-3xl my-5">что Удалить</h1>
         <select className="bg-fifth placeholder:text-white p-5"  onChange={onChangeValue} name="" id="">
-                    <option value="" key="" disabled hidden>Что удалить?</option>
+                    <option value="" key="" hidden >Что удалить?</option>
                     <option value="646a7d448834fb372c5a751e" key="">Жидкости</option>
                     <option value="646894d611e5b1bd7d4c57bd" key="">Картриджи</option>
                     <option value="646886eb11e5b1bd7d4c57bb" key="">Одноразки</option>
