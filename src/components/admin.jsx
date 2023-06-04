@@ -55,7 +55,7 @@ export const Admin = () => {
         type: "",
         name: "",
         nicotine: "",
-        cost: 1,
+        cost: Number,
         mark: "",
     }
     // const initialChange={
@@ -76,7 +76,7 @@ export const Admin = () => {
                     }}>
                         <h1 className="text-white">ДОБАВИТЬ НОВЫЙ ПРОДУКТ</h1>
                         <Field className="bg-fifth placeholder:text-white p-5" as="select" name={"type"}>
-                            <option value="" disabled hidden key="">Что добавить</option>
+                            <option value="" disabled hidden key="">Что добавить ?</option>
                             <option className="p-5" value="жидкости" key="">Жидкости</option>
                             <option className="p-5" value="картриджи" key="">Картриджи</option>
                             <option className="p-5" value="одноразки" key="">Одноразки</option>
@@ -160,9 +160,8 @@ const Delete=()=>{
     }
     return(
         <div className="flex justify-center flex-col items-center">
-        <h1 className="text-3xl my-5">что Удалить</h1>
-        <select className="bg-fifth placeholder:text-white p-5"  onChange={onChangeValue} name="" id="">
-                    <option value="" key="" hidden >Что удалить?</option>
+        <select className="bg-fifth placeholder:text-white p-5 mt-5"  onChange={onChangeValue} name="" id="">
+                    <option value="" key="" hidden >Что удалить ?</option>
                     <option value="646a7d448834fb372c5a751e" key="">Жидкости</option>
                     <option value="646894d611e5b1bd7d4c57bd" key="">Картриджи</option>
                     <option value="646886eb11e5b1bd7d4c57bb" key="">Одноразки</option>
