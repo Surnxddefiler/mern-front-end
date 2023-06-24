@@ -29,7 +29,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
         <>
             {loading ? "" :
                 <div className=" text-white mt-5">
-                    <div className="bg-primary py-5  flex justify-between w-full px-5 rounded-3xl">
+                    <div className="bg-primary py-5  flex justify-between w-full  rounded-3xl">
                         <select onChange={(e) => { setMark(e.target.value) }} className="p-2 bg-fifth rounded-2xl" name="" id="">
                             <option value="" className="bg-fifth text-black" hidden key={"mark-hidden"} >{filterName[0]}</option>
                             <option value="" className="bg-fifth text-black" key={"mark-none"} >-</option>
