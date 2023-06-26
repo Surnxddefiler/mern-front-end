@@ -84,7 +84,7 @@ export const Admin = () => {
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nameRef} placeholder={"Вкус"} name={"name"} onKeyDown={(e) => handleKeyDown(e, nicotineRef)} />
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nicotineRef} placeholder={"Дополнение"} name={"nicotine"} onKeyDown={(e) => handleKeyDown(e, markRef)} />
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={markRef} placeholder={"Марка"} name={"mark"} onKeyDown={(e) => handleKeyDown(e, costRef)} />
-                        <Field className="bg-fifth placeholder:text-white p-5" innerRef={costRef} type="number" placeholder={"цена"} name={"cost"} />
+                        <Field className="bg-fifth placeholder:text-white p-5" innerRef={costRef} type="number" placeholder={"Цена"} name={"cost"} />
                         <div>
                             <button type="submit" className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
                                 Добавить
@@ -171,7 +171,7 @@ const Delete=()=>{
         data.map((obj)=>{
             return <div onDoubleClick={()=>{
                 deleteOnClick({mark: obj.mark, name: obj.name, nicotine: obj.nicotine })
-            }} className="bg-black p-6 rounded-lg text-white">{obj.mark} {obj.name} {obj.nicotine}</div>
+            }} className="bg-black p-6 rounded-xl text-white">{obj.mark} {obj.name} {obj.nicotine}</div>
         })
         }
         </div>
