@@ -145,10 +145,10 @@ const Delete=()=>{
        
         const newData = data.filter(
             (obj) =>
-              obj.mark !== arr.mark &&
-              obj.name !== arr.name &&
+              obj.mark !== arr.mark ||
+              obj.name !== arr.name ||
               obj.nicotine !== arr.nicotine
-          );
+          );          
           setData(newData);
 
         try{
