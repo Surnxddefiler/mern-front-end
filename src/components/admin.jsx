@@ -12,7 +12,7 @@ export const Admin = () => {
         }
         else {
             try {
-                await axios.post('https://mernnode-production.up.railway.app/api/nicotine/postProduc', { e })
+                await axios.post('https://mernnode-production.up.railway.app/api/nicotine/postProduct', { e })
             } catch (e) {
                 const notify = () => toast("успешно не добавлено");
                 return notify()
