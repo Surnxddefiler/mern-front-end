@@ -12,7 +12,7 @@ export const Admin = () => {
         }
         else {
             try {
-                await axios.post('https://mernnode-production.up.railway.app/api/nicotine/postProduct', { e })
+                await axios.post('https://mernnode-production-873d.up.railway.app/api/nicotine/postProduct', { e })
             } catch (e) {
                 const notify = () => toast("успешно не добавлено");
                 return notify()
@@ -136,7 +136,7 @@ export const Admin = () => {
 const Delete=()=>{
     const [data, setData]=useState([])
     const onChangeValue=(e)=>{
-            fetch('https://mernnode-production.up.railway.app/api/nicotine/' + e.target.value).then(res=>res.json()).then((data)=>{
+            fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/' + e.target.value).then(res=>res.json()).then((data)=>{
                 setData(data.data.product)
             })
         
@@ -152,7 +152,7 @@ const Delete=()=>{
           setData(newData);
 
         try{
-            await axios.put('https://mernnode-production.up.railway.app/api/nicotine/updateamount', { arr });
+            await axios.put('https://mernnode-production-873d.up.railway.app/api/nicotine/updateamount', { arr });
         }
         catch(e){
             console.log(e)

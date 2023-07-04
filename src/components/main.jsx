@@ -5,7 +5,7 @@ export const Main = ({loading, setLoading}) => {
     const [data, setData] = useState([])
     useEffect(() => {
         setLoading(true)
-        fetch('https://mernnode-production.up.railway.app/api/nicotine/').then(res => res.json()).then(data => {
+        fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/').then(res => res.json()).then(data => {
             setData(data.data)
             setLoading(false)
         })
