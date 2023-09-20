@@ -78,7 +78,7 @@ export const Admin = () => {
                         <Field className="bg-fifth placeholder:text-white p-5" as="select" name={"type"}>
                             <option value="" disabled hidden key="">Что добавить ?</option>
                             <option className="p-5" value="жидкости" key="">Жидкости</option>
-                            <option className="p-5" value="картриджи" key="">Картриджи</option>
+                            <option className="p-5" value="МНОГОРАЗКИ / КАРТРИДЖИ" key=""> МНОГОРАЗКИ / КАРТРИДЖИ</option>
                             <option className="p-5" value="одноразки" key="">Одноразки</option>
                         </Field>
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nameRef} placeholder={"Вкус"} name={"name"} onKeyDown={(e) => handleKeyDown(e, nicotineRef)} />
