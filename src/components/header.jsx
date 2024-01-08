@@ -196,7 +196,9 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                                 <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
                                 <div className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
                             </div>}
-                            <Field ref={setTimeFieldRef} className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
+                            <Field  innerRef={(ref) => {
+        setTimeFieldRef.current = ref;
+    }} className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
 
                         </div>
                         <div>

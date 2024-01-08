@@ -18,7 +18,7 @@ export const Main = ({loading, setLoading}) => {
             {data.map((obj) => {
                 return (
                     <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/'+ obj._id}>
-                            <button className='rounded-3xl button py-10'><span className='rounded-3xl'>{obj.type}</span><i></i> </button>
+                            <button onClick={()=>{setLoading(true)}} className='rounded-3xl button py-10'><span className='rounded-3xl'>{obj.type}</span><i></i> </button>
                     </NavLink>
                 )
             })}
