@@ -14,7 +14,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 
     const [modal, setModal] = useState(false)
     return (
-        <header className={`${modal ? 'pb-52 h-screen sticky top-0' : 'sticky top-0'} py-3 px-5 w-s  overflow-scroll bg-primary`}>
+        <header className={`${modal ? 'pb-52 h-screen sticky top-0' : 'sticky top-0'} py-3 px-5 w-s  overflow-auto bg-primary`}>
             <div className="justify-between flex items-center">
                 <NavLink to="/" onClick={()=>{
                     setModal(false)
