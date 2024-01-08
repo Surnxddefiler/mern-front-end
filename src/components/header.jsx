@@ -181,7 +181,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             }
                             {deliv && <div>
                                 <input placeholder="Адрес / место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
-                                <button className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</button>
+                                {/* <button className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</button> */}
                             </div>}
                             <Field className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
 
