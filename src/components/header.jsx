@@ -78,8 +78,10 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
     const selectRef = useRef(null);
 
     const handleKeyDown = (e) => {
+        if (!deliv){
         if (e.key === 'Enter') {
             selectRef.current.focus();
+        }
         }
     };
 
