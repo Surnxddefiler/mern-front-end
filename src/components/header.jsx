@@ -14,7 +14,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 
     const [modal, setModal] = useState(false)
     return (
-        <header className={`${modal ? 'pb-52 h-screen sticky top-0' : 'sticky top-0'} py-3 px-5 w-s  overflow-y-scroll bg-primary`}>
+        <header className={`${modal ? 'pb-52 h-screen sticky top-0 overflow-y-scroll' : 'sticky top-0'} py-3 px-5 w-s   bg-primary`}>
             <div className="justify-between flex items-center">
                 <NavLink to="/" onClick={()=>{
                     setModal(false)
@@ -77,11 +77,24 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
     const selectRef = useRef(null);
 
+
+    const setTimeFieldRef = useRef(null);
+
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            selectRef.current.focus();
+            if (deliv) {
+                // Если фокус в поле ввода текста, предотвращаем стандартное поведение (отправку формы) и обрабатываем по необходимости
+                e.preventDefault();
+                // Добавьте вашу логику обработки клавиши Enter в поле ввода текста здесь
+                // Например, можно переместить фокус на следующее поле ввода
+                setTimeFieldRef.current.focus();
+            } else {
+                // Если фокус в выпадающем списке, фокусируемся на selectRef
+                selectRef.current.focus();
+            }
         }
     };
+    
 
 
     useEffect(() => {
@@ -180,10 +193,10 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             </select>
                             }
                             {deliv && <div>
-                                <input placeholder="Адрес / место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
-                                <button className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</button>
+                                <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
+                                <div className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
                             </div>}
-                            <Field className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
+                            <Field ref={setTimeFieldRef} className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
 
                         </div>
                         <div>
