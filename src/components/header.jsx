@@ -14,7 +14,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 
     const [modal, setModal] = useState(false)
     return (
-        <header className={`${modal ? 'pb-52 h-screen sticky top-0' : 'sticky top-0'} py-3 px-5 w-s  overflow-auto bg-primary`}>
+        <header className={`${modal ? 'pb-52 h-screen sticky top-0' : 'sticky top-0'} py-3 px-5 w-s  overflow-y-scroll bg-primary`}>
             <div className="justify-between flex items-center">
                 <NavLink to="/" onClick={()=>{
                     setModal(false)
@@ -180,8 +180,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             </select>
                             }
                             {deliv && <div>
-                                <Field placeholder="Адрес / место доставки" onKeyDown={handleKeyDown} value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
-                                <div className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
+                                <input placeholder="Адрес / место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
+                                <button className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</button>
                             </div>}
                             <Field className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
 
