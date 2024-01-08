@@ -180,7 +180,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             </select>
                             }
                             {deliv && <div>
-                                <input placeholder="Адрес / место доставки" onKeyDown={handleKeyDown} value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
+                                <Field placeholder="Адрес / место доставки" onKeyDown={handleKeyDown} value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
                                 <div className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
                             </div>}
                             <Field className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
