@@ -7,10 +7,6 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
 
     const [data, setData] = useState([])
     const [filterName, setFilterName] = useState([])
-
-    //index producta для активного состояния
-    const [indexes, setIndexes]=useState([])
-
 console.log(cart)
 
     useEffect(() => {
