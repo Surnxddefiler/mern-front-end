@@ -11,7 +11,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     //index producta для активного состояния
     const [indexes, setIndexes]=useState([])
 
-console.log(indexes)
+console.log(cart)
 
     useEffect(() => {
         fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/' + linkId).then(res => res.json()).then(data => {
@@ -65,17 +65,21 @@ console.log(indexes)
                             };
 
 
+                            const productObject={ mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost }
+                            const isProductInCart = cart.some(item => (
+                                item.mark === productObject.mark &&
+                                item.name === productObject.name &&
+                                item.nicotine === productObject.nicotine &&
+                                item.cost === productObject.cost
+                              ));
 
                             return (
                                 <div className="bg-primary my-5 flex flex-col justify-center px-5 py-5 rounded-3xl" >
 
                                     <div className="flex justify-between items-center">
-                                        <div className={`${indexes.includes(i) ? 'text-red-500' : ''} text-2xl font-bold`}>{obj.name}</div>
+                                        <div className={`${isProductInCart ? 'text-red-500' : ''} text-2xl font-bold`}>{obj.name}</div>
                                         <div>
-                                            <i className="fa-solid fa-plus fa-2xl text-white active:text-red-500 focus:text-red-500" onClick={() => {
-                                                setIndexes(prevIndexes => [...prevIndexes, i]);
-                                                 handleAddToCart(ammountInCart) }
-                                                 }></i>
+                                            <i className="fa-solid fa-plus fa-2xl text-white active:text-red-500 focus:text-red-500" onClick={() => {handleAddToCart(ammountInCart) }}></i>
                                             <ToastContainer />
                                         </div>
                                     </div>
