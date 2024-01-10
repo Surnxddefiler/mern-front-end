@@ -13,6 +13,8 @@ function App() {
   const { cart, setCart } = useCart()
   const [loading, setLoading] = useState(true)
 
+  const [isMain, setIsMain]=useState(true)
+
   const [ammountInCart, setAmountsInCart] = useState(0);
 
 

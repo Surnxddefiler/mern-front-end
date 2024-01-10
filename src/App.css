@@ -105,3 +105,9 @@
     color: white;
   }
 }
+.logo__wrapper i::before{
+  transition-duration: 0.3s;
+}
+.logo__wrapper:hover i::before{
+  color: rgba(254,56,117,255);
+}

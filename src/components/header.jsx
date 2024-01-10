@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react"
 // import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Field, Formik } from 'formik';
 
 
@@ -12,14 +12,26 @@ import { Field, Formik } from 'formik';
 export const Header = ({ cart, setCart, setAmountsInCart }) => {
     
 
+
+    //проверка на локацию, если локация не мейн страница то будет стрелка возле лого
+    const [isHome, setHome]=useState(true)
+    const location = useLocation();
+
+    useEffect(()=>{
+        if(location.pathname!=='/'){
+            setHome(false)
+        }
+    },[location])
+
     const [modal, setModal] = useState(false)
     return (
         <header className={`${modal ? 'pb-52 h-screen sticky top-0 overflow-y-scroll' : 'sticky top-0'} py-3 px-5 w-s   bg-primary`}>
             <div className="justify-between flex items-center">
-                <NavLink to="/" onClick={()=>{
+                <NavLink className={'flex items-center logo__wrapper'} to="/" onClick={()=>{
                     setModal(false)
                 }}>
-                    <img className={"w-12 rounded-2xl"} src="/logo2.jpg" alt="" />
+                    {isHome ? '' : <i className="text-white text-4xl fa-solid fa-caret-left"></i>}
+                    <img className={`${isHome ? 'home' : 'nehome'} w-12 rounded-2xl`} src="/logo2.jpg" alt="" />
                 </NavLink>
                 <div className="relative">{modal ?
                     <i
