@@ -91,7 +91,7 @@
   }
 }
 .glowing-cart{
-  animation: glowing infinite 3s;
+  animation: glowing infinite 5s;
 }
 
 @keyframes glowing {
