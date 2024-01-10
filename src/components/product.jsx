@@ -73,7 +73,7 @@ console.log(cart)
                                 <div className="bg-primary my-5 flex flex-col justify-center px-5 py-5 rounded-3xl" >
 
                                     <div className="flex justify-between items-center">
-                                        <div className={`${isProductInCart ? 'text-red-500' : ''} text-2xl font-bold`}>{obj.name}</div>
+                                        <div className={`${isProductInCart ? 'text-red-500 active-product' : ''} text-2xl font-bold`}>{obj.name}</div>
                                         <div>
                                             <i className="fa-solid fa-plus fa-2xl text-white active:text-red-500 focus:text-red-500" onClick={() => {handleAddToCart(ammountInCart) }}></i>
                                             <ToastContainer />

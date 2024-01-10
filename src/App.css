@@ -113,3 +113,17 @@
   color: rgba(254,56,117,255);
 }
 
+.active-product{
+  animation: activeproduct 4s infinite;
+}
+@keyframes activeproduct{
+  0%{
+    color: rgb(239 68 68)
+  }
+  50%{
+    color: rgb(220 38 38);
+  }
+  100%{
+    color: rgb(239 68 68)
+  }
+}
