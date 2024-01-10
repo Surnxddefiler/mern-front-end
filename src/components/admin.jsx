@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 export const Admin = () => {
     const handleSubmit = async (e) => {
-        if (e.type === "" || e.name === "" || e.nicotine === "" || e.mark === "") {
+        if (e.type === "" || e.name === "" || e.nicotine === "" || e.mark === "" || e.color === "") {
             const notify = () => toast("не заполнены все строки");
             return notify()
         }
@@ -25,6 +25,7 @@ export const Admin = () => {
     const nicotineRef = useRef(null);
     const markRef = useRef(null);
     const costRef = useRef(null);
+    const colorRef=useRef(null)
     const handleKeyDown = (e, inputRef) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -57,6 +58,7 @@ export const Admin = () => {
         nicotine: "",
         cost: Number,
         mark: "",
+        color: "",
     }
     // const initialChange={
     //     type: "",
@@ -85,7 +87,8 @@ export const Admin = () => {
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nameRef} placeholder={"Вкус"} name={"name"} onKeyDown={(e) => handleKeyDown(e, nicotineRef)} />
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nicotineRef} placeholder={"Дополнение"} name={"nicotine"} onKeyDown={(e) => handleKeyDown(e, markRef)} />
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={markRef} placeholder={"Марка"} name={"mark"} onKeyDown={(e) => handleKeyDown(e, costRef)} />
-                        <Field className="bg-fifth placeholder:text-white p-5" innerRef={costRef} type="number" placeholder={"Цена"} name={"cost"} />
+                        <Field className="bg-fifth placeholder:text-white p-5" innerRef={costRef} type="number" placeholder={"Цена"} name={"cost"} onKeyDown={(e) => handleKeyDown(e, colorRef)} />
+                           <Field className="bg-fifth placeholder:text-white p-5" innerRef={colorRef} type="number" placeholder={"Цвет"} name={"color"} />
                         <div>
                             <button type="submit" className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
                                 Добавить
