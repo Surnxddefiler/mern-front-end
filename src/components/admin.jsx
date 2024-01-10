@@ -77,10 +77,10 @@ export const Admin = () => {
                         <h1 className="text-white">ДОБАВИТЬ НОВЫЙ ПРОДУКТ</h1>
                         <Field className="bg-fifth placeholder:text-white p-5" as="select" name={"type"}>
                             <option value="" disabled hidden key="">Что добавить ?</option>
-                            <option className="p-5" value="жидкости" key="">Жидкости</option>
+                            <option className="p-5" value="одноразки" key="">Одноразки</option>
                             <option className="p-5" value="МНОГОРАЗКИ" key="">МНОГОРАЗКИ</option>
                             <option className="p-5" value="КАРТРИДЖИ" key="">КАРТРИДЖИ</option>
-                            <option className="p-5" value="одноразки" key="">Одноразки</option>
+                            <option className="p-5" value="жидкости" key="">Жидкости</option>
                         </Field>
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nameRef} placeholder={"Вкус"} name={"name"} onKeyDown={(e) => handleKeyDown(e, nicotineRef)} />
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nicotineRef} placeholder={"Дополнение"} name={"nicotine"} onKeyDown={(e) => handleKeyDown(e, markRef)} />
@@ -163,9 +163,12 @@ const Delete=()=>{
         <div className="flex justify-center flex-col items-center">
         <select className="bg-fifth placeholder:text-white p-5 mt-5"  onChange={onChangeValue} name="" id="">
                     <option value="" key="" hidden >Что удалить ?</option>
-                    <option value="646a7d448834fb372c5a751e" key="">Жидкости</option>
-                    <option value="646894d611e5b1bd7d4c57bd" key="">Картриджи</option>
                     <option value="646886eb11e5b1bd7d4c57bb" key="">Одноразки</option>
+                    <option value="646894d611e5b1bd7d4c57bd" key="">Многоразки</option>
+                    <option value="646a7d448834fb372c5a751e" key="">Жидкости</option>
+                    <option value="659edb2cc2e0e16384df4422" key="">Картриджи</option>
+             
+
         </select>
         <div className="mt-16 flex justify-center items-center flex-wrap gap-11">
         {data.length!==0 &&
