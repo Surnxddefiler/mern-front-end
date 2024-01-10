@@ -88,7 +88,7 @@ export const Admin = () => {
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nicotineRef} placeholder={"Дополнение"} name={"nicotine"} onKeyDown={(e) => handleKeyDown(e, markRef)} />
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={markRef} placeholder={"Марка"} name={"mark"} onKeyDown={(e) => handleKeyDown(e, costRef)} />
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={costRef} type="number" placeholder={"Цена"} name={"cost"} onKeyDown={(e) => handleKeyDown(e, colorRef)} />
-                           <Field className="bg-fifth placeholder:text-white p-5" innerRef={colorRef} type="number" placeholder={"Цвет"} name={"color"} />
+                           <Field className="bg-fifth placeholder:text-white p-5" innerRef={colorRef} placeholder={"Цвет"} name={"color"} />
                         <div>
                             <button type="submit" className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
                                 Добавить
