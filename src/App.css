@@ -91,7 +91,7 @@
   }
 }
 .glowing-cart{
-  animation: glowing infinite 5s;
+  animation: glowing infinite 4s;
 }
 
 @keyframes glowing {
@@ -107,7 +107,9 @@
 }
 .logo__wrapper i::before{
   transition-duration: 0.3s;
+  animation: glowing infinite 4s;
 }
 .logo__wrapper:hover i::before{
   color: rgba(254,56,117,255);
 }
+
