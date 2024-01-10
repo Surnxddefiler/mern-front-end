@@ -33,7 +33,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
                             setModal(!modal);
                             document.body.style.overflow = modal ? 'auto' : 'hidden';
                         }}
-                        class={`fa-solid ${cart.length > 0 ? "fa-beat-fade" : ""} fa-cart-shopping fa-2xl text-white`}></i>}
+                        class={`fa-solid ${cart.length > 0 ? "fa-beat-fade" : "glowing-cart"} fa-cart-shopping fa-2xl text-white`}></i>}
                     {modal ? "" : <div
 
                         className="-top-4 -right-3  bg-white px-1.5 rounded-full absolute text-black" >{cart.length}</div>}
@@ -179,7 +179,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                         handleSubmit()
                     }}>
                         <div className="flex justify-center flex-col gap-5">
-                            <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона"} name={"phone"} onKeyDown={handleKeyDown} />
+                            <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона"} type="tel" name={"phone"} onKeyDown={handleKeyDown} />
                             {!deliv && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white p-5" onChange={onChangePlace}>
                                 <option value="" disabled hidden key="">Точка выдачи -</option>
                                 <option className="p-5" value="• Дэмитекс" key="">• Дэмитекс</option>
@@ -201,8 +201,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
     }} className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
 
                         </div>
-                        <div>
-                            <button type="submit" className="text-2xl mt-5">
+                        <div className="flex justify-center mt-4">
+                            <button type="submit" className="bg-secondary duration-200 px-4 py-1 hover:bg-fourth rounded-2xl text-2xl mt-5">
                                 Оформить заказ
                             </button>
                             <ToastContainer />
