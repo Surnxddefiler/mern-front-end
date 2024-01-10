@@ -8,10 +8,10 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     const [data, setData] = useState([])
     const [filterName, setFilterName] = useState([])
 
+    //index producta для активного состояния
+    const [indexes, setIndexes]=useState([])
 
-
-
-
+console.log(indexes)
 
     useEffect(() => {
         fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/' + linkId).then(res => res.json()).then(data => {
@@ -53,7 +53,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                             const filter = obj.mark.toLowerCase()
                             const secondFilter = obj.nicotine.toLowerCase()
                             return filter.includes(mark.toLowerCase()) && secondFilter.includes(tyagi.toLowerCase())
-                        }).map((obj) => {
+                        }).map((obj, i) => {
                             //обаботчик для колечества в складе
                             const handleAddToCart = (ammountInCart) => {
                                 if (ammountInCart >= 50) {
@@ -70,9 +70,12 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                                 <div className="bg-primary my-5 flex flex-col justify-center px-5 py-5 rounded-3xl" >
 
                                     <div className="flex justify-between items-center">
-                                        <div className="text-2xl font-bold">{obj.name}</div>
+                                        <div className={`${indexes.includes(i) ? 'text-red-500' : ''} text-2xl font-bold`}>{obj.name}</div>
                                         <div>
-                                            <i className="fa-solid fa-plus fa-2xl text-white active:text-red-500" onClick={() => { handleAddToCart(ammountInCart) }}></i>
+                                            <i className="fa-solid fa-plus fa-2xl text-white active:text-red-500 focus:text-red-500" onClick={() => {
+                                                setIndexes(prevIndexes => [...prevIndexes, i]);
+                                                 handleAddToCart(ammountInCart) }
+                                                 }></i>
                                             <ToastContainer />
                                         </div>
                                     </div>
