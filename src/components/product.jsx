@@ -10,6 +10,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
 console.log(cart)
 
     useEffect(() => {
+        setLoading(true)
         fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/' + linkId).then(res => res.json()).then(data => {
             setData(data.data.product)
             setFilterName([data.data.firstFilter, data.data.secondFilter])
