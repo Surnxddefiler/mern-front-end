@@ -1,3 +1,4 @@
+
 .button {
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -126,4 +127,27 @@
   100%{
     color: rgb(239 68 68)
   }
+}
+
+/* transitions.css */
+.fade-enter {
+  opacity: 0;
+  transform: translate(0, 25px);
+  z-index: 1;
+}
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transform: translate(0, 0);
+
+  transition: opacity 250ms ease-out, transform 300ms ease;
+}
+.fade-exit {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transform: translate(0, 30px);
+
+  transition: opacity 250ms ease-out, transform 300ms ease;
 }
