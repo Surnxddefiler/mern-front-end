@@ -145,22 +145,23 @@ opacity: 1;
 /* transitions.css */
 .fade-enter {
   opacity: 0;
-  transform: translate(0, 30px);
+  transform: translateY(100px); /* Адаптируйте начальное вертикальное перемещение */
   z-index: 1;
 }
+
 .fade-enter.fade-enter-active {
   opacity: 1;
-  transform: translate(0, 0);
-
-  transition: opacity 300ms ease-out, transform 300ms ease;
+  transform: translateY(0);
+  transition: opacity 2000ms ease-out, transform 300ms ease;
 }
+
 .fade-exit {
   opacity: 1;
-  transform: translate(0, 0);
+  transform: translateY(0);
 }
+
 .fade-exit.fade-exit-active {
   opacity: 0;
-  transform: translate(0, 30px);
-
-  transition: opacity 300ms ease-out, transform 300ms ease;
+  transform: translateY(100px); /* Адаптируйте конечное вертикальное перемещение */
+  transition: opacity 2000ms ease-out, transform 300ms ease;
 }
