@@ -13,7 +13,7 @@ export const Main = ({loading, setLoading}) => {
     return (
         <>
         
-        {loading ? <img className='absolute translate-x-2/4' style={{top: "10%", right: "50%"}} src="/load.gif" alt="" /> : 
+        {loading ? <img className='absolute translate-x-2/4 loading__animation' style={{top: "150px", right: "50%"}} src="/load.gif" alt="" /> : 
         <div className='flex justify-center flex-wrap gap-8 mt-6'>
             {data.map((obj) => {
                 return (

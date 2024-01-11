@@ -1,4 +1,17 @@
 
+
+.loading__animation{
+  animation: loading ease 3s;
+}
+@keyframes loading {
+  0%{
+    opacity: 0;
+  }
+  100%{
+opacity: 1;
+  }
+}
+
 .button {
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -139,7 +152,7 @@
   opacity: 1;
   transform: translate(0, 0);
 
-  transition: opacity 250ms ease-out, transform 300ms ease;
+  transition: opacity 300ms ease-out, transform 300ms ease;
 }
 .fade-exit {
   opacity: 1;
@@ -149,5 +162,5 @@
   opacity: 0;
   transform: translate(0, 30px);
 
-  transition: opacity 250ms ease-out, transform 300ms ease;
+  transition: opacity 300ms ease-out, transform 300ms ease;
 }
