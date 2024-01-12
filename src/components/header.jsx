@@ -27,7 +27,10 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
         <header className={`${modal ? 'pb-52 h-screen sticky top-0 overflow-y-scroll' : 'sticky top-0'} py-3 px-5 w-s bg-primary`}>
             <div className="justify-between flex items-center">
                 {modal ? 
-                <div className={'flex items-center logo__wrapper'} onClick={()=>{setModal(false)}}>
+                <div className={'flex items-center logo__wrapper'} onClick={()=>{
+                    document.body.style.overflow = modal ? 'auto' : 'hidden';
+                    setModal(false)}
+                    }>
                     <i className="text-white text-4xl fa-solid fa-caret-left"></i>
                     <img className={`${isHome ? 'home' : 'nehome'} w-12 rounded-2xl`} src="/logo2.jpg" alt="" /> 
                 </div>
