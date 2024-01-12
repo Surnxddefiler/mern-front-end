@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink, useLocation } from "react-router-dom";
 import { Field, Formik } from 'formik';
-import { CSSTransition } from "react-transition-group";
+// import { CSSTransition } from "react-transition-group";
 import '../App.css'
 
 export const Header = ({ cart, setCart, setAmountsInCart }) => {
