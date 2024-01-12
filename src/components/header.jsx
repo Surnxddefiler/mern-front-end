@@ -90,11 +90,16 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 
 const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
+        //ончедж для доставки
+        const [place, setPlace] = useState("")
+        const [deliv, setDeliv] = useState(false)
+
     const tg = window.Telegram.WebApp
 
 
     const selectRef = useRef(null);
 
+    const otherRef=useRef(null)
 
     const setTimeFieldRef = useRef(null);
 
@@ -116,11 +121,16 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
 
     useEffect(() => {
+
+        if (deliv && otherRef.current) {
+            otherRef.current.focus();
+        }
+
         tg.MainButton.setParams({
             text: 'Подтвердить заказ',
             color: 'rgba(254,56,117,255)'
         })
-    })
+    }, [deliv])
 
 
     const onSubmitForm = (val) => {
@@ -158,14 +168,20 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         setPayment(totalPayment);
     }, [cart]);
 
-    //ончедж для доставки
-    const [place, setPlace] = useState("")
-    const [deliv, setDeliv] = useState(false)
+
+
+
+
+    
+
     const onChangePlace = (e) => {
         setPlace(e.target.value)
         if (e.target.value === "другое") {
             setPlace("")
             setDeliv(true)
+            if (otherRef.current) {
+                otherRef.current.focus()
+            }
         }
         else {
             setPlace(e.target.value)
@@ -189,7 +205,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                 </div>
             })}
             </div>
-            <div className="text-2xl border-t-4 border-white">Стоимость заказа - {pay} ₴</div>
+            <div className="text-2xl border-t-4 border-white pt-2 pb-7">Стоимость заказа - {pay} ₴</div>
             <Formik onSubmit={onSubmitForm} initialValues={initialValue}>
                 {({ handleSubmit }) => (
                     <form onSubmit={(e) => {
@@ -211,7 +227,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             </select>
                             }
                             {deliv && <div>
-                                <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
+                                <input ref={otherRef} onKeyDown={handleKeyDown} placeholder="Адрес / место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
                                 <div className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
                             </div>}
                             <Field  innerRef={(ref) => {
