@@ -130,7 +130,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
             text: 'Подтвердить заказ',
             color: 'rgba(254,56,117,255)'
         })
-    }, [deliv])
+    }, [deliv, tg.MainButton])
 
 
     const onSubmitForm = (val) => {
