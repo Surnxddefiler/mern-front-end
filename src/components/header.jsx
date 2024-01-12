@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink, useLocation } from "react-router-dom";
 import { Field, Formik } from 'formik';
-// import { CSSTransition } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import '../App.css'
 
 export const Header = ({ cart, setCart, setAmountsInCart }) => {
@@ -26,12 +26,19 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
     return (
         <header className={`${modal ? 'pb-52 h-screen sticky top-0 overflow-y-scroll' : 'sticky top-0'} py-3 px-5 w-s bg-primary`}>
             <div className="justify-between flex items-center">
-                <NavLink className={'flex items-center logo__wrapper'} to="/" onClick={()=>{
-                    setModal(false)
-                }}>
+                {modal ? 
+                <div className={'flex items-center logo__wrapper'} onClick={()=>{setModal(false)}}>
+                    <i className="text-white text-4xl fa-solid fa-caret-left"></i>
+                    <img className={`${isHome ? 'home' : 'nehome'} w-12 rounded-2xl`} src="/logo2.jpg" alt="" /> 
+                </div>
+                 : 
+                 <div>
+                    <NavLink className={'flex items-center logo__wrapper'} to="/">
                     {isHome ? '' : <i className="text-white text-4xl fa-solid fa-caret-left"></i>}
                     <img className={`${isHome ? 'home' : 'nehome'} w-12 rounded-2xl`} src="/logo2.jpg" alt="" />
                 </NavLink>
+                    </div>}
+                
                 <div className="relative">{modal ?
                     <i
                         onClick={() => {
@@ -50,7 +57,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
                         className="-top-4 -right-3  bg-white px-1.5 rounded-full absolute text-black" >{cart.length}</div>}
                 </div>
             </div>
-            {modal ? <ModalWindow cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} /> : ""}
+            {modal ? <CSSTransition in={modal} classNames={'fade'} timeout={300} unmountOnExit><ModalWindow cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} /></CSSTransition> : ""}
         </header>
     )
 }
