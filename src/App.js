@@ -7,7 +7,7 @@ import { Header } from './components/header';
 import { useCart } from './hooks/useCart';
 import { useState } from 'react';
 import { Admin } from './components/admin';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+// import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 
 function App() {
@@ -22,18 +22,14 @@ function App() {
   const tg=window.Telegram.WebApp
   return (
     tg.platform && (
-       <TransitionGroup component={null}>
+      <>
         <Header  cart={cart} loading={loading} setLoading={setLoading} setCart={setCart} setAmountsInCart={setAmountsInCart} />
-        {tg.initData}
-        <CSSTransition key={location.key} classNames="fade" timeout={300}>
-        <Routes location={location}>
-          
+              <Routes location={location}>
           <Route path='/' exact element={<Main loading={loading} setLoading={setLoading} />} />
           <Route path='/product/:id' element={<Product loading={loading} setLoading={setLoading} setCart={setCart} cart={cart} ammountInCart={ammountInCart} setAmountsInCart={setAmountsInCart} />} />
           <Route path='/admin' exact element={<Admin />} />
         </Routes>
-        </CSSTransition>
-        </TransitionGroup>
+        </> 
     )
   );
 }
