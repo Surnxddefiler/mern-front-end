@@ -90,16 +90,10 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 
 const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
-        //ончедж для доставки
-        const [place, setPlace] = useState("")
-        const [deliv, setDeliv] = useState(false)
-
     const tg = window.Telegram.WebApp
 
 
     const selectRef = useRef(null);
-
-    const otherRef=useRef(null)
 
     const setTimeFieldRef = useRef(null);
 
@@ -121,16 +115,11 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
 
     useEffect(() => {
-
-        requestAnimationFrame(() => {
-            otherRef.current.focus();
-        });
-
         tg.MainButton.setParams({
             text: 'Подтвердить заказ',
             color: 'rgba(254,56,117,255)'
         })
-    }, [deliv, tg.MainButton])
+    })
 
 
     const onSubmitForm = (val) => {
@@ -168,20 +157,14 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         setPayment(totalPayment);
     }, [cart]);
 
-
-
-
-
-    
-
+    //ончедж для доставки
+    const [place, setPlace] = useState("")
+    const [deliv, setDeliv] = useState(false)
     const onChangePlace = (e) => {
         setPlace(e.target.value)
         if (e.target.value === "другое") {
             setPlace("")
             setDeliv(true)
-            if (otherRef.current) {
-                otherRef.current.focus()
-            }
         }
         else {
             setPlace(e.target.value)
@@ -227,7 +210,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             </select>
                             }
                             {deliv && <div>
-                                <input ref={otherRef} onKeyDown={handleKeyDown} placeholder="Адрес / место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
+                                <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
                                 <div className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
                             </div>}
                             <Field  innerRef={(ref) => {
