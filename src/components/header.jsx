@@ -122,10 +122,10 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
     useEffect(() => {
 
-        if (deliv && otherRef.current) {
+        setTimeout(() => {
             otherRef.current.focus();
-        }
-
+        }, 1000); // Задержка в 1 секунду
+        
         tg.MainButton.setParams({
             text: 'Подтвердить заказ',
             color: 'rgba(254,56,117,255)'
