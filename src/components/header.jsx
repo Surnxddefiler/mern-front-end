@@ -191,7 +191,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                 </div>
             })}
             </div>
-            <div className="text-2xl border-t-4 border-white pt-2 pb-7">Стоимость заказа - {pay} ₴</div>
+            <div className=" border-t-4"></div>
+            <div className="text-2xl my-5 border w-fit  border-secondary  p-2 ">Стоимость заказа - {pay} ₴</div>
             <Formik onSubmit={onSubmitForm} initialValues={initialValue}>
                 {({ handleSubmit }) => (
                     <form onSubmit={(e) => {
@@ -199,8 +200,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                         handleSubmit()
                     }}>
                         <div className="flex justify-center flex-col gap-5">
-                            <Field className="bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона"}  inputMode="numeric" type="number" name={"phone"} onKeyDown={handleKeyDown} />
-                            {!deliv && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white p-5" onChange={onChangePlace}>
+                            <Field className="placeholder:opacity-70 bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона"}  inputMode="numeric" type="number" name={"phone"} onKeyDown={handleKeyDown} />
+                            {!deliv && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white text-input p-5" onChange={onChangePlace}>
                                 <option value="" disabled hidden key="">Точка выдачи -</option>
                                 <option className="p-5" value="• Дэмитекс" key="">• Дэмитекс</option>
                                 <option className="p-5" value="• Институт связи" key="">• Институт связи</option>
@@ -213,16 +214,16 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             </select>
                             }
                             {deliv && <div>
-                                <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки" value={place} className="bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
-                                <div className="ml-5" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
+                                <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки" value={place} className="w-full placeholder:opacity-70 bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
+                                <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
                             </div>}
                             <Field  innerRef={(ref) => {
         setTimeFieldRef.current = ref;
-    }} className="p-5 bg-fifth placeholder:text-white" type="time" placeholder={"время"} name={"time"} />
+    }} className="p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />
 
                         </div>
                         <div className="flex justify-center mt-4">
-                            <button type="submit" className="bg-secondary duration-200 px-4 py-1 hover:bg-fourth rounded-2xl text-2xl mt-5">
+                            <button type="submit" className=" hover:bg-fourth  text-2xl mt-5 shadow__btn">
                                 Оформить заказ
                             </button>
                             <ToastContainer />

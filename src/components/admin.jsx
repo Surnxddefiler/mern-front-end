@@ -5,7 +5,18 @@ import { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 export const Admin = () => {
+
+
+//для блокировки инпута
+    const [taste, setTaste]=useState(false)
+    const [color, setColor]=useState(false)
+    const [additional, setAdditional]=useState(false)
+    const [marka, setMarka]=useState(false)
+    const [cena, setCena]=useState(false)
+
+
     const handleSubmit = async (e) => {
+        console.log(e)
         if (e.type === "" || e.name === "" || e.nicotine === "" || e.mark === "" || e.color === "") {
             const notify = () => toast("не заполнены все строки");
             return notify()
@@ -67,9 +78,50 @@ export const Admin = () => {
     // }
     return (
         <div>
-            <Formik initialValues={initialValue} onSubmit={(values, { resetForm }) => {
+            <Formik initialValues={initialValue} onSubmit={(values, { setFieldValue }) => {
                 handleSubmit(values);
-                resetForm({ values: '' }); // Reset the form fields
+                // resetForm({ values: '' }); // Reset the form fields
+                setFieldValue('name', 'ok');
+
+
+                if(taste){
+                    setFieldValue('name', values.name);
+                }
+                else{
+                    setFieldValue('name', '');
+                }
+
+
+                if(additional){
+                    setFieldValue('nicotine', values.name);
+                }
+                else{
+                    setFieldValue('nicotine', '');
+                }
+
+
+                if(marka){
+                    setFieldValue('mark', values.name);
+                }
+                else{
+                    setFieldValue('mark', '');
+                }
+
+
+                if(cena){
+                    setFieldValue('cost', values.name);
+                }
+                else{
+                    setFieldValue('cost', '');
+                }
+
+
+                if(color){
+                    setFieldValue('color', values.name);
+                }
+                else{
+                    setFieldValue('color', '');
+                }
             }}>
                 {({ handleSubmit }) => (
                     <form className="flex flex-col justify-center gap-4 items-center" onSubmit={(e) => {
@@ -84,11 +136,28 @@ export const Admin = () => {
                             <option className="p-5" value="КАРТРИДЖИ" key="">КАРТРИДЖИ</option>
                             <option className="p-5" value="жидкости" key="">Жидкости</option>
                         </Field>
+                        <div>
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nameRef} placeholder={"Вкус"} name={"name"} onKeyDown={(e) => handleKeyDown(e, nicotineRef)} />
+                        {taste ?   <i onClick={()=>setTaste(!taste)} className="ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setTaste(!taste)} className="ml-2 fa-solid fa-lock-open"></i>}
+                        </div>
+                        <div>
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nicotineRef} placeholder={"Дополнение"} name={"nicotine"} onKeyDown={(e) => handleKeyDown(e, markRef)} />
+                        {additional ?   <i onClick={()=>setAdditional(!additional)} className="ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setAdditional(!additional)} className="ml-2 fa-solid fa-lock-open"></i>}
+                        </div>
+                        <div>
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={markRef} placeholder={"Марка"} name={"mark"} onKeyDown={(e) => handleKeyDown(e, costRef)} />
+                        {marka ?   <i onClick={()=>setMarka(!marka)} className="ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setMarka(!marka)} className="ml-2 fa-solid fa-lock-open"></i>}
+                        </div>
+
+<div>
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={costRef} type="number" placeholder={"Цена"} name={"cost"} onKeyDown={(e) => handleKeyDown(e, colorRef)} />
-                           <Field className="bg-fifth placeholder:text-white p-5" innerRef={colorRef} placeholder={"Цвет"} name={"color"} />
+                        {cena ?   <i onClick={()=>setCena(!cena)} className="ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setCena(!cena)} className="ml-2 fa-solid fa-lock-open"></i>}
+                        </div>
+
+                        <div>
+                        <Field className="bg-fifth placeholder:text-white p-5" innerRef={colorRef} placeholder={"Цвет"} name={"color"} />
+                        {color ?   <i onClick={()=>setColor(!color)} className="ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setColor(!color)} className="ml-2 fa-solid fa-lock-open"></i>}
+                        </div>
                         <div>
                             <button type="submit" className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
                                 Добавить
