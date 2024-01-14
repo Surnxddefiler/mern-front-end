@@ -82,7 +82,7 @@ const [tip, setTip]=useState(false)
             <Formik initialValues={initialValue} onSubmit={(values, { setFieldValue }) => {
                 handleSubmit(values);
                 // resetForm({ values: '' }); // Reset the form fields
-
+console.log(values)
                 if(taste){
                     setFieldValue('name', values.name);
                 }
@@ -92,7 +92,7 @@ const [tip, setTip]=useState(false)
 
 
                 if(additional){
-                    setFieldValue('nicotine', values.name);
+                    setFieldValue('nicotine', values.nicotine);
                 }
                 else{
                     setFieldValue('nicotine', '');
@@ -100,7 +100,7 @@ const [tip, setTip]=useState(false)
 
 
                 if(marka){
-                    setFieldValue('mark', values.name);
+                    setFieldValue('mark', values.mark);
                 }
                 else{
                     setFieldValue('mark', '');
@@ -116,7 +116,7 @@ const [tip, setTip]=useState(false)
 
 
                 if(color){
-                    setFieldValue('color', values.name);
+                    setFieldValue('color', values.color);
                 }
                 else{
                     setFieldValue('color', '');
