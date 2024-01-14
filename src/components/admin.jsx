@@ -8,6 +8,7 @@ export const Admin = () => {
 
 
 //для блокировки инпута
+const [tip, setTip]=useState(false)
     const [taste, setTaste]=useState(false)
     const [color, setColor]=useState(false)
     const [additional, setAdditional]=useState(false)
@@ -81,8 +82,6 @@ export const Admin = () => {
             <Formik initialValues={initialValue} onSubmit={(values, { setFieldValue }) => {
                 handleSubmit(values);
                 // resetForm({ values: '' }); // Reset the form fields
-                setFieldValue('name', 'ok');
-
 
                 if(taste){
                     setFieldValue('name', values.name);
@@ -109,7 +108,7 @@ export const Admin = () => {
 
 
                 if(cena){
-                    setFieldValue('cost', values.name);
+                    setFieldValue('cost', values.cost);
                 }
                 else{
                     setFieldValue('cost', '');
@@ -122,6 +121,15 @@ export const Admin = () => {
                 else{
                     setFieldValue('color', '');
                 }
+
+
+                if(tip){
+                    setFieldValue('type', values.type);
+                }
+                else{
+                    setFieldValue('type', '');
+                }
+                
             }}>
                 {({ handleSubmit }) => (
                     <form className="flex flex-col justify-center gap-4 items-center" onSubmit={(e) => {
@@ -129,6 +137,7 @@ export const Admin = () => {
                         handleSubmit()
                     }}>
                         <h1 className="text-white">ДОБАВИТЬ НОВЫЙ ПРОДУКТ</h1>
+                        <div>
                         <Field className="bg-fifth placeholder:text-white p-5" as="select" name={"type"}>
                             <option value="" disabled hidden key="">Что добавить ?</option>
                             <option className="p-5" value="одноразки" key="">Одноразки</option>
@@ -136,27 +145,29 @@ export const Admin = () => {
                             <option className="p-5" value="КАРТРИДЖИ" key="">КАРТРИДЖИ</option>
                             <option className="p-5" value="жидкости" key="">Жидкости</option>
                         </Field>
+                        {tip ?   <i onClick={()=>setTip(!tip)} className="text-2xl ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setTip(!tip)} className="text-2xl ml-2 fa-solid fa-lock-open"></i>}
+                        </div>
                         <div>
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nameRef} placeholder={"Вкус"} name={"name"} onKeyDown={(e) => handleKeyDown(e, nicotineRef)} />
-                        {taste ?   <i onClick={()=>setTaste(!taste)} className="ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setTaste(!taste)} className="ml-2 fa-solid fa-lock-open"></i>}
+                        {taste ?   <i onClick={()=>setTaste(!taste)} className="text-2xl ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setTaste(!taste)} className="text-2xl ml-2 fa-solid fa-lock-open"></i>}
                         </div>
                         <div>
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={nicotineRef} placeholder={"Дополнение"} name={"nicotine"} onKeyDown={(e) => handleKeyDown(e, markRef)} />
-                        {additional ?   <i onClick={()=>setAdditional(!additional)} className="ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setAdditional(!additional)} className="ml-2 fa-solid fa-lock-open"></i>}
+                        {additional ?   <i onClick={()=>setAdditional(!additional)} className="text-2xl ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setAdditional(!additional)} className="text-2xl ml-2 fa-solid fa-lock-open"></i>}
                         </div>
                         <div>
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={markRef} placeholder={"Марка"} name={"mark"} onKeyDown={(e) => handleKeyDown(e, costRef)} />
-                        {marka ?   <i onClick={()=>setMarka(!marka)} className="ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setMarka(!marka)} className="ml-2 fa-solid fa-lock-open"></i>}
+                        {marka ?   <i onClick={()=>setMarka(!marka)} className="text-2xl ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setMarka(!marka)} className="text-2xl ml-2 fa-solid fa-lock-open"></i>}
                         </div>
 
 <div>
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={costRef} type="number" placeholder={"Цена"} name={"cost"} onKeyDown={(e) => handleKeyDown(e, colorRef)} />
-                        {cena ?   <i onClick={()=>setCena(!cena)} className="ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setCena(!cena)} className="ml-2 fa-solid fa-lock-open"></i>}
+                        {cena ?   <i onClick={()=>setCena(!cena)} className="text-2xl ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setCena(!cena)} className="text-2xl ml-2 fa-solid fa-lock-open"></i>}
                         </div>
 
                         <div>
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={colorRef} placeholder={"Цвет"} name={"color"} />
-                        {color ?   <i onClick={()=>setColor(!color)} className="ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setColor(!color)} className="ml-2 fa-solid fa-lock-open"></i>}
+                        {color ?   <i onClick={()=>setColor(!color)} className="text-2xl ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setColor(!color)} className="text-2xl ml-2 fa-solid fa-lock-open"></i>}
                         </div>
                         <div>
                             <button type="submit" className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
