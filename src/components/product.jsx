@@ -7,7 +7,6 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
 
     const [data, setData] = useState([])
     const [filterName, setFilterName] = useState([])
-console.log(cart)
 
     useEffect(() => {
         setLoading(true)
@@ -20,6 +19,8 @@ console.log(cart)
     //фильтр
     const [mark, setMark] = useState('')
     const [tyagi, setTyagi] = useState('')
+    const markArray=[...new Set(data.map((obj) => obj.mark))];
+    console.log(markArray)
     //
     return (
         <>
@@ -29,7 +30,8 @@ console.log(cart)
                         <select onChange={(e) => { setMark(e.target.value) }} className={`${mark ? '' : 'unused-filter'} w-full p-2 bg-fifth rounded-2xl`} name="" id="">
                             <option value="" className="bg-fifth text-black" hidden key={"mark-hidden"} >{filterName[0]}</option>
                             <option value="" className="bg-fifth text-black" key={"mark-none"} >-</option>
-                            {[...new Set(data.map((obj) => obj.mark))].map((mark, i) => (
+                            {
+                            markArray.map((mark, i) => (
                                 <option className="bg-fifth text-black" key={`mark-${i}`} value={mark}>
                                     {mark}
                                 </option>
@@ -49,7 +51,18 @@ console.log(cart)
                         {data.filter((obj) => {
                             const filter = obj.mark.toLowerCase()
                             const secondFilter = obj.nicotine.toLowerCase()
-                            return filter.includes(mark.toLowerCase()) && secondFilter.includes(tyagi.toLowerCase())
+                            if(mark && tyagi){
+                                return filter===mark.toLowerCase() && secondFilter===tyagi.toLowerCase()
+                            }
+                            else if(mark){
+                                return filter===mark.toLowerCase();
+                            }
+                            else if(tyagi){
+                               return secondFilter===tyagi.toLowerCase()
+                            }
+                            else{
+                                return data
+                            }
                         }).map((obj, i) => {
                             //обаботчик для колечества в складе
                             const handleAddToCart = (ammountInCart) => {

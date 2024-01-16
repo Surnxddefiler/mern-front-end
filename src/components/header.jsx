@@ -96,6 +96,11 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
     const tg = window.Telegram.WebApp
 
 
+
+    //зaменение полей в случае новой почты
+    const [novaPoshta, setNovaPoshta]=useState(false)
+
+
     const selectRef = useRef(null);
 
     const setTimeFieldRef = useRef(null);
