@@ -143,10 +143,11 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         console.log(val)
         console.log(cart)
         tg.MainButton.show();
-        tg.onEvent('mainButtonClicked', (() => {
-                tg.sendData(JSON.stringify({ val, cart, place }))
-
-        }))
+        tg.sendData(JSON.stringify({ val, cart, place }))
+        // tg.onEvent('mainButtonClicked', (() => {
+            
+        //     tg.sendData(JSON.stringify({ val, cart, place }))
+        // }))
 
     }
 
