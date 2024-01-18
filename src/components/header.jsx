@@ -174,6 +174,11 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
             setPlace("")
             setDeliv(true)
         }
+        else if(e.target.value==="нп"){
+            setPlace("")
+            setNovaPoshta(true)
+            console.log('okidoki')
+        }
         else {
             setPlace(e.target.value)
         }
@@ -206,7 +211,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                     }}>
                         <div className="flex justify-center flex-col gap-5">
                             <Field className="placeholder:opacity-70 bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона"}  inputMode="numeric" type="number" name={"phone"} onKeyDown={handleKeyDown} />
-                            {!deliv && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white text-input p-5" onChange={onChangePlace}>
+                            {!deliv && !novaPoshta && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white text-input p-5" onChange={onChangePlace}>
                                 <option value="" disabled hidden key="">Точка выдачи -</option>
                                 <option className="p-5" value="• Дэмитекс" key="">• Дэмитекс</option>
                                 <option className="p-5" value="• Институт связи" key="">• Институт связи</option>
@@ -216,15 +221,22 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                                 <option className="p-5" value="• Сенная" key="">• Сенная</option>
                                 <option className="p-5" value="• Центр" key="">• Центр</option>
                                 <option className="p-5" value="другое" key="">Доставка от 10-ти ₴ до 80-ти ₴</option>
+                                <option className="p-5" value="нп" key="">Доставка через Новую Почту</option>
                             </select>
                             }
                             {deliv && <div>
                                 <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки" value={place} className="w-full placeholder:opacity-70 bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
                                 <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
                             </div>}
-                            <Field  innerRef={(ref) => {
-        setTimeFieldRef.current = ref;
-    }} className="p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />
+                            {!novaPoshta && <Field  innerRef={(ref) => {setTimeFieldRef.current = ref;}} className="p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />}
+                            {novaPoshta  &&  
+                            <div className="flex justify-center flex-col gap-5">
+                            <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"ФИО:"}  type="text" name={"name"} />
+                            <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"Город / другое :"}  type="text" name={"town"}/>
+                            <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"Отделение :"}  type="text" name={"compartment"}/>
+                            <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setNovaPoshta(false) }}>Выбрать другой вид доставки</div>
+                            </div>
+                            }
 
                         </div>
                         <div className="flex justify-center mt-4">

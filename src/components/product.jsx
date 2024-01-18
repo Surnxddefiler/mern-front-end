@@ -20,7 +20,6 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     const [mark, setMark] = useState('')
     const [tyagi, setTyagi] = useState('')
     const markArray=[...new Set(data.map((obj) => obj.mark))];
-    console.log(markArray)
     //
     return (
         <>
