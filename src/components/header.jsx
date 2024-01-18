@@ -131,7 +131,11 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
 
     const onSubmitForm = (val) => {
-        console.log(val)
+        if (cart.length === 0) {
+            const notify = () => toast("Корзина пустая");
+            return notify()
+        }
+
         if (!novaPoshta) {
             if (val.phone === "" || val.time === "00:00" || place === "") {
                 const notify = () => toast("Заполните все поля");
@@ -156,10 +160,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         }
        
 
-        if (cart.length === 0) {
-            const notify = () => toast("Корзина пустая");
-            return notify()
-        }
+       
    
 
         tg.MainButton.show();
