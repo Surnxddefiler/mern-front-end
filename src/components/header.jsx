@@ -131,19 +131,39 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
 
     const onSubmitForm = (val) => {
-        if (val.phone === "" || val.time === "00:00" || place === "") {
-            const notify = () => toast("Заполните все поля");
-            return notify()
+        console.log(val)
+        if (!novaPoshta) {
+            if (val.phone === "" || val.time === "00:00" || place === "") {
+                const notify = () => toast("Заполните все поля");
+                return notify()
+            }
+            tg.MainButton.show();
+            tg.onEvent('mainButtonClicked', (() => {
+            
+                tg.sendData(JSON.stringify({ val, cart, place }))
+            }))
         }
+        else{
+            if (!val.compartment || !val.name || val.phone === "" || !val.town) {
+                const notify = () => toast("Заполните все поля");
+                return notify()
+            }
+            tg.MainButton.show();
+            tg.onEvent('mainButtonClicked', (() => {
+            setNovaPoshta(true)
+                tg.sendData(JSON.stringify({ val, cart, novaPoshta }))
+            }))
+        }
+       
 
         if (cart.length === 0) {
             const notify = () => toast("Корзина пустая");
             return notify()
         }
-        console.log(val)
-        console.log(cart)
+   
+
         tg.MainButton.show();
-        tg.sendData(JSON.stringify({ val, cart, place }))
+        // tg.sendData(JSON.stringify({ val, cart, place }))
         // tg.onEvent('mainButtonClicked', (() => {
             
         //     tg.sendData(JSON.stringify({ val, cart, place }))
