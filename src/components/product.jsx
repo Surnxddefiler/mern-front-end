@@ -7,14 +7,14 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
 
     const [data, setData] = useState([])
     const [filterName, setFilterName] = useState([])
-const [ismnogorazka, setMnogorazka]=useState(false)
+    //проверка на многоразки
+    const [isPod, setIsPod]=useState(false)
     useEffect(() => {
         setLoading(true)
         fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/' + linkId).then(res => res.json()).then(data => {
             if (data.data.type==='МНОГОРАЗКИ') {
-                setMnogorazka(true)
+                setIsPod(true)
             }
-            console.log(ismnogorazka)
             setData(data.data.product)
             setFilterName([data.data.firstFilter, data.data.secondFilter])
             setLoading(false)
@@ -73,12 +73,11 @@ const [ismnogorazka, setMnogorazka]=useState(false)
                                     const notify = () => toast("корзина полная");
                                     return notify()
                                 }
-                                setCart([...cart, { mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost }]);
+                                setCart([...cart, { mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost, isPod: isPod }]);
                                 setAmountsInCart(prev => prev + 1)
                             };
 
-
-                            const productObject={ mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost }
+                            const productObject={ mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost}
                             const isProductInCart = cart.some(item => (
                                 item.mark === productObject.mark &&
                                 item.name === productObject.name &&

@@ -192,18 +192,19 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         else if(e.target.value==="нп"){
             setPlace("")
             setNovaPoshta(true)
-            console.log('okidoki')
         }
         else {
             setPlace(e.target.value)
         }
     }
+   
     return (
         <div className="text-white mt-5">
             <div className="">
             {cart.map((obj, index) => {
+                 console.log(obj)
                 return <div className="flex justify-between mb-5 items-center">
-                    <div className="w-1/3" > <span>{obj.mark}</span> <span>{obj.name}</span></div>
+                    <div className="w-1/3" > <span>{obj.isPod ? '' : obj.mark}</span> <span>{obj.name}</span></div>
                     <div className="w-1/3">{obj.cost} ₴</div>
                     <div
                         onClick={() => {
