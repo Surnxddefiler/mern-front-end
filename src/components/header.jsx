@@ -60,7 +60,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
                         className="-top-4 -right-3  bg-white px-1.5 rounded-full absolute text-black" >{cart.length}</div>}
                 </div>
             </div>
-            {modal ? <CSSTransition in={modal} classNames={'fade'} timeout={300} unmountOnExit><ModalWindow cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} /></CSSTransition> : ""}
+            {modal ? <CSSTransition in={modal} classNames={'fade'} timeout={300}><ModalWindow cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} /></CSSTransition> : ""}
         </header>
     )
 }
@@ -250,7 +250,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"ФИО :"}  type="text" name={"name"} />
                             <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"Город / другое :"}  type="text" name={"town"}/>
                             <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"Отделение :"}  type="text" name={"compartment"}/>
-                            <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setNovaPoshta(false) }}>Выбрать другой вид доставки</div>
+                            <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setNovaPoshta(false) }}>Выбрать другой вид доставки -</div>
                             </div>
                             }
 
