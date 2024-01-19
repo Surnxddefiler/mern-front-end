@@ -225,7 +225,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                         handleSubmit()
                     }}>
                         <div className="flex justify-center flex-col gap-5">
-                            <Field className="placeholder:opacity-70 bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона"}  inputMode="numeric" type="number" name={"phone"} onKeyDown={handleKeyDown} />
+                            <Field className="placeholder:opacity-70 bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона: "}  inputMode="numeric" type="number" name={"phone"} onKeyDown={handleKeyDown} />
                             {!deliv && !novaPoshta && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white text-input p-5" onChange={onChangePlace}>
                                 <option value="" disabled hidden key="">Точка выдачи -</option>
                                 <option className="p-5" value="• Дэмитекс" key="">• Дэмитекс</option>
@@ -240,7 +240,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             </select>
                             }
                             {deliv && <div>
-                                <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки" value={place} className="w-full placeholder:opacity-70 bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
+                                <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки :" value={place} className="w-full placeholder:opacity-70 bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
                                 <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
                             </div>}
                             {!novaPoshta && <Field  innerRef={(ref) => {setTimeFieldRef.current = ref;}} className="p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />}

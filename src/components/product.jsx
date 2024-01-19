@@ -7,10 +7,14 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
 
     const [data, setData] = useState([])
     const [filterName, setFilterName] = useState([])
-
+const [ismnogorazka, setMnogorazka]=useState(false)
     useEffect(() => {
         setLoading(true)
         fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/' + linkId).then(res => res.json()).then(data => {
+            if (data.data.type==='МНОГОРАЗКИ') {
+                setMnogorazka(true)
+            }
+            console.log(ismnogorazka)
             setData(data.data.product)
             setFilterName([data.data.firstFilter, data.data.secondFilter])
             setLoading(false)
