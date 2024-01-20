@@ -12,7 +12,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     useEffect(() => {
         setLoading(true)
         fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/' + linkId).then(res => res.json()).then(data => {
-            if (data.data.type==='МНОГОРАЗКИ') {
+            if (data.data.type==='МНОГОРАЗКИ' || data.data.type==="КАРТРИДЖИ") {
                 setIsPod(true)
             }
             setData(data.data.product)
