@@ -60,7 +60,9 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
                         className="-top-4 -right-3  bg-white px-1.5 rounded-full absolute text-black" >{cart.length}</div>}
                 </div>
             </div>
-            {modal ? <CSSTransition in={modal} classNames={'fade'} timeout={300} unmountOnExit><ModalWindow cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} /></CSSTransition> : ""}
+            <CSSTransition in={modal} classNames={'korzina'} timeout={300} unmountOnExit>
+                <ModalWindow cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} />
+            </CSSTransition>
         </header>
     )
 }

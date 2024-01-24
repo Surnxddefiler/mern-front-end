@@ -166,6 +166,34 @@ opacity: 1;
   transition: opacity 2000ms ease-out, transform 300ms ease;
 }
 
+
+
+.korzina-enter {
+  opacity: 0;
+  transform: translateY(100px); /* Адаптируйте начальное вертикальное перемещение */
+  z-index: 1;
+}
+
+.korzina-enter.korzina-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 2000ms ease-out, transform 300ms ease;
+}
+
+.korzina-exit {
+  opacity: 1;
+  transform: translateY(100px);
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0);
+  transition: opacity 2000ms ease-out, transform 300ms ease, background-color 300ms ease;
+}
+
+.korzina-exit.fade-exit-active {
+  opacity: 0;
+  transform: translateY(100px); /* Адаптируйте конечное вертикальное перемещение */
+  transition: opacity 2000ms ease-out, transform 300ms ease, background-color 300ms ease;
+}
+
 body {
   -webkit-user-select: none; /* Запрет выделения на WebKit браузерах */
   -moz-user-select: none; /* Запрет выделения на Mozilla браузерах */
