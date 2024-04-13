@@ -144,6 +144,7 @@ console.log(values)
                             <option className="p-5" value="МНОГОРАЗКИ" key="">Многоразки</option>
                             <option className="p-5" value="КАРТРИДЖИ" key="">Картриджи</option>
                             <option className="p-5" value="жидкости" key="">Жидкости</option>
+                            <option className="p-5" value="снюс" key="">Снюс</option>
                         </Field>
                         {tip ?   <i onClick={()=>setTip(!tip)} className="text-2xl ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setTip(!tip)} className="text-2xl ml-2 fa-solid fa-lock-open"></i>}
                         </div>
@@ -250,7 +251,7 @@ const Delete=()=>{
                     <option value="646894d611e5b1bd7d4c57bd" key="">Многоразки</option>
                     <option value="659edb2cc2e0e16384df4422" key="">Картриджи</option>
                     <option value="646a7d448834fb372c5a751e" key="">Жидкости</option>
-             
+                    <option value="661ac4766ed64e73620364ab" key="">Снюс</option>
 
         </select>
         <div className="mt-16 flex justify-center items-center flex-wrap gap-11">
