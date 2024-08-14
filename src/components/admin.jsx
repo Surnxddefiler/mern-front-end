@@ -14,7 +14,7 @@ const [tip, setTip]=useState(false)
     const [additional, setAdditional]=useState(false)
     const [marka, setMarka]=useState(false)
     const [cena, setCena]=useState(false)
-
+    const [position, setPosition]=useState(false)
 
     const handleSubmit = async (e) => {
         console.log(e)
@@ -175,6 +175,7 @@ console.log(values)
 
                         <div>
                         <Field className="bg-fifth placeholder:text-white p-5"  type="number" placeholder={"Позиция"} name={"place"} />
+                        {position ?   <i onClick={()=>setPosition(!position)} className="text-2xl ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setPosition(!position)} className="text-2xl ml-2 fa-solid fa-lock-open"></i>}
                         </div>
 
 
