@@ -131,6 +131,13 @@ console.log(values)
                     setFieldValue('type', '');
                 }
 
+                if(position){
+                    setFieldValue('place', values.place);
+                }
+                else{
+                    setFieldValue('place', '');
+                }
+
             }}>
                 {({ handleSubmit }) => (
                     <form className="flex flex-col justify-center gap-4 items-center" onSubmit={(e) => {
