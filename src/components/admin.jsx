@@ -37,7 +37,7 @@ const [tip, setTip]=useState(false)
     const nicotineRef = useRef(null);
     const markRef = useRef(null);
     const costRef = useRef(null);
-    const colorRef=useRef(null)
+    const colorRef=useRef(null);
     const handleKeyDown = (e, inputRef) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -71,6 +71,7 @@ const [tip, setTip]=useState(false)
         cost: Number,
         mark: "",
         color: "",
+        place: Number
     }
     // const initialChange={
     //     type: "",
@@ -129,7 +130,7 @@ console.log(values)
                 else{
                     setFieldValue('type', '');
                 }
-                
+
             }}>
                 {({ handleSubmit }) => (
                     <form className="flex flex-col justify-center gap-4 items-center" onSubmit={(e) => {
@@ -170,6 +171,13 @@ console.log(values)
                         <Field className="bg-fifth placeholder:text-white p-5" innerRef={colorRef} placeholder={"Цвет"} name={"color"} />
                         {color ?   <i onClick={()=>setColor(!color)} className="text-2xl ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setColor(!color)} className="text-2xl ml-2 fa-solid fa-lock-open"></i>}
                         </div>
+
+
+                        <div>
+                        <Field className="bg-fifth placeholder:text-white p-5"  type="number" placeholder={"Позиция"} name={"place"} />
+                        </div>
+
+
                         <div>
                             <button type="submit" className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
                                 Добавить
@@ -256,10 +264,10 @@ const Delete=()=>{
         </select>
         <div className="mt-16 flex justify-center items-center flex-wrap gap-11">
         {data.length!==0 &&
-        data.map((obj)=>{
+        data.map((obj, i)=>{
             return <div onDoubleClick={()=>{
                 deleteOnClick({mark: obj.mark, name: obj.name, nicotine: obj.nicotine })
-            }} className="bg-black p-6 rounded-xl text-white">{obj.mark} {obj.name} {obj.nicotine}</div>
+            }} className="bg-black p-6 rounded-xl text-white">{i+1}. {obj.mark} {obj.name} {obj.nicotine}</div>
         })
         }
         </div>
