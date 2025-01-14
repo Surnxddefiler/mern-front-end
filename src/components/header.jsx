@@ -249,7 +249,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             {!novaPoshta &&
                             <div>
                                 <label className="mb-4 mr-4 text-xl">Удобное время получения :</label>
-                             <Field  innerRef={(ref) => {setTimeFieldRef.current = ref;}} className="w-full p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />
+                             <Field  innerRef={(ref) => {setTimeFieldRef.current = ref;}} className="p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />
                              </div>
                                 }
                             {novaPoshta  &&  
