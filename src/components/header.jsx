@@ -246,7 +246,12 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                                 <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки :" value={place} className="w-full placeholder:opacity-70 bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
                                 <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
                             </div>}
-                            {!novaPoshta && <Field  innerRef={(ref) => {setTimeFieldRef.current = ref;}} className="p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />}
+                            {!novaPoshta &&
+                            <div>
+                                <div className="mb-4 text-xl">Удобное время получения:</div>
+                             <Field  innerRef={(ref) => {setTimeFieldRef.current = ref;}} className="w-full p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />
+                             </div>
+                                }
                             {novaPoshta  &&  
                             <div className="flex justify-center flex-col gap-5">
                             <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"ФИО :"}  type="text" name={"name"} />
