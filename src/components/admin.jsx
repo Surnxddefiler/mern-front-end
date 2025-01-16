@@ -2,7 +2,7 @@ import axios from "axios";
 import { Field, Formik } from "formik"
 import { useRef, useState } from "react";
 // import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify"
+import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 export const Admin = () => {
 
@@ -190,7 +190,6 @@ console.log(values)
                             <button type="submit" className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
                                 Добавить
                             </button>
-                            <ToastContainer />
                         </div>
                     </form>
 
