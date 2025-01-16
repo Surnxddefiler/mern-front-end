@@ -157,7 +157,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                 tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }))
             }
             else{
-                tg.sendData(JSON.stringify({ val, cart, place, pay }))
+                tg.sendData(JSON.stringify({ val, cart, place, pay, deliv }))
             }
                
             }))
