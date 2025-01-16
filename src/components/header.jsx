@@ -154,10 +154,10 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         tg.MainButton.show();
         tg.onEvent('mainButtonClicked', (() => {
             if (novaPoshta) {
-                tg.sendData(JSON.stringify({ val, cart, novaPoshta }))
+                tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }))
             }
             else{
-                tg.sendData(JSON.stringify({ val, cart, place }))
+                tg.sendData(JSON.stringify({ val, cart, place, pay }))
             }
                
             }))
