@@ -84,21 +84,24 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                                 item.nicotine === productObject.nicotine &&
                                 item.cost === productObject.cost
                               ));
-
                             return (
                                 <div className="bg-primary my-5 flex flex-col justify-center px-5 py-5 rounded-3xl" >
 
                                     <div className="flex justify-between items-center">
                                         <div style={{color: obj.color}} className={`${isProductInCart ? 'text-red-500 active-product' : ''} text-2xl font-bold`}>{obj.name}</div>
+                                        {obj.stock ?
                                         <div>
                                             <i className="fa-solid fa-plus fa-2xl text-white active:text-red-500 focus:text-red-500" onClick={() => {handleAddToCart(ammountInCart) }}></i>
                                             <ToastContainer />
                                         </div>
+                                        :
+                                        ''
+                        }
                                     </div>
                                     <div className="text-secondary">{filterName[1]} - {obj.nicotine}</div>
                                     <div className="text-fourth">{filterName[1]==="Сопротивление" ? "" : `${filterName[0]} - ${obj.mark}`}</div>
                                     <div className="text-fifth" >Стоимость - {obj.cost} ₴</div>
-
+                                    <div className="flex justify-end">Наличие - {obj.stock ? '✅' : '❌'}</div>
                                 </div>
                             )
                         })}

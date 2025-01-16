@@ -198,37 +198,8 @@ console.log(values)
             </Formik>
            
             <div>
-
-                {/* <Formik initialValues={initialChange} onSubmit={(values, { resetForm }) => {
-    onHandleChange(values);
-    resetForm({ values: '' }); // Reset the form fields
-}}>
-                {({ handleSubmit }) => (
-                    <form className="mt-5 flex flex-col justify-center gap-4 items-center" onSubmit={(e) => {
-                        e.preventDefault();
-                        handleSubmit()
-                    }}>
-                        <h1 className="text-black text-2xl">изменить цену</h1>
-                        <Field className="bg-fifth placeholder:text-white p-5" as="select" name="type">
-                            <option value="" disabled hidden>что изменить</option>
-                            {data.map(obj=>{
-                                return <option value={obj.type} key="">{obj.type}</option>
-                            })}
-                        </Field>
-                        <Field className="bg-fifth placeholder:text-white p-5" placeholder="название продукта" name="name"/>
-                        <Field className="bg-fifth placeholder:text-white p-5" placeholder="новая цена" type="number" name="cost"/>
-
-                        <div>
-                            <button type="submit"  className="text-2xl text-white mt-5 bg-fifth placeholder:text-white p-5">
-                                изменить
-                            </button>
-                            <ToastContainer />
-                        </div>
-                    </form>
-
-                )}
-                </Formik> */}
                 <Delete/>
+                <Stock/>
             </div>
         </div>
     )
@@ -276,6 +247,62 @@ const Delete=()=>{
             return <div onDoubleClick={()=>{
                 deleteOnClick({mark: obj.mark, name: obj.name, nicotine: obj.nicotine })
             }} className="bg-black p-6 rounded-xl text-white">{i+1}. {obj.mark} {obj.name} {obj.nicotine}</div>
+        })
+        }
+        </div>
+        </div>
+    )
+}
+
+// форма изменения в наличии
+const Stock=()=>{
+    const [data, setData]=useState([])
+    const onChangeValue=(e)=>{
+            fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/' + e.target.value).then(res=>res.json()).then((data)=>{
+                setData(data.data.product)
+            })
+        
+    }
+    const stockOnClick=async(arr)=>{
+       
+        const updatedData = data.map((obj) =>
+            obj.mark === arr.mark && obj.name === arr.name && obj.nicotine === arr.nicotine
+              ? { ...obj, stock: !obj.stock }
+              : obj
+          );
+          setData(updatedData);
+
+        try{
+            await axios.put('https://mernnode-production-873d.up.railway.app/api/nicotine/stock', { arr });
+        }
+        catch(e){
+            console.log(e)
+        }
+    }
+    return(
+        <div className="flex justify-center flex-col items-center">
+        <select className="bg-fifth placeholder:text-white p-5 mt-5"  onChange={onChangeValue} name="" id="">
+                    <option value="" key="" hidden >Что в наличии ?</option>
+                    <option value="646886eb11e5b1bd7d4c57bb" key="">Одноразки</option>
+                    <option value="646894d611e5b1bd7d4c57bd" key="">Многоразки</option>
+                    <option value="659edb2cc2e0e16384df4422" key="">Картриджи</option>
+                    <option value="646a7d448834fb372c5a751e" key="">Жидкости</option>
+                    <option value="661ac4766ed64e73620364ab" key="">Снюс</option>
+
+        </select>
+        <div className="mt-16 flex justify-center items-center flex-wrap gap-11">
+        {data.length!==0 &&
+        data.map((obj, i)=>{
+            let stock=obj.stock
+            if(stock){
+                stock=true
+            }
+            else{
+                stock=false
+            }
+            return <div onDoubleClick={()=>{
+                stockOnClick({mark: obj.mark, name: obj.name, nicotine: obj.nicotine, stock: !stock })
+            }} className="bg-black p-6 rounded-xl text-white">{i+1}. {obj.mark} {obj.name} {obj.nicotine} {stock ? '✅' : '❌'}</div>
         })
         }
         </div>
