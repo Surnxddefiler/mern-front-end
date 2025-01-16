@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from 'react'
-import { ToastContainer, toast } from "react-toastify"
+import {toast } from "react-toastify"
 export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loading, setLoading }) => {
 
     const linkId = useParams().id
@@ -92,7 +92,6 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                                         {obj.stock ?
                                         <div>
                                             <i className="fa-solid fa-plus fa-2xl text-white active:text-red-500 focus:text-red-500" onClick={() => {handleAddToCart(ammountInCart) }}></i>
-                                            <ToastContainer />
                                         </div>
                                         :
                                         ''

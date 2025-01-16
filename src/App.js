@@ -8,7 +8,7 @@ import { useCart } from './hooks/useCart';
 import { useState } from 'react';
 import { Admin } from './components/admin';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
+import {ToastContainer} from "react-toastify"
 
 function App() {
   const { cart, setCart } = useCart()
@@ -33,6 +33,7 @@ function App() {
           <Route path='/admin' exact element={<Admin />} />
         </Routes>
         </CSSTransition>
+          <ToastContainer />
         </TransitionGroup>
     )
   );

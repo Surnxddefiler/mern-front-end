@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 
 // import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink, useLocation } from "react-router-dom";
 import { Field, Formik } from 'formik';
@@ -134,8 +134,9 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
 
     const onSubmitForm = (val) => {
         if (cart.length === 0) {
-            const notify = () => toast("Корзина пустая");
-            return notify()
+            toast("Корзина пустая");
+        
+            return
         }
 
         if (!novaPoshta) {
@@ -266,7 +267,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             <button type="submit" className=" hover:bg-fourth  text-2xl mt-5 shadow__btn">
                                 Оформить заказ
                             </button>
-                            <ToastContainer />
+                            {/* <ToastContainer /> */}
                         </div>
                     </form>
 
