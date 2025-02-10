@@ -232,6 +232,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             <Field className="placeholder:opacity-70 bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона :"} name={"phone"} onKeyDown={handleKeyDown} />
                             {!deliv && !novaPoshta && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white text-input p-5" onChange={onChangePlace}>
                                 <option value="" disabled hidden key="">Точка выдачи -</option>
+                                <option className="p-5" value="• ЖБИ" key="">• ЖБИ</option>
                                 <option className="p-5" value="• Дэмитекс" key="">• Дэмитекс</option>
                                 <option className="p-5" value="• Институт связи" key="">• Институт связи</option>
                                 <option className="p-5" value="• ТРЦ киев" key="">• ТРЦ киев</option>
@@ -239,6 +240,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                                 <option className="p-5" value="• 5-я школа" key="">• 5-я школа</option>
                                 <option className="p-5" value="• Сенная" key="">• Сенная</option>
                                 <option className="p-5" value="• Центр" key="">• Центр</option>
+                                <option className="p-5" value="• 1-я гор. больница" key="">• 1-я гор. больница</option>
                                 <option className="p-5" value="другое" key="">Доставка по Полтавe</option>
                                 <option className="p-5" value="нп" key="">Доставка Новой Почтой</option>
                             </select>
