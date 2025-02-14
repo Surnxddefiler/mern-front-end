@@ -238,7 +238,7 @@ const Delete=()=>{
                     <option value="659edb2cc2e0e16384df4422" key="">Картриджи</option>
                     <option value="646a7d448834fb372c5a751e" key="">Жидкости</option>
                     <option value="661ac4766ed64e73620364ab" key="">Снюс</option>
-
+                    <option value="67af9abb55046b0894a517c1" key="">Все Для Кальяна</option>
         </select>
         <div className="mt-16 flex justify-center items-center flex-wrap gap-11">
         {data.length!==0 &&
@@ -287,6 +287,7 @@ const Stock=()=>{
                     <option value="659edb2cc2e0e16384df4422" key="">Картриджи</option>
                     <option value="646a7d448834fb372c5a751e" key="">Жидкости</option>
                     <option value="661ac4766ed64e73620364ab" key="">Снюс</option>
+                    <option value="67af9abb55046b0894a517c1" key="">Все Для Кальяна</option>
 
         </select>
         <div className="mt-16 flex justify-center items-center flex-wrap gap-11">
