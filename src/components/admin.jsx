@@ -153,6 +153,7 @@ console.log(values)
                             <option className="p-5" value="КАРТРИДЖИ" key="">Картриджи</option>
                             <option className="p-5" value="жидкости" key="">Жидкости</option>
                             <option className="p-5" value="снюс" key="">Снюс</option>
+                            <option className="p-5" value="ВСЁ ДЛЯ КАЛЬЯНА" key="">ВСЁ ДЛЯ КАЛЬЯНА</option>
                         </Field>
                         {tip ?   <i onClick={()=>setTip(!tip)} className="text-2xl ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setTip(!tip)} className="text-2xl ml-2 fa-solid fa-lock-open"></i>}
                         </div>
