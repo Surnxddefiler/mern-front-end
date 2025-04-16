@@ -5,19 +5,33 @@ import { Main } from './components/main';
 import { Header } from './components/header';
 
 import { useCart } from './hooks/useCart';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Admin } from './components/admin';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import {ToastContainer} from "react-toastify"
 
 function App() {
   const { cart, setCart } = useCart()
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
 
   const [ammountInCart, setAmountsInCart] = useState(0);
 
   const location = useLocation();
+  useEffect(()=>{
+    const params = new URLSearchParams(window.location.search);
+    const encodedOrder = params.get("order");
+    if(encodedOrder){
+      try{
+        const jsonOrder = decodeURIComponent(encodedOrder);
+        const order = JSON.parse(jsonOrder);
+        // setRestoredOrder(order);
+        console.log("Полученный заказ:", order);
+      }catch(error){
+        console.log(error)
+      }
+    }
+  })
 
   const tg=window.Telegram.WebApp
   return (
