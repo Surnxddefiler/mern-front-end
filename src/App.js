@@ -62,7 +62,7 @@ function App() {
     tg.platform && (
        <TransitionGroup component={null}>
         <Header  cart={cart} loading={loading} setLoading={setLoading} setCart={setCart} setAmountsInCart={setAmountsInCart} restoredOrder={restoredOrder} />
-        {tg.initData}
+        {/* {tg.initData} */}
         <CSSTransition key={location.key} classNames="fade" timeout={300}>
         <Routes location={location}>
           
