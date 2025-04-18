@@ -164,7 +164,6 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
             }
             
         }
-        console.log(val)
         tg.MainButton.show();
         tg.onEvent('mainButtonClicked', (() => {
             if (novaPoshta) {
