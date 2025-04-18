@@ -188,7 +188,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
         town: restoredOrder?.val?.town || "",
         payment: restoredOrder?.val?.payment || "",
         poltavapayment: restoredOrder?.val?.poltavapayment || false,
-        cacheAmount: restoredOrder?.val?.poltavapayment || 0
+        cashAmount: restoredOrder?.val?.cashAmount || 0
     }
 
     //общее количевство денег
