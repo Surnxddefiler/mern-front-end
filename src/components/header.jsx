@@ -137,6 +137,22 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
             text: 'Подтвердить заказ',
             color: 'rgba(254,56,117,255)'
         })
+        const handleMainButtonClick = () => {
+            const val = formValuesRef.current;
+            if (!val) return;
+        
+            if (novaPoshta) {
+              tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }));
+            } else {
+              tg.sendData(JSON.stringify({ val, cart, place, pay, deliv }));
+            }
+          };
+        
+          tg.onEvent('mainButtonClicked', handleMainButtonClick);
+        
+          return () => {
+            tg.offEvent('mainButtonClicked', handleMainButtonClick); // отписка
+          };
     })
 
 
@@ -164,16 +180,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
             }
             
         }
-        tg.MainButton.show();
-        tg.onEvent('mainButtonClicked', (() => {
-            if (novaPoshta) {
-                tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }))
-            }
-            else{
-                tg.sendData(JSON.stringify({ val, cart, place, pay, deliv }))
-            }
-               
-            }))
+        formValuesRef.current = val; // сохраняем в useRef
+        tg.MainButton.show(); // показываем кнопку
 
        
    
