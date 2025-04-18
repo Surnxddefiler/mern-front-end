@@ -164,17 +164,15 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
             }
             
         }
+        console.log(val)
         tg.MainButton.show();
         tg.onEvent('mainButtonClicked', (() => {
-            const notify = () => toast("Заполните все поля");
-            return notify()
-            // if (novaPoshta) {
-            //     tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }))
-            // }
-            // else{
-            //     tg.sendData(JSON.stringify({ val, cart, place, pay, deliv }))
-            // }
-            // tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }))
+            if (novaPoshta) {
+                tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }))
+            }
+            else{
+                tg.sendData(JSON.stringify({ val, cart, place, pay, deliv }))
+            }
         }))
 
        
