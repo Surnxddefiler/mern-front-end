@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react"
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink, useLocation } from "react-router-dom";
-import { Field, Formik } from 'formik';
+import { Field, Formik} from 'formik';
 import { CSSTransition } from "react-transition-group";
 import '../App.css'
 
-export const Header = ({ cart, setCart, setAmountsInCart }) => {
+export const Header = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
     
 
 
@@ -16,13 +16,21 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
     const [isHome, setHome]=useState(true)
     const location = useLocation();
 
-    useEffect(()=>{
-        if(location.pathname!=='/'){
-            setHome(false)
-        }
-    },[location])
-
     const [modal, setModal] = useState(false)
+    useEffect(()=>{
+       // если не главная — меняем флаг isHome
+  if (location.pathname !== '/') {
+    setHome(false);
+  } else {
+    setHome(true); // на всякий случай добавь возврат
+  }
+
+  // открываем модалку ТОЛЬКО если это главная и заказ восстановлен
+  if (restoredOrder && location.pathname === '/') {
+    setModal(true);
+  }
+    },[location, restoredOrder])
+
     return (
         <header className={`${modal ? 'pb-52 h-screen sticky top-0 overflow-y-scroll' : 'sticky top-0'} py-3 px-5 w-s bg-primary`}>
             <div className="justify-between flex items-center">
@@ -61,7 +69,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
                 </div>
             </div>
             <CSSTransition in={modal} classNames={'korzina'} timeout={300} unmountOnExit>
-                <ModalWindow cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} />
+                <ModalWindow cart={cart} setCart={setCart} setAmountsInCart={setAmountsInCart} restoredOrder={restoredOrder} />
             </CSSTransition>
         </header>
     )
@@ -93,7 +101,7 @@ export const Header = ({ cart, setCart, setAmountsInCart }) => {
 
 
 
-const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
+const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
 
     const tg = window.Telegram.WebApp
 
@@ -144,9 +152,13 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                 const notify = () => toast("Заполните все поля");
                 return notify()
             }
+            if (!val.poltavapayment && (val.cashAmount === 0 || val.cashAmount == null)) {
+                toast("Укажите сумму, с которой сдача");
+                return;
+              }
         }
         else{
-            if (!val.compartment || !val.name || val.phone === "" || !val.town) {
+            if (!val.compartment || !val.name || val.phone === "" || !val.town || !val.payment) {
                 const notify = () => toast("Заполните все поля");
                 return notify()
             }
@@ -169,8 +181,14 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
     }
 
     const initialValue = {
-        phone: "",
-        time: "00:00"
+        phone: restoredOrder?.val?.phone || "",
+        time:  restoredOrder?.val?.time || "00:00",
+        name: restoredOrder?.val?.name || "",
+        compartment: restoredOrder?.val?.compartment || "",
+        town: restoredOrder?.val?.town || "",
+        payment: restoredOrder?.val?.payment || "",
+        poltavapayment: restoredOrder?.val?.poltavapayment || false,
+        cacheAmount: restoredOrder?.val?.poltavapayment || 0
     }
 
     //общее количевство денег
@@ -181,13 +199,35 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
             totalPayment += obj.cost;
         });
         setPayment(totalPayment);
-    }, [cart]);
+        if(restoredOrder){
+            
+            const validPlaces = ["• ЖБИ","• Дэмитекс","• Институт связи","• ТРЦ киев","• Зыгина","• 5-я школа","• Сенная","• Центр","• 1-я гор. больница"];
+
+
+            if(restoredOrder.place){
+                if (validPlaces.includes(restoredOrder.place)) {
+                    setPlace(restoredOrder.place);
+                    console.log("ne nova");
+                  } else {
+                    setPlace(restoredOrder.place);
+                    setDeliv(true);     // включаем ручной ввод адреса
+                    console.log("custom delivery");
+                  }
+            }
+            else if(restoredOrder.novaPoshta){
+                setNovaPoshta(true)
+                console.log('nova')
+            }
+            
+        }
+    }, [cart, restoredOrder]);
 
     //ончедж для доставки
     const [place, setPlace] = useState("")
     const [deliv, setDeliv] = useState(false)
     const onChangePlace = (e) => {
         setPlace(e.target.value)
+    
         if (e.target.value === "другое") {
             setPlace("")
             setDeliv(true)
@@ -201,11 +241,11 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
         }
     }
    
+   
     return (
         <div className="text-white mt-5">
             <div className="">
             {cart.map((obj, index) => {
-                 console.log(obj)
                 return <div className="flex justify-between mb-5 items-center">
                     <div className="w-1/3" > <span>{obj.isPod ? '' : obj.mark}</span> <span>{obj.name}</span></div>
                     <div className="w-1/3">{obj.cost} ₴</div>
@@ -223,7 +263,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
             <div className=" border-t-4"></div>
             <div className="text-2xl my-5 border w-fit  border-secondary  p-2 ">Стоимость заказа - {pay} ₴</div>
             <Formik onSubmit={onSubmitForm} initialValues={initialValue}>
-                {({ handleSubmit }) => (
+                {({ handleSubmit, values }) => (
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         handleSubmit()
@@ -250,9 +290,30 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                                 <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
                             </div>}
                             {!novaPoshta &&
+                            <div className="flex flex-col gap-5">
                             <div>
                                 <label className="mb-4 mr-4 text-xl">Удобное время получения -</label>
                              <Field  innerRef={(ref) => {setTimeFieldRef.current = ref;}} className="p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />
+                             </div>
+                             <div className="flex items-center gap-3">
+                                <div>Наличные</div>
+                                <label class="switch">
+                                <Field name="poltavapayment" type="checkbox"/>
+  <span class="slider round"></span>
+</label>
+<div>Карта</div>
+
+                             </div>
+                             {!values.poltavapayment && (
+    <div>
+        <Field
+          name="cashAmount"
+          type="number"
+          placeholder="С какой суммы сдача?"
+          className="w-full bg-fifth text-input p-5 placeholder:text-white placeholder:opacity-70"
+        />
+        </div>
+      )}
                              </div>
                                 }
                             {novaPoshta  &&  
@@ -260,6 +321,12 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart }) => {
                             <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"ФИО :"}  type="text" name={"name"} />
                             <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"Город / другое :"}  type="text" name={"town"}/>
                             <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"Отделение :"}  type="text" name={"compartment"}/>
+                            <Field name="payment" as="select" className="bg-fifth placeholder:text-white text-input p-5">
+                            <option value="" disabled hidden>Выберите способ оплаты</option>
+  <option value="Наложенный платёж">Наложенный платёж</option>
+  <option value="Предоплата">Предоплата</option>
+  <option value="Полная оплата">Полная оплата</option>
+                            </Field>
                             <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setNovaPoshta(false) }}>Выбрать другой вид доставки -</div>
                             </div>
                             }

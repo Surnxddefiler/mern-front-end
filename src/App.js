@@ -13,7 +13,7 @@ import {ToastContainer} from "react-toastify"
 function App() {
   const { cart, setCart } = useCart()
   const [loading, setLoading] = useState(true);
-
+  const [restoredOrder, setRestoredOrder]=useState(null)
 
   const [ammountInCart, setAmountsInCart] = useState(0);
 
@@ -23,21 +23,45 @@ function App() {
     const encodedOrder = params.get("order");
     if(encodedOrder){
       try{
+
+        setLoading(true)
+        fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/').then(res => res.json()).then(apiData => {
+
+          
         const jsonOrder = decodeURIComponent(encodedOrder);
         const order = JSON.parse(jsonOrder);
-        // setRestoredOrder(order);
-        console.log("Полученный заказ:", order);
+
+          const allProducts = apiData.data.flatMap(group => group.product);
+          const filteredCart = order.cart.filter((itemFromOrder) => {
+            return allProducts.some((product) =>
+              product.stock &&
+              product.name === itemFromOrder.name &&
+              product.nicotine === itemFromOrder.nicotine &&
+              product.mark === itemFromOrder.mark
+            );
+          });
+  
+          // Создаём новый заказ с обновлённой корзиной
+          const filteredOrder = { ...order, cart: filteredCart };
+            setLoading(false)
+            setRestoredOrder(order);
+            setCart(filteredOrder.cart)
+            console.log("Полученный заказ:", order);
+        })
+
+        
+    
       }catch(error){
         console.log(error)
       }
     }
-  })
+  }, [])
 
   const tg=window.Telegram.WebApp
   return (
     tg.platform && (
        <TransitionGroup component={null}>
-        <Header  cart={cart} loading={loading} setLoading={setLoading} setCart={setCart} setAmountsInCart={setAmountsInCart} />
+        <Header  cart={cart} loading={loading} setLoading={setLoading} setCart={setCart} setAmountsInCart={setAmountsInCart} restoredOrder={restoredOrder} />
         {tg.initData}
         <CSSTransition key={location.key} classNames="fade" timeout={300}>
         <Routes location={location}>
