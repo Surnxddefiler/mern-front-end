@@ -55,7 +55,7 @@ function App() {
         console.log(error)
       }
     }
-  }, [])
+  }, [setCart])
 
   const tg=window.Telegram.WebApp
   return (
