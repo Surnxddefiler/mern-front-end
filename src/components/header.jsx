@@ -115,6 +115,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
 
     const setTimeFieldRef = useRef(null);
 
+    const formValuesRef = useRef(null);
+
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             if (deliv) {
