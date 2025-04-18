@@ -166,6 +166,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
         }
         tg.MainButton.show();
         tg.onEvent('mainButtonClicked', (() => {
+            const notify = () => toast("Заполните все поля");
+            return notify()
             if (novaPoshta) {
                 tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }))
             }
