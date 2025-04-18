@@ -148,14 +148,10 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
         }
 
         if (!novaPoshta) {
-            if (val.phone === "" || val.time === "00:00" || place === "") {
+            if (val.phone === "" || val.time === "00:00" || place === "" || val.poltavapayment==="") {
                 const notify = () => toast("Заполните все поля");
                 return notify()
             }
-            if (!val.poltavapayment && (val.cashAmount === 0 || val.cashAmount == null)) {
-                toast("Укажите сумму, с которой сдача");
-                return;
-              }
         }
         else{
             if (!val.compartment || !val.name || val.phone === "" || !val.town || !val.payment) {
@@ -186,8 +182,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
         compartment: restoredOrder?.val?.compartment || "",
         town: restoredOrder?.val?.town || "",
         payment: restoredOrder?.val?.payment || "",
-        poltavapayment: restoredOrder?.val?.poltavapayment || false,
-        cashAmount: restoredOrder?.val?.cashAmount || 0
+        poltavapayment: restoredOrder?.val?.poltavapayment || "",
+        cashAmount: restoredOrder?.val?.cashAmount || ""
     }
 
     //общее количевство денег
@@ -294,21 +290,17 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                                 <label className="mb-4 mr-4 text-xl">Удобное время получения -</label>
                              <Field  innerRef={(ref) => {setTimeFieldRef.current = ref;}} className="p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />
                              </div>
-                             <div className="flex items-center gap-3">
-                                <div>Наличные</div>
-                                <label class="switch">
-                                <Field name="poltavapayment" type="checkbox"/>
-  <span class="slider round"></span>
-</label>
-<div>Карта</div>
-
-                             </div>
-                             {!values.poltavapayment && (
+                             <Field name="poltavapayment" as="select" className="bg-fifth placeholder:text-white text-input p-5">
+                            <option value="" disabled hidden>Выберите способ оплаты</option>
+  <option value="Наличные">Наличные</option>
+  <option value="Картой">Картой</option>
+                            </Field>
+                             {values.poltavapayment==="Наличные" && (
     <div>
         <Field
           name="cashAmount"
-          type="number"
-          placeholder="С какой суммы сдача?"
+          type="phone"
+          placeholder="Сумма для оплаты"
           className="w-full bg-fifth text-input p-5 placeholder:text-white placeholder:opacity-70"
         />
         </div>
