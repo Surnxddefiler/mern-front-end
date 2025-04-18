@@ -115,8 +115,6 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
 
     const setTimeFieldRef = useRef(null);
 
-    const formValuesRef = useRef(null);
-
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             if (deliv) {
@@ -182,8 +180,16 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
             }
             
         }
-        formValuesRef.current = val; // сохраняем в useRef
-        tg.MainButton.show(); // показываем кнопку
+        tg.MainButton.show();
+        tg.onEvent('mainButtonClicked', (() => {
+            if (novaPoshta) {
+                tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }))
+            }
+            else{
+                tg.sendData(JSON.stringify({ val, cart, place, pay, deliv }))
+            }
+            tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }))
+            }))
 
        
    
