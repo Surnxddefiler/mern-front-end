@@ -291,7 +291,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                              <Field  innerRef={(ref) => {setTimeFieldRef.current = ref;}} className="p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />
                              </div>
                              <Field name="poltavapayment" as="select" className="bg-fifth placeholder:text-white text-input p-5">
-                            <option value="" disabled hidden>Выберите способ оплаты</option>
+                            <option value="" disabled hidden>Выберите способ оплаты :</option>
   <option value="Наличные">Наличные</option>
   <option value="Картой">Картой</option>
                             </Field>
@@ -313,7 +313,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                             <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"Город / другое :"}  type="text" name={"town"}/>
                             <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"Отделение :"}  type="text" name={"compartment"}/>
                             <Field name="payment" as="select" className="bg-fifth placeholder:text-white text-input p-5">
-                            <option value="" disabled hidden>Выберите способ оплаты</option>
+                            <option value="" disabled hidden>Выберите способ оплаты : </option>
   <option value="Наложенный платёж">Наложенный платёж</option>
   <option value="Предоплата">Предоплата</option>
   <option value="Полная оплата">Полная оплата</option>
