@@ -299,8 +299,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
     <div>
         <Field
           name="cashAmount"
-          type="number"
-          inputMode="numeric"
+          type="tel"
           placeholder="Сумма для оплаты"
           className="w-full bg-fifth text-input p-5 placeholder:text-white placeholder:opacity-70"
         />
