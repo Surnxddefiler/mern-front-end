@@ -264,7 +264,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                         handleSubmit()
                     }}>
                         <div className="flex justify-center flex-col gap-5">
-                            <Field className="placeholder:opacity-70 bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона :"} name={"phone"} onKeyDown={handleKeyDown} />
+                            <Field type="tel" className="placeholder:opacity-70 bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона :"} name={"phone"} onKeyDown={handleKeyDown} />
                             {!deliv && !novaPoshta && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white text-input p-5" onChange={onChangePlace}>
                                 <option value="" disabled hidden key="">Точка выдачи -</option>
                                 <option className="p-5" value="• ЖБИ" key="">• ЖБИ</option>
