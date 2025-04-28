@@ -140,7 +140,7 @@ console.log(values)
 
             }}>
                 {({ handleSubmit }) => (
-                    <form className="flex flex-col justify-center gap-4 items-center" onSubmit={(e) => {
+                    <form className="admin__form flex flex-col justify-center gap-4 items-center" onSubmit={(e) => {
                         e.preventDefault();
                         handleSubmit()
                     }}>
