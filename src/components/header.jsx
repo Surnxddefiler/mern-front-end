@@ -32,7 +32,7 @@ export const Header = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
     },[location, restoredOrder])
 
     return (
-        <header className={`${modal ? 'pb-52 h-screen absolute top-0 overflow-y-scroll w-full z-40' : 'sticky top-0'} py-3 px-5 w-s bg-primary`}>
+        <header className={`${modal ? 'pb-52 h-screen absolute top-0 overflow-y-scroll w-full z-40 pt-6' : 'sticky top-0'} py-3 px-5 w-s bg-primary`}>
             <div className="justify-between flex items-center">
                 {modal ? 
                 <div className={'flex items-center logo__wrapper'} onClick={()=>{
