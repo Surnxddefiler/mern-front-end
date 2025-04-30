@@ -15,7 +15,7 @@ export const Main = ({loading, setLoading}) => {
         <>
         
         {loading ? <img className='absolute translate-x-2/4 loading__animation' style={{top: "150px", right: "50%"}} src="/load.gif" alt="" /> : 
-        <div className='flex justify-center flex-wrap gap-8 mt-6'>
+        <div className='flex justify-center flex-wrap gap-8 pt-6'>
             {data.map((obj) => {
                 return (
                     <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/'+ obj._id}>
