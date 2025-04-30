@@ -296,3 +296,6 @@ input:checked + .slider:before {
 .admin__form{
   background-color: rgba(255, 255, 255, 0.5);
 }
+.Toastify__toast{
+  z-index: 999999999999999;
+}
