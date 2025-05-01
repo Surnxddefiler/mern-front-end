@@ -299,3 +299,6 @@ input:checked + .slider:before {
 .Toastify__toast{
   z-index: 999999999999999;
 }
+body:before{
+  content: "";
+}
