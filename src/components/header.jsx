@@ -275,7 +275,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                                 <option className="p-5" value="• ЖБИ" key="">• ЖБИ</option>
                                 <option className="p-5" value="• Дэмитекс" key="">• Дэмитекс</option>
                                 <option className="p-5" value="• Институт связи" key="">• Институт связи</option>
-                                <option className="p-5" value="• ТРЦ киев" key="">• ТРЦ киев</option>
+                                <option className="p-5" value="• ТРЦ киев" key="">• ТРЦ Киев</option>
                                 <option className="p-5" value="• Зыгина" key="">• Зыгина</option>
                                 <option className="p-5" value="• 5-я школа" key="">• 5-я школа</option>
                                 <option className="p-5" value="• Сенная" key="">• Сенная</option>
