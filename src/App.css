@@ -300,5 +300,5 @@ input:checked + .slider:before {
   z-index: 999999999999999;
 }
 .header__wrapper{
-  height: 120%;
+   max-height: 100%;
 }
