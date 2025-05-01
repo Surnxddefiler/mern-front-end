@@ -279,7 +279,13 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                                 <option className="p-5" value="• Зыгина" key="">• Зыгина</option>
                                 <option className="p-5" value="• 5-я школа" key="">• 5-я школа</option>
                                 <option className="p-5" value="• Сенная" key="">• Сенная</option>
-                                <option className="p-5" value="• Центр" key="">• Центр</option>
+                                <option className="p-5" value="• Школа искусств" key="">• Школа искусств</option>
+                                <option className="p-5" value="• ТЦ ЦУМ" key="">• ТЦ ЦУМ</option>
+                                <option className="p-5" value="• Театр Гоголя" key="">• Театр Гоголя</option>
+                                <option className="p-5" value="• Собор - Альтанка" key="">• Собор - Альтанка</option>
+                                <option className="p-5" value="• Берёзовый сквер" key="">• Берёзовый сквер</option>
+                                <option className="p-5" value="• Парк победы" key="">• Парк победы</option>
+                                <option className="p-5" value="• Шевченка АТБ" key="">• Шевченка АТБ</option>
                                 <option className="p-5" value="• 1-я гор. больница" key="">• 1-я гор. больница</option>
                                 <option className="p-5" value="другое" key="">Доставка по Полтавe</option>
                                 <option className="p-5" value="нп" key="">Доставка Новой Почтой</option>
