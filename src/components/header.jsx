@@ -284,7 +284,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                                 <option className="p-5" value="• Театр Гоголя" key="">• Театр Гоголя</option>
                                 <option className="p-5" value="• Собор - Альтанка" key="">• Собор - Альтанка</option>
                                 <option className="p-5" value="• Берёзовый сквер" key="">• Берёзовый сквер</option>
-                                <option className="p-5" value="• Парк победы" key="">• Парк победы</option>
+                                <option className="p-5" value="• Парк Победа" key="">• Парк Победа</option>
                                 <option className="p-5" value="• Шевченка АТБ" key="">• Шевченка АТБ</option>
                                 <option className="p-5" value="• 1-я гор. больница" key="">• 1-я гор. больница</option>
                                 <option className="p-5" value="другое" key="">Доставка по Полтавe</option>
