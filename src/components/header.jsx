@@ -28,6 +28,8 @@ export const Header = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
   // открываем модалку ТОЛЬКО если это главная и заказ восстановлен
   if (restoredOrder && location.pathname === '/') {
     setModal(true);
+    document.querySelector('#root').style.overflow ='hidden';
+    document.querySelector('#root').style.height ='100vh';
   }
     },[location, restoredOrder])
 
