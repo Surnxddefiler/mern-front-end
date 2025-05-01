@@ -36,7 +36,8 @@ export const Header = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
             <div className="justify-between flex items-center">
                 {modal ? 
                 <div className={'flex items-center logo__wrapper'} onClick={()=>{
-                    document.body.style.overflow = modal ? 'auto' : 'hidden';
+                    document.querySelector('#root').style.overflow = modal ? 'auto' : 'hidden';
+                    document.querySelector('#root').style.height = modal ? 'auto' : '100vh';
                     setModal(false)}
                     }>
                     <i className="text-white text-4xl fa-solid fa-caret-left"></i>
@@ -54,13 +55,15 @@ export const Header = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                     <i
                         onClick={() => {
                             setModal(!modal);
-                            document.body.style.overflow = modal ? 'auto' : 'hidden';
+                            document.querySelector('#root').style.overflow = modal ? 'auto' : 'hidden';
+                            document.querySelector('#root').style.height = modal ? 'auto' : '100vh';
                         }}
                         class="fa-regular fa-circle-xmark text-white fa-2xl"></i>
                     : <i
                         onClick={() => {
                             setModal(!modal);
-                            document.body.style.overflow = modal ? 'auto' : 'hidden';
+                            document.querySelector('#root').style.overflow = modal ? 'auto' : 'hidden';
+                            document.querySelector('#root').style.height = modal ? 'auto' : '100vh';
                         }}
                         class={`fa-solid ${cart.length > 0 ? "fa-beat-fade" : "glowing-cart"} fa-cart-shopping fa-2xl text-white`}></i>}
                     {modal ? "" : <div
