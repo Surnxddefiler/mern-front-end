@@ -28,7 +28,7 @@ export const Header = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
   // открываем модалку ТОЛЬКО если это главная и заказ восстановлен
   if (restoredOrder && location.pathname === '/') {
     setModal(true);
-    document.querySelector('#root').style.overflow ='hidden';
+    document.querySelector('#root').style.overflow ='initial';
     document.querySelector('#root').style.height ='100vh';
   }
     },[location, restoredOrder])
@@ -38,7 +38,7 @@ export const Header = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
             <div className="justify-between flex items-center">
                 {modal ? 
                 <div className={'flex items-center logo__wrapper'} onClick={()=>{
-                    document.querySelector('#root').style.overflow = modal ? 'auto' : 'hidden';
+                    document.querySelector('#root').style.overflow = modal ? 'auto' : 'initial';
                     document.querySelector('#root').style.height = modal ? 'auto' : '100vh';
                     setModal(false)}
                     }>
@@ -57,14 +57,14 @@ export const Header = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                     <i
                         onClick={() => {
                             setModal(!modal);
-                            document.querySelector('#root').style.overflow = modal ? 'auto' : 'hidden';
+                            document.querySelector('#root').style.overflow = modal ? 'auto' : 'initial';
                             document.querySelector('#root').style.height = modal ? 'auto' : '100vh';
                         }}
                         class="fa-regular fa-circle-xmark text-white fa-2xl"></i>
                     : <i
                         onClick={() => {
                             setModal(!modal);
-                            document.querySelector('#root').style.overflow = modal ? 'auto' : 'hidden';
+                            document.querySelector('#root').style.overflow = modal ? 'auto' : 'initial';
                             document.querySelector('#root').style.height = modal ? 'auto' : '100vh';
                         }}
                         class={`fa-solid ${cart.length > 0 ? "fa-beat-fade" : "glowing-cart"} fa-cart-shopping fa-2xl text-white`}></i>}

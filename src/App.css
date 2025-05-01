@@ -299,6 +299,3 @@ input:checked + .slider:before {
 .Toastify__toast{
   z-index: 999999999999999;
 }
-.header__wrapper{
-   max-height: 100%;
-}
