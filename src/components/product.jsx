@@ -127,11 +127,11 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                               ));
                     
                               const gallery=[]
-                              {obj.gallery.map((image)=>{
-                           const src=image.url
-                           console.log(image)
-  gallery.push({src});
-                                        })}
+                           obj.gallery.forEach((image) => {
+  const src = image.url;
+  console.log(image);
+  gallery.push({ src });
+});
 
                             return (
                                 <div className="bg-primary my-5 flex flex-col justify-center px-5 py-5 rounded-3xl" >
