@@ -1,10 +1,18 @@
 import axios from "axios";
-import { Field, Formik } from "formik"
-import { useRef, useState } from "react";
+import { Field, Formik, useFormikContext } from "formik"
+import { useEffect, useRef, useState } from "react";
 // import { useEffect, useState } from "react";
 import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 export const Admin = () => {
+
+    useEffect(()=>{
+        fetch("https://mernnode-production-873d.up.railway.app/api/nicotine/status")
+        .then(res => res.json())
+        .then(data =>setDiscount(data.discount))
+        .catch(err => console.error("Ошибка при получении:", err));
+    },[])
+
 
 
 //для блокировки инпута
@@ -23,12 +31,36 @@ const [tip, setTip]=useState(false)
             return notify()
         }
         else {
-            try {
-                await axios.post('https://mernnode-production-873d.up.railway.app/api/nicotine/postProduct', { e })
-            } catch (e) {
-                const notify = () => toast("успешно не добавлено");
-                return notify()
-            }
+          try{
+            
+  const formData = new FormData();
+
+    // Добавим все текстовые поля
+    formData.append("type", e.type);
+    formData.append("name", e.name);
+    formData.append("nicotine", e.nicotine);
+    formData.append("cost", e.cost);
+    formData.append("mark", e.mark);
+    // formData.append("ammount", e.ammount);
+    formData.append("color", e.color);
+    formData.append("place", e.place);
+
+    // Файлы: добавляем каждую картинку как отдельный файл с одним и тем же ключом `gallery`
+    e.gallery.forEach((file) => {
+      formData.append("gallery", file);
+    });
+
+    console.log(formData)
+    await axios.post(
+      "https://mernnode-production-873d.up.railway.app/api/nicotine/postProduct",
+      formData,
+      
+    );
+
+          } catch(e){
+ console.error(e);
+    toast("успешно не добавлено");
+          }
         }
 
     }
@@ -71,15 +103,39 @@ const [tip, setTip]=useState(false)
         cost: Number,
         mark: "",
         color: "",
-        place: Number
+        place: Number,
+        gallery: [],
     }
     // const initialChange={
     //     type: "",
     //     name: "",
     //     cost: ""
     // }
+    //discount
+    const [discount, setDiscount]=useState(0);
+
+    const dicsountHandler=async ()=>{
+           const response = await fetch("https://mernnode-production-873d.up.railway.app/api/nicotine/toggle-status", {
+          method: "POST",
+         headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ arr: discount })
+        });
+      
+        const data = await response.json();
+        setDiscount(data.discount);
+    }
+
     return (
         <div>
+
+      <div className="flex flex-col content-center items-center gap-4">
+                            <h1 className="text-white text-xl mt-5" >Акция</h1>
+                            <input className="bg-fifth placeholder:text-white p-5" type="number" value={discount} onChange={e=>setDiscount(e.target.value)}  />
+                            <button className="bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5 mb-5" onClick={dicsountHandler}>Активировать акцию</button>
+                        </div>
+
             <Formik initialValues={initialValue} onSubmit={(values, { setFieldValue }) => {
                 handleSubmit(values);
                 // resetForm({ values: '' }); // Reset the form fields
@@ -144,7 +200,10 @@ console.log(values)
                         e.preventDefault();
                         handleSubmit()
                     }}>
+                  
                         <h1 className="text-white">ДОБАВИТЬ НОВЫЙ ПРОДУКТ</h1>
+                        <div>
+                        </div>
                         <div>
                         <Field className="bg-fifth placeholder:text-white p-5" as="select" name={"type"}>
                             <option value="" disabled hidden key="">Что добавить ?</option>
@@ -186,6 +245,9 @@ console.log(values)
                         {position ?   <i onClick={()=>setPosition(!position)} className="text-2xl ml-2 fa-solid fa-lock"></i> :  <i onClick={()=>setPosition(!position)} className="text-2xl ml-2 fa-solid fa-lock-open"></i>}
                         </div>
 
+<div>
+     <GalleryUpload name="gallery" />
+</div>
 
                         <div>
                             <button type="submit" className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5">
@@ -310,3 +372,26 @@ const Stock=()=>{
         </div>
     )
 }
+
+const GalleryUpload = ({ name }) => {
+//   const [, , helpers] = useField(name);
+  const { setFieldValue } = useFormikContext();
+
+  const handleChange = (e) => {
+    const files = e.currentTarget.files;
+    if (files) {
+      const fileArray = Array.from(files);
+      setFieldValue(name, fileArray);
+    }
+  };
+
+  return (
+    <input
+      type="file"
+      multiple
+      accept="image/*"
+      onChange={handleChange}
+      className="bg-fifth text-white p-5"
+    />
+  );
+};

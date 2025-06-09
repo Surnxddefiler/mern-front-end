@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {toast } from "react-toastify"
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loading, setLoading }) => {
 
     const linkId = useParams().id
@@ -8,7 +10,9 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     const [data, setData] = useState([])
     const [filterName, setFilterName] = useState([])
     //проверка на многоразки
-    const [isPod, setIsPod]=useState('')
+    const [isPod, setIsPod]=useState('');
+    //
+    const [pay, setPayment] = useState(0)
     useEffect(() => {
         setLoading(true)
         fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/' + linkId).then(res => res.json()).then(data => {
@@ -19,12 +23,50 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
             setFilterName([data.data.firstFilter, data.data.secondFilter])
             setLoading(false)
         })
+        
     }, [linkId, setLoading])
+    const [discount,setDiscount]=useState(0)
+    //логика бесплатной доставки
+      useEffect(()=>{
+        fetch("https://mernnode-production-873d.up.railway.app/api/nicotine/status")
+        .then(res => res.json())
+        .then(data =>setDiscount(Number(data.discount)))
+        .catch(err => console.error("Ошибка при получении:", err));
+    },[])
+    const hasShownFreeDelivery = useRef(false);
+    useEffect(() => {
+        if (discount !==0) {
+                    const shownKey = `freeDeliveryShown_${discount}`; // уникальный ключ
+        const hasShown = sessionStorage.getItem(shownKey);
+            console.log(typeof discount)
+        if (pay > discount && !hasShown) {
+            toast("бесплатная доставка");
+            hasShownFreeDelivery.current = true; // больше не показываем
+             sessionStorage.setItem(shownKey, "true");
+        }
+    
+        if (pay <= discount) {
+ sessionStorage.removeItem(shownKey); // сбросить при снижении
+        }
+        }
+      
+    }, [pay, discount]);
+    useEffect(() => {
+        let totalPayment = 0;
+        cart.forEach((obj) => {
+            totalPayment += obj.cost;
+        });
+        setPayment(totalPayment);
+    }, [cart]);
+    
     //фильтр
     const [mark, setMark] = useState('')
     const [tyagi, setTyagi] = useState('')
     const markArray=[...new Set(data.map((obj) => obj.mark))];
     //
+    const [open, setOpen]=useState(false)
+    const [slides, setSlides]=useState({})
+    const [index, setIndex]=useState(1)
     return (
         <>
             {loading ? <img className='loading__animation absolute translate-x-2/4 duration-300' style={{top: "150px", right: "50%"}} src="/load.gif" alt="" /> :
@@ -76,7 +118,6 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                                 setCart([...cart, { mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost, isPod: isPod }]);
                                 setAmountsInCart(prev => prev + 1)
                             };
-
                             const productObject={ mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost}
                             const isProductInCart = cart.some(item => (
                                 item.mark === productObject.mark &&
@@ -84,9 +125,30 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                                 item.nicotine === productObject.nicotine &&
                                 item.cost === productObject.cost
                               ));
+                    
+                              const gallery=[]
+                              {obj.gallery.map((image)=>{
+                           const src=image.url
+                           console.log(image)
+  gallery.push({src});
+                                        })}
+
                             return (
                                 <div className="bg-primary my-5 flex flex-col justify-center px-5 py-5 rounded-3xl" >
+                                    <div className="flex gap-3 mb-4">
+                                        {gallery.map((image,index)=>{
+                           
 
+  return <img onClick={()=>{
+    setOpen(true)
+    setSlides(gallery);
+    setIndex(index);
+    document.body.style.backdropFilter="none"
+}
+  } src={image.src} alt={`product-${index}`} style={{ maxWidth: "100px", borderRadius: '0.5rem', width:'100%', maxHeight: "100px", objectFit: "cover" }} />
+;
+                                        })}
+                                    </div>
                                     <div className="flex justify-between items-center">
                                         <div style={{color: obj.color}} className={`${isProductInCart ? 'text-red-500 active-product' : ''} text-2xl font-bold`}>{obj.name}</div>
                                         {obj.stock ?
@@ -107,6 +169,15 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                     </div>
                 </div>
             }
+            <Lightbox
+        open={open}
+        close={() => {
+               document.body.style.backdropFilter="blur(30px)"
+            setOpen(false)
+        }}
+        slides={slides}
+         index={index}
+      />
         </>
     )
 }

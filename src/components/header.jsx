@@ -171,7 +171,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                 tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }))
             }
             else{
-                tg.sendData(JSON.stringify({ val, cart, place, pay, deliv }))
+                tg.sendData(JSON.stringify({ val, cart, place, pay, deliv, freeDelivery }))
             }
         }))
 
@@ -221,6 +221,36 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
             
         }
     }, [cart, restoredOrder]);
+    
+    const [freeDelivery, setFreeDelivery]=useState(false)
+    const [discount,setDiscount]=useState(0)
+      useEffect(()=>{
+        fetch("https://mernnode-production-873d.up.railway.app/api/nicotine/status")
+        .then(res => res.json())
+        .then(data =>setDiscount(Number(data.discount)))
+        .catch(err => console.error("Ошибка при получении:", err));
+    },[])
+    const [wasToastShown, setWasToastShown] = useState(false);
+
+    useEffect(() => {
+         if (discount !==0) {
+        if (pay > discount) {
+            setFreeDelivery(true)
+            setWasToastShown(true);
+        }
+    
+        if (pay <= discount) {
+            setFreeDelivery(false)
+        }
+        if (pay < discount && pay >= discount - 300 && !wasToastShown) {
+    toast(`Докупите товара на ${discount - pay} чтобы воспользоваться бесплатной доставкой`);
+     setWasToastShown(true);
+}
+    }
+    if (pay < discount - 300 && wasToastShown) {
+            setWasToastShown(false);
+        }
+    }, [pay, discount, wasToastShown]);
 
     //ончедж для доставки
     const [place, setPlace] = useState("")
@@ -287,7 +317,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                                 <option className="p-5" value="• Парк Победа" key="">• Парк Победа</option>
                                 <option className="p-5" value="• Шевченка АТБ" key="">• Шевченка АТБ</option>
                                 <option className="p-5" value="• 1-я гор. больница" key="">• 1-я гор. больница</option>
-                                <option className="p-5" value="другое" key="">Доставка по Полтавe</option>
+                                <option className="p-5" value="другое" key="">Доставка по Полтавe {freeDelivery ? '(Бесплатно)': ''}</option>
                                 <option className="p-5" value="нп" key="">Доставка Новой Почтой</option>
                             </select>
                             }
