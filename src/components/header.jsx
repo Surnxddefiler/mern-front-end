@@ -245,10 +245,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
         if (pay <= discount) {
             setFreeDelivery(false)
         }
-        if (pay < discount && pay >= discount - 300 && !wasToastShown) {
-    toast(`Хочешь бесплатную доставку ? Добавь к заказу позиций ещё на ${discount-pay} ₴ — и доставка будет бесплатно !`);
-     setWasToastShown(true);
-}
+       
     }
     if (pay < discount - 300 && wasToastShown) {
             setWasToastShown(false);
@@ -327,7 +324,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                             }
                             {deliv && <div>
                                 <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки :" value={place} className="text-xl w-full placeholder:opacity-70 bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
-                                <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
+                                <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setDeliv(false) }}>Назад ⬅️</div>
                             </div>}
                             {!novaPoshta &&
                             <div className="flex flex-col gap-5">
@@ -363,7 +360,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
   <option value="Предоплата">Предоплата</option>
   <option value="Полная оплата">Полная оплата</option>
                             </Field>
-                            <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setNovaPoshta(false) }}>Выбрать другой вид доставки -</div>
+                            <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setNovaPoshta(false) }}>Назад ⬅️</div>
                             </div>
                             }
 

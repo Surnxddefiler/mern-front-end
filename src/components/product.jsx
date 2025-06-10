@@ -36,19 +36,26 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     },[])
     const hasShownFreeDelivery = useRef(false);
     useEffect(() => {
-        if (discount !==0) {
-                    const shownKey = `freeDeliveryShown_${discount}`; // уникальный ключ
-        const hasShown = sessionStorage.getItem(shownKey);
-        if (pay > discount && !hasShown) {
-            toast(`Вы составили заказ на ${pay} ₴ — доставка будет бесплатной !`);
-            hasShownFreeDelivery.current = true; // больше не показываем
-             sessionStorage.setItem(shownKey, "true");
+        if (discount !== 0) {
+        const freeKey = `freeDeliveryShown_${discount}`;
+        const almostKey = `freeDeliveryAlmostShown_${discount}`;
+
+        const hasShownFree = sessionStorage.getItem(freeKey);
+        const hasShownAlmost = sessionStorage.getItem(almostKey);
+
+        // Бесплатная доставка достигнута
+        if (pay > discount && !hasShownFree) {
+            toast(`Вы составили заказ на ${pay} ₴ — доставка будет бесплатной!`);
+            hasShownFreeDelivery.current = true;
+            sessionStorage.setItem(freeKey, "true");
         }
-    
-        if (pay <= discount) {
- sessionStorage.removeItem(shownKey); // сбросить при снижении
+
+        // Почти бесплатная доставка
+        if (pay < discount && !hasShownAlmost && pay !== 0) {
+            toast(`Хочешь бесплатную доставку? Добавь к заказу позиций ещё на ${discount - pay} ₴ — и доставка будет бесплатно!`);
+            sessionStorage.setItem(almostKey, "true");
         }
-        }
+    }
       
     }, [pay, discount]);
     useEffect(() => {
