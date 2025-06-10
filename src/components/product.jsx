@@ -151,6 +151,8 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     setSlides(gallery);
     setIndex(index);
     document.body.style.backdropFilter="none"
+    document.body.style.webkitBackdropFilter = "none";
+
 }
   } src={image.src} alt={`product-${index}`} style={{ maxWidth: "100px", borderRadius: '0.5rem', width:'100%', maxHeight: "100px", objectFit: "cover" }} />
 ;
@@ -180,6 +182,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
         open={open}
         close={() => {
                document.body.style.backdropFilter="blur(30px)"
+               document.body.style.webkitBackdropFilter = "blur(30px)";
             setOpen(false)
         }}
         slides={slides}
