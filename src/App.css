@@ -302,3 +302,8 @@ input:checked + .slider:before {
 body:before{
   content: "";
 }
+.time__wrapper{
+      display: grid;
+    grid-template-columns: max-content 1fr;
+    align-items: center;
+}

@@ -168,7 +168,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
         tg.MainButton.show();
         tg.onEvent('mainButtonClicked', (() => {
             if (novaPoshta) {
-                tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay }))
+                tg.sendData(JSON.stringify({ val, cart, novaPoshta, pay, freeDelivery, np }))
             }
             else{
                 tg.sendData(JSON.stringify({ val, cart, place, pay, deliv, freeDelivery }))
@@ -224,10 +224,13 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
     
     const [freeDelivery, setFreeDelivery]=useState(false)
     const [discount,setDiscount]=useState(0)
+     const [np,setNp]=useState(false)
       useEffect(()=>{
         fetch("https://mernnode-production-873d.up.railway.app/api/nicotine/status")
         .then(res => res.json())
-        .then(data =>setDiscount(Number(data.discount)))
+        .then(data =>{
+            setNp(data.np)
+            setDiscount(Number(data.discount))})
         .catch(err => console.error("Ошибка при получении:", err));
     },[])
     const [wasToastShown, setWasToastShown] = useState(false);
@@ -243,7 +246,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
             setFreeDelivery(false)
         }
         if (pay < discount && pay >= discount - 300 && !wasToastShown) {
-    toast(`Докупите товара на ${discount - pay} чтобы воспользоваться бесплатной доставкой`);
+    toast(`Хочешь бесплатную доставку ? Добавь к заказу позиций ещё на ${discount-pay} ₴ — и доставка будет бесплатно !`);
      setWasToastShown(true);
 }
     }
@@ -291,7 +294,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
             })}
             </div>
             <div className=" border-t-4"></div>
-            <div className="text-2xl my-5 border w-fit  border-secondary  p-2 ">Стоимость заказа - {pay} ₴</div>
+            <div className="text-2xl my-5 border w-full  border-secondary  p-2 ">Стоимость заказа - {pay} ₴</div>
+            <div className="text-xl text-gray-600 mb-3">{pay ? "":"Добавьте товары в корзину, чтобы продолжить оформление"}</div>
             <Formik onSubmit={onSubmitForm} initialValues={initialValue}>
                 {({ handleSubmit, values }) => (
                     <form onSubmit={(e) => {
@@ -318,7 +322,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                                 <option className="p-5" value="• Шевченка АТБ" key="">• Шевченка АТБ</option>
                                 <option className="p-5" value="• 1-я гор. больница" key="">• 1-я гор. больница</option>
                                 <option className="p-5" value="другое" key="">Доставка по Полтавe {freeDelivery ? '(Бесплатно)': ''}</option>
-                                <option className="p-5" value="нп" key="">Доставка Новой Почтой</option>
+                                <option className="p-5" value="нп" key="">Доставка Новой Почтой {freeDelivery && np ? '(Бесплатно)': ''}</option>
                             </select>
                             }
                             {deliv && <div>
@@ -327,7 +331,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                             </div>}
                             {!novaPoshta &&
                             <div className="flex flex-col gap-5">
-                            <div>
+                            <div className="time__wrapper">
                                 <label className="mb-4 mr-4 text-xl">Удобное время получения -</label>
                              <Field className="p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />
                              </div>

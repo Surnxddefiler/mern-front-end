@@ -26,6 +26,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
         
     }, [linkId, setLoading])
     const [discount,setDiscount]=useState(0)
+    
     //логика бесплатной доставки
       useEffect(()=>{
         fetch("https://mernnode-production-873d.up.railway.app/api/nicotine/status")
@@ -38,9 +39,8 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
         if (discount !==0) {
                     const shownKey = `freeDeliveryShown_${discount}`; // уникальный ключ
         const hasShown = sessionStorage.getItem(shownKey);
-            console.log(typeof discount)
         if (pay > discount && !hasShown) {
-            toast("бесплатная доставка");
+            toast(`Вы составили заказ на ${pay} ₴ — доставка будет бесплатной !`);
             hasShownFreeDelivery.current = true; // больше не показываем
              sessionStorage.setItem(shownKey, "true");
         }

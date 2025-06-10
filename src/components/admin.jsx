@@ -9,7 +9,10 @@ export const Admin = () => {
     useEffect(()=>{
         fetch("https://mernnode-production-873d.up.railway.app/api/nicotine/status")
         .then(res => res.json())
-        .then(data =>setDiscount(data.discount))
+        .then(data =>{
+            setDiscount(data.discount)
+            setNp(data.np)
+        })
         .catch(err => console.error("Ошибка при получении:", err));
     },[])
 
@@ -113,6 +116,7 @@ const [tip, setTip]=useState(false)
     // }
     //discount
     const [discount, setDiscount]=useState(0);
+        const [np, setNp]=useState(false);
 
     const dicsountHandler=async ()=>{
            const response = await fetch("https://mernnode-production-873d.up.railway.app/api/nicotine/toggle-status", {
@@ -127,6 +131,19 @@ const [tip, setTip]=useState(false)
         setDiscount(data.discount);
     }
 
+      const npHandler=async ()=>{
+           const response = await fetch("https://mernnode-production-873d.up.railway.app/api/nicotine/changenp", {
+          method: "POST",
+         headers: {
+      "Content-Type": "application/json"
+    },
+        });
+      
+        const data = await response.json();
+        setNp(data.np);
+    }
+
+
     return (
         <div>
 
@@ -134,6 +151,9 @@ const [tip, setTip]=useState(false)
                             <h1 className="text-white text-xl mt-5" >Акция</h1>
                             <input className="bg-fifth placeholder:text-white p-5" type="number" value={discount} onChange={e=>setDiscount(e.target.value)}  />
                             <button className="bg-fifth placeholder:text-white p-5 text-2xl text-white mt-5 mb-5" onClick={dicsountHandler}>Активировать акцию</button>
+                            <button onClick={npHandler} className=" bg-fifth placeholder:text-white p-5 text-2xl text-white mb-5">
+                                {np ? "акция для всего": "акция только локально"}
+                            </button>
                         </div>
 
             <Formik initialValues={initialValue} onSubmit={(values, { setFieldValue }) => {
