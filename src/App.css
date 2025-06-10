@@ -303,7 +303,8 @@ body:before{
   content: "";
 }
 .time__wrapper{
-      display: grid;
-    grid-template-columns: max-content 1fr;
+    display: grid;
+    grid-template-columns: 70% 29%;
     align-items: center;
+    gap: 1%;
 }
