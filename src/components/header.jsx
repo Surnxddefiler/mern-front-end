@@ -294,7 +294,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
             })}
             </div>
             <div className=" border-t-4"></div>
-            <div className="text-2xl my-5 border w-full  border-secondary  p-2 ">Стоимость заказа - {pay} ₴</div>
+            <div className="text-2xl my-5 border w-full  border-secondary  p-2 ">Сумма заказа - {pay} ₴</div>
             <div className="text-xl text-gray-600 mb-3">{pay ? "":"Добавьте товары в корзину, чтобы продолжить оформление"}</div>
             <Formik onSubmit={onSubmitForm} initialValues={initialValue}>
                 {({ handleSubmit, values }) => (
@@ -303,8 +303,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                         handleSubmit()
                     }}>
                         <div className="flex justify-center flex-col gap-5">
-                            <Field type="tel" className="placeholder:opacity-70 bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона :"} name={"phone"} onKeyDown={handleKeyDown} />
-                            {!deliv && !novaPoshta && <select ref={selectRef} value={place} className="bg-fifth placeholder:text-white text-input p-5" onChange={onChangePlace}>
+                            <Field type="tel" className="placeholder:opacity-70 text-xl bg-fifth placeholder:text-white p-5" placeholder={"Номер телефона :"} name={"phone"} onKeyDown={handleKeyDown} />
+                            {!deliv && !novaPoshta && <select ref={selectRef} value={place} className="text-xl bg-fifth placeholder:text-white text-input p-5" onChange={onChangePlace}>
                                 <option value="" disabled hidden key="">Точка выдачи -</option>
                                 <option className="p-5" value="• ЖБИ" key="">• ЖБИ</option>
                                 <option className="p-5" value="• Дэмитекс" key="">• Дэмитекс</option>
@@ -326,16 +326,16 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                             </select>
                             }
                             {deliv && <div>
-                                <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки :" value={place} className="w-full placeholder:opacity-70 bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
+                                <input onKeyDown={handleKeyDown} placeholder="Адрес / место доставки :" value={place} className="text-xl w-full placeholder:opacity-70 bg-fifth placeholder:text-white p-5" type="text" onChange={onChangePlace} />
                                 <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setDeliv(false) }}>Выбрать из существующих -</div>
                             </div>}
                             {!novaPoshta &&
                             <div className="flex flex-col gap-5">
                             <div className="time__wrapper">
                                 <label className="mb-4 mr-4 text-xl">Удобное время получения -</label>
-                             <Field className="p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />
+                             <Field className="text-xl p-5 bg-fifth placeholder:text-white placeholder:opacity-70 text-input" type="time" placeholder={"время"} name={"time"} />
                              </div>
-                             <Field name="poltavapayment" as="select" className="bg-fifth placeholder:text-white text-input p-5">
+                             <Field name="poltavapayment" as="select" className="text-xl bg-fifth placeholder:text-white text-input p-5">
                             <option value="" disabled hidden>Выберите способ оплаты :</option>
   <option value="Наличные">Наличные</option>
   <option value="Картой">Картой</option>

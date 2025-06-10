@@ -302,9 +302,9 @@ input:checked + .slider:before {
 body:before{
   content: "";
 }
-.time__wrapper{
+/* .time__wrapper{
     display: grid;
     grid-template-columns: 70% 29%;
     align-items: center;
     gap: 1%;
-}
+} */
