@@ -11,7 +11,7 @@ body {
   background-color: #090a0f;
   background: url(../public/logo2.jpg)  0 50px/100% 100% no-repeat;
   min-height: 100vh;
-  backdrop-filter: blur(30px);
+  /* backdrop-filter: blur(30px); */
   overflow-x: hidden;
   /* overflow-y: auto!important; */
 }

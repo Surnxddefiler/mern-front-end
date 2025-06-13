@@ -181,8 +181,8 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
             <Lightbox
         open={open}
         close={() => {
-               document.body.style.backdropFilter="blur(30px)"
-               document.body.style.webkitBackdropFilter = "blur(30px)";
+            //    document.body.style.backdropFilter="blur(30px)"
+            //    document.body.style.webkitBackdropFilter = "blur(30px)";
             setOpen(false)
         }}
         slides={slides}

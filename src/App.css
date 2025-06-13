@@ -298,6 +298,7 @@ input:checked + .slider:before {
 }
 .Toastify__toast{
   z-index: 999999999999999;
+  /* position: fixed!important; */
 }
 body:before{
   content: "";
@@ -308,3 +309,10 @@ body:before{
     align-items: center;
     gap: 1%;
 } */
+ .page-blur-layer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(30px);
+  z-index: -1;
+}
