@@ -106,7 +106,7 @@ const [tip, setTip]=useState(false)
         cost: Number,
         mark: "",
         color: "",
-        place: Number,
+        place: 0,
         gallery: [],
     }
     // const initialChange={

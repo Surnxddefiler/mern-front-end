@@ -44,7 +44,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
         const hasShownAlmost = sessionStorage.getItem(almostKey);
 
         // Бесплатная доставка достигнута
-        if (pay > discount && !hasShownFree) {
+        if (pay >= discount && !hasShownFree) {
             toast(`Вы составили заказ на ${pay} ₴ — доставка будет бесплатной!`);
             hasShownFreeDelivery.current = true;
             sessionStorage.setItem(freeKey, "true");

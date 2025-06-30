@@ -237,7 +237,7 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
 
     useEffect(() => {
          if (discount !==0) {
-        if (pay > discount) {
+        if (pay >= discount) {
             setFreeDelivery(true)
             setWasToastShown(true);
         }
