@@ -26,22 +26,22 @@ export const Main = () => {
                     </NavLink>
                 )
             })} */}
-              <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/'+ 'odnorazka'}>
+              <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/odnorazka'}>
                             <button className='rounded-3xl button py-10'><span unselectable='on' className='rounded-3xl select-none'>Одноразки</span><i></i> </button>
                     </NavLink>
-                      <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/'+ 'vape'}>
+                      <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/vape'}>
                             <button className='rounded-3xl button py-10'><span unselectable='on' className='rounded-3xl select-none'>МНОГОРАЗКИ</span><i></i> </button>
                     </NavLink>
-                     <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/'+ 'cartridge'}>
+                     <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/cartridge'}>
                             <button className='rounded-3xl button py-10'><span unselectable='on' className='rounded-3xl select-none'>КАРТРИДЖИ</span><i></i> </button>
                     </NavLink>
-                    <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/'+ 'liquid'}>
+                    <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/liquid'}>
                             <button className='rounded-3xl button py-10'><span unselectable='on' className='rounded-3xl select-none'>жидкости</span><i></i> </button>
                     </NavLink>
-                    <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/'+ 'snus'}>
+                    <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/snus'}>
                             <button className='rounded-3xl button py-10'><span unselectable='on' className='rounded-3xl select-none'>снюс</span><i></i> </button>
                     </NavLink>
-                    <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/'+ 'hookah'}>
+                    <NavLink className="border font-bold rounded-3xl w-96 flex flex-col items-center bg-black text-2xl" to={'/product/hookah'}>
                             <button className='rounded-3xl button py-10'><span unselectable='on' className='rounded-3xl select-none'>ВСЁ ДЛЯ КАЛЬЯНА</span><i></i> </button>
                     </NavLink>
         </div>
