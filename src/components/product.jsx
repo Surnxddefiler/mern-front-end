@@ -4,6 +4,37 @@ import {toast } from "react-toastify"
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loading, setLoading }) => {
+//cpt list
+const taxonomyMap = {
+  vape: {
+    mark: 'vape-mark',
+    nicotine: 'resistance'
+  },
+  odnorazka: {
+    mark: 'mark',
+    nicotine: 'puffs-nicotine'
+  },
+  cartridge: {
+    mark: 'cartridge-mark',
+    nicotine: 'resistance-ammount'
+  },
+  snus: {
+    mark: 'snus-mark',
+    nicotine: 'strength-quantity'
+  },
+  liquid: {
+    mark: 'liquid-mark',
+    nicotine: 'amount-nicotine'
+  },
+
+  hookah: {
+    mark: 'hookah-mark',
+    nicotine: 'information'
+  }
+  // добавь другие типы при необходимости
+};
+
+
 
     const linkId = useParams().id
 
@@ -62,6 +93,37 @@ const [additinalLoading, setAdditionalLoading]=useState(false)
 
 useEffect(() => {
 
+  //foruseEffect
+  const taxonomyMap = {
+  vape: {
+    mark: 'vape-mark',
+    nicotine: 'resistance'
+  },
+  odnorazka: {
+    mark: 'mark',
+    nicotine: 'puffs-nicotine'
+  },
+  cartridge: {
+    mark: 'cartridge-mark',
+    nicotine: 'resistance-ammount'
+  },
+  snus: {
+    mark: 'snus-mark',
+    nicotine: 'strength-quantity'
+  },
+  liquid: {
+    mark: 'liquid-mark',
+    nicotine: 'amount-nicotine'
+  },
+
+  hookah: {
+    mark: 'hookah-mark',
+    nicotine: 'information'
+  }
+  // добавь другие типы при необходимости
+};
+
+
 
   //laberls
    const taxonomyLabels = {
@@ -108,9 +170,10 @@ let url = `https://primary-production-66e2f.up.railway.app/wp-json/wp/v2/${linkI
       setData(data);
 
       // Получаем таксономии из результата
-      const terms = data[0]?._embedded?.['wp:term'] || [];
-      const tax1 = terms[0]?.[0]?.taxonomy;
-      const tax2 = terms[1]?.[0]?.taxonomy;
+      const map =taxonomyMap[linkId]
+
+      const tax1 = map.mark
+      const tax2 = map.nicotine;
 
       setSelectedMarkTax(tax1);
       setSelectedNicotineTax(tax2);
@@ -217,17 +280,25 @@ useEffect(() => {
 
                     <div className={`last:pb-2 ${additinalLoading ? "additional__loading" : ""}`}>
                         {data.map((obj, i) => {
+
+ //getting right taxonomy
+                            const flatTerms = obj?._embedded?.['wp:term']?.flat() || [];
+                            const map = taxonomyMap[linkId] || {};
+const markTerm = flatTerms.find(t => t.taxonomy === map.mark);
+const nicotineTerm = flatTerms.find(t => t.taxonomy === map.nicotine);
                             //обаботчик для колечества в складе
                             const handleAddToCart = (ammountInCart) => {
                                 if (ammountInCart >= 50) {
                                     const notify = () => toast("корзина полная");
                                     return notify()
                                 }
-                                setCart([...cart, { mark: obj._embedded['wp:term'][1][0].name, name: obj.acf.product_name, nicotine: obj._embedded['wp:term'][0][0].name, cost: Number(obj.acf.cost), isPod: isPod }]);
+                                setCart([...cart, { mark: markTerm, name: obj.acf.product_name, nicotine: nicotineTerm, cost: Number(obj.acf.cost), isPod: isPod }]);
                                 setAmountsInCart(prev => prev + 1)
+                                console.log({ mark: markTerm?.name, name: obj.acf.product_name, nicotine: nicotineTerm?.name, cost: Number(obj.acf.cost), isPod: isPod })
                             };
-                            const productObject={ mark:  obj._embedded['wp:term'][1][0].name, name: obj.acf.product_name, nicotine: obj._embedded['wp:term'][0][0].name, cost: Number(obj.acf.cost)}
-                            console.log(obj.acf)
+                           
+
+                            const productObject={ mark: markTerm?.name, name: obj.acf.product_name, nicotine: nicotineTerm?.name, cost: Number(obj.acf.cost)}
                             const isProductInCart = cart.some(item => (
                                 item.mark === productObject.mark &&
                                 item.name === productObject.name &&
