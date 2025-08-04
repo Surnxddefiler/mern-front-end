@@ -292,9 +292,9 @@ const nicotineTerm = flatTerms.find(t => t.taxonomy === map.nicotine);
                                     const notify = () => toast("корзина полная");
                                     return notify()
                                 }
-                                setCart([...cart, { mark: markTerm, name: obj.acf.product_name, nicotine: nicotineTerm, cost: Number(obj.acf.cost), isPod: isPod }]);
+                                setCart([...cart, { mark: markTerm?.name, name: obj.acf.product_name, nicotine: nicotineTerm?.name, cost: Number(obj.acf.cost), isPod: isPod }]);
                                 setAmountsInCart(prev => prev + 1)
-                                console.log({ mark: markTerm?.name, name: obj.acf.product_name, nicotine: nicotineTerm?.name, cost: Number(obj.acf.cost), isPod: isPod })
+                                // console.log({ mark: markTerm?.name, name: obj.acf.product_name, nicotine: nicotineTerm?.name, cost: Number(obj.acf.cost), isPod: isPod })
                             };
                            
 
