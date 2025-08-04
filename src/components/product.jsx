@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useRef, useState } from 'react'
 import {toast } from "react-toastify"
-import Lightbox from "yet-another-react-lightbox";
+import Lightbox, { label } from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loading, setLoading }) => {
 
@@ -13,18 +13,124 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     const [isPod, setIsPod]=useState('');
     //
     const [pay, setPayment] = useState(0)
-    useEffect(() => {
-        setLoading(true)
-        fetch('https://mernnode-production-873d.up.railway.app/api/nicotine/' + linkId).then(res => res.json()).then(data => {
-            if (data.data.type==='МНОГОРАЗКИ' || data.data.type==="КАРТРИДЖИ") {
-                setIsPod(`${data.data.type}`)
-            }
-            setData(data.data.product)
-            setFilterName([data.data.firstFilter, data.data.secondFilter])
-            setLoading(false)
-        })
-        
-    }, [linkId, setLoading])
+
+
+    //all categories
+    const [selectedMarkTax, setSelectedMarkTax] = useState('');
+const [selectedNicotineTax, setSelectedNicotineTax] = useState('');
+    const taxonomyLabels = {
+  'mark': 'Марка',
+  'puffs-nicotine': 'Затяжки / % Никотина',
+  'information': 'Информация',
+  'strength-quantity':'Крепость / Количество',
+  'liquid-mark': 'Макра',
+  'snus-mark': 'Макра',
+  'vape-mark': 'Макра',
+  'hookah-mark': 'Макра',
+'cartridge-mark': 'Марка',
+'amount-nicotine': 'Объём / % Никотина',
+'resistance': 'Сопротивление',
+'resistance-ammount': 'Сопротивление / Объём'
+};
+
+
+    //getting all tax
+const [markArray, setMarkArray]=useState([])
+const [nicotineArray, setNicotineArray]=useState([])
+const [selectedMark, setSelectedMark] = useState('');
+const [selectedNicotine, setSelectedNicotine] = useState('');
+
+const fetchAllTerms = async (taxonomy) => {
+  let page = 1;
+  let allTerms = [];
+  let hasMore = true;
+
+  while (hasMore) {
+    const res = await fetch(`https://primary-production-66e2f.up.railway.app/wp-json/wp/v2/${taxonomy}?per_page=100&page=${page}&hide_empty=true`);
+    const data = await res.json();
+    allTerms = [...allTerms, ...data];
+    hasMore = data.length === 100;
+    page++;
+  }
+
+  return allTerms;
+};
+
+useEffect(() => {
+  if (linkId==="vape") {
+   setIsPod('МНОГОРАЗКИ')
+  }
+ if (linkId==="cartridge") {
+   setIsPod('КАРТРИДЖИ')
+  }
+}, []);
+
+
+//additinal loading
+const [wasLoaded, setWasLoaded]=useState(false)
+const [additinalLoading, setAdditionalLoading]=useState(false)
+    //pagination
+      const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+useEffect(() => {
+
+  if(!wasLoaded){
+  setLoading(true);
+  }
+  else{
+    setAdditionalLoading(true)
+  }
+let url = `https://primary-production-66e2f.up.railway.app/wp-json/wp/v2/${linkId}?_embed&per_page=10&page=${page}&orderby=menu_order&order=asc`;
+
+  if (selectedMark) url += `&${selectedMarkTax}=${selectedMark}`;
+  if (selectedNicotine) url += `&${selectedNicotineTax}=${selectedNicotine}`;
+
+  fetch(url)
+    .then(res => {
+      const total = res.headers.get('X-WP-TotalPages');
+      if (total) setTotalPages(parseInt(total));
+      return res.json();
+    })
+    .then(data => {
+      if (!data || data.length === 0) {
+        setData([]);
+        setLoading(false);
+        return;
+      }
+
+      setData(data);
+
+      // Получаем таксономии из результата
+      const terms = data[0]?._embedded?.['wp:term'] || [];
+      const tax1 = terms[0]?.[0]?.taxonomy;
+      const tax2 = terms[1]?.[0]?.taxonomy;
+
+      setSelectedMarkTax(tax1);
+      setSelectedNicotineTax(tax2);
+      setFilterName([taxonomyLabels[tax1], taxonomyLabels[tax2]]);
+
+      Promise.all([
+        fetchAllTerms(tax1),
+        fetchAllTerms(tax2),
+      ]).then(([marks, nicotines]) => {
+        setMarkArray(marks);
+        setNicotineArray(nicotines);
+      });
+
+      setLoading(false);
+      setWasLoaded(true)
+      setAdditionalLoading(false)
+    })
+    .catch(err => {
+      console.error(err);
+      setLoading(false);
+      setWasLoaded(true)
+        setAdditionalLoading(false)
+    });
+}, [linkId, page, selectedMark, selectedNicotine]);
+
+
     const [discount,setDiscount]=useState(0)
     
     //логика бесплатной доставки
@@ -35,29 +141,32 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
         .catch(err => console.error("Ошибка при получении:", err));
     },[])
     const hasShownFreeDelivery = useRef(false);
-    useEffect(() => {
-        if (discount !== 0) {
+useEffect(() => {
+    if (discount !== 0) {
         const freeKey = `freeDeliveryShown_${discount}`;
         const almostKey = `freeDeliveryAlmostShown_${discount}`;
 
         const hasShownFree = sessionStorage.getItem(freeKey);
         const hasShownAlmost = sessionStorage.getItem(almostKey);
 
-        // Бесплатная доставка достигнута
         if (pay >= discount && !hasShownFree) {
             toast(`Вы составили заказ на ${pay} ₴ — доставка будет бесплатной!`);
             hasShownFreeDelivery.current = true;
             sessionStorage.setItem(freeKey, "true");
         }
 
-        // Почти бесплатная доставка
-        if (pay < discount && !hasShownAlmost && pay !== 0) {
+        if (pay < discount && pay !== 0 && !hasShownAlmost) {
             toast(`Хочешь бесплатную доставку? Добавь к заказу позиций ещё на ${discount - pay} ₴ — и доставка будет бесплатно!`);
             sessionStorage.setItem(almostKey, "true");
         }
+
+        // Сброс при сбросе суммы
+        if (pay === 0) {
+            sessionStorage.removeItem(freeKey);
+            sessionStorage.removeItem(almostKey);
+        }
     }
-      
-    }, [pay, discount]);
+}, [pay, discount]);
     useEffect(() => {
         let totalPayment = 0;
         cart.forEach((obj) => {
@@ -66,10 +175,8 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
         setPayment(totalPayment);
     }, [cart]);
     
-    //фильтр
-    const [mark, setMark] = useState('')
-    const [tyagi, setTyagi] = useState('')
-    const markArray=[...new Set(data.map((obj) => obj.mark))];
+
+
     //
     const [open, setOpen]=useState(false)
     const [slides, setSlides]=useState({})
@@ -78,54 +185,42 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
         <>
             {loading ? <img className='loading__animation absolute translate-x-2/4 duration-300' style={{top: "150px", right: "50%"}} src="/load.gif" alt="" /> :
                 <div className=" text-white mt-5">
-                    <div className="bg-primary py-5  flex justify-between w-full gap-4  rounded-3x flex-wrap px-4">
-                        <select onChange={(e) => { setMark(e.target.value) }} className={`${mark ? '' : 'unused-filter'} w-full p-2 bg-fifth rounded-2xl`} name="" id="">
-                            <option value="" className="bg-fifth text-black" hidden key={"mark-hidden"} >{filterName[0]}</option>
-                            <option value="" className="bg-fifth text-black" key={"mark-none"} >-</option>
-                            {
-                            markArray.map((mark, i) => (
-                                <option className="bg-fifth text-black" key={`mark-${i}`} value={mark}>
-                                    {mark}
-                                </option>
-                            ))}
-                        </select>
-                        <select onChange={(e) => { setTyagi(e.target.value) }} className={`${tyagi ? '' : 'unused-filter'} w-full bg-fifth p-2 rounded-2xl`} name="" id="">
-                            <option value="" className="bg-fifth text-black" hidden>{filterName[1]}</option>
-                            <option value="" className="bg-fifth text-black" >-</option>
-                            {[...new Set(data.map((obj) => obj.nicotine))].map((nicotine, i) => (
-                                <option className="bg-fifth text-black" key={`nicotine-${i}`} value={nicotine}>
-                                    {nicotine}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className="last:pb-2">
-                        {data.filter((obj) => {
-                            const filter = obj.mark.toLowerCase()
-                            const secondFilter = obj.nicotine.toLowerCase()
-                            if(mark && tyagi){
-                                return filter===mark.toLowerCase() && secondFilter===tyagi.toLowerCase()
-                            }
-                            else if(mark){
-                                return filter===mark.toLowerCase();
-                            }
-                            else if(tyagi){
-                               return secondFilter===tyagi.toLowerCase()
-                            }
-                            else{
-                                return data
-                            }
-                        }).map((obj, i) => {
+                    <div className="flex gap-4 flex-wrap px-4 py-5 bg-primary rounded-3xl">
+  <select
+    value={selectedMark}
+    onChange={(e) => { setSelectedMark(e.target.value); setPage(1); }}
+    className="w-full p-2 bg-fifth rounded-2xl"
+  >
+    <option value="">{filterName[0]}</option>
+    {markArray.map((term) => (
+      <option key={term.id} value={term.id}>{term.name}</option>
+    ))}
+  </select>
+
+  <select
+    value={selectedNicotine}
+    onChange={(e) => { setSelectedNicotine(e.target.value); setPage(1); }}
+    className="w-full p-2 bg-fifth rounded-2xl"
+  >
+    <option value="">{filterName[1]}</option>
+    {nicotineArray.map((term) => (
+      <option key={term.id} value={term.id}>{term.name}</option>
+    ))}
+  </select>
+</div>
+
+                    <div className={`last:pb-2 ${additinalLoading ? "additional__loading" : ""}`}>
+                        {data.map((obj, i) => {
                             //обаботчик для колечества в складе
                             const handleAddToCart = (ammountInCart) => {
                                 if (ammountInCart >= 50) {
                                     const notify = () => toast("корзина полная");
                                     return notify()
                                 }
-                                setCart([...cart, { mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost, isPod: isPod }]);
+                                setCart([...cart, { mark: obj._embedded['wp:term'][1][0].name, name: obj.acf.name, nicotine: obj._embedded['wp:term'][0][0].name, cost: Number(obj.acf.cost), isPod: isPod }]);
                                 setAmountsInCart(prev => prev + 1)
                             };
-                            const productObject={ mark: obj.mark, name: obj.name, nicotine: obj.nicotine, cost: obj.cost}
+                            const productObject={ mark:  obj._embedded['wp:term'][1][0].name, name: obj.acf.name, nicotine: obj._embedded['wp:term'][0][0].name, cost: Number(obj.acf.cost)}
                             const isProductInCart = cart.some(item => (
                                 item.mark === productObject.mark &&
                                 item.name === productObject.name &&
@@ -133,17 +228,27 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                                 item.cost === productObject.cost
                               ));
                     
-                              const gallery=[]
-                           obj.gallery.forEach((image) => {
-  const src = image.url;
-  console.log(image);
-  gallery.push({ src });
-});
+                              const gallery = [];
 
+// Проверка на наличие wp:featuredmedia и source_url
+const featuredMedia = obj?._embedded?.["wp:featuredmedia"];
+if (Array.isArray(featuredMedia) && featuredMedia[0]?.source_url) {
+  gallery.push({src:featuredMedia[0].source_url});
+}
+
+// Проверка на наличие дополнительной фотографии
+if (obj?.acf?.extra_photo?.link) {
+  gallery.push({src:obj.acf.extra_photo.link}); // не надо повторно пушить featured
+}
+if (obj?.acf?.extra_photo_copy?.link) {
+  gallery.push({src:obj.acf.extra_photo_copy.link}); // не надо повторно пушить featured
+}
+
+                            
                             return (
                                 <div className="bg-primary my-5 flex flex-col justify-center px-5 py-5 rounded-3xl" >
                                     <div className="flex gap-3 mb-4">
-                                        {gallery.map((image,index)=>{
+                        {gallery.map((image,index)=>{
                            
 
   return <img onClick={()=>{
@@ -157,10 +262,11 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
   } src={image.src} alt={`product-${index}`} style={{ maxWidth: "100px", borderRadius: '0.5rem', width:'100%', maxHeight: "100px", objectFit: "cover" }} />
 ;
                                         })}
+                                    
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <div style={{color: obj.color}} className={`${isProductInCart ? 'text-red-500 active-product' : ''} text-2xl font-bold`}>{obj.name}</div>
-                                        {obj.stock ?
+                                        <div style={{color: obj.acf.color}} className={`${isProductInCart ? 'text-red-500 active-product' : ''} text-2xl font-bold`}>{obj.acf.product_name}</div>
+                                        {obj.acf.stock ?
                                         <div>
                                             <i className="fa-solid fa-plus fa-2xl text-white active:text-red-500 focus:text-red-500" onClick={() => {handleAddToCart(ammountInCart) }}></i>
                                         </div>
@@ -168,14 +274,20 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
                                         ''
                         }
                                     </div>
-                                    <div className="text-secondary">{filterName[1]} - {obj.nicotine}</div>
-                                    <div className="text-fourth">{filterName[1]==="Сопротивление" ? "" : `${filterName[0]} - ${obj.mark}`}</div>
-                                    <div className="text-fifth" >Стоимость - {obj.cost} ₴</div>
-                                    <div className="flex justify-end">Наличие - {obj.stock ? '✅' : '❌'}</div>
+                                    <div className="text-secondary">{filterName[1]} - {obj._embedded['wp:term'][0][0].name}</div>
+                                    <div className="text-fourth">{filterName[1]==="Сопротивление" ? "" : `${filterName[0]} - ${obj._embedded['wp:term'][1][0].name}`}</div>
+                                    <div className="text-fifth" >Стоимость - {obj.acf.cost} ₴</div>
+                                    <div className="flex justify-end">Наличие - {obj.acf.stock ? '✅' : '❌'}</div>
                                 </div>
                             )
                         })}
                     </div>
+                    
+                      <div className="pagination__wrapper" style={{ marginTop: "20px" }}>
+        <button className="py-2 px-4 bg-slate-900" onClick={() => setPage(p => Math.max(p - 1, 1))} disabled={page === 1}><i class="fa-solid fa-angle-left"></i></button>
+        <span style={{ margin: "0 10px" }}>{page} из {totalPages}</span>
+        <button className="p-2" onClick={() => setPage(p => Math.min(p + 1, totalPages))} disabled={page === totalPages}><i class="fa-solid fa-angle-right"></i></button>
+      </div>
                 </div>
             }
             <Lightbox

@@ -316,3 +316,28 @@ body:before{
   backdrop-filter: blur(30px);
   z-index: -1;
 }
+.pagination__wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 0 15px;
+}
+.pagination__wrapper button, .pagination__wrapper span{
+  background-color: rgb(9 10 15);
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.additional__loading{
+  position: relative;
+}
+.additional__loading:after{
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+position: absolute;
+height: 100%;
+width: 100%;
+z-index: 2;
+top: 0;
+left: 0;
+}
