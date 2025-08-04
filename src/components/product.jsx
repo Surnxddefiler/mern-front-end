@@ -362,7 +362,7 @@ if (obj?.acf?.extra_photo_copy?.link) {
                     </div>
                     
                       <div className="pagination__wrapper" style={{ marginTop: "20px" }}>
-        <button className="py-2 px-4 bg-slate-900" onClick={() => setPage(p => Math.max(p - 1, 1))} disabled={page === 1}><i class="fa-solid fa-angle-left"></i></button>
+        <button className="py-6 px-4 bg-slate-900" onClick={() => setPage(p => Math.max(p - 1, 1))} disabled={page === 1}><i class="fa-solid fa-angle-left"></i></button>
         <span style={{ margin: "0 10px" }}>{page} из {totalPages}</span>
         <button className="p-2" onClick={() => setPage(p => Math.min(p + 1, totalPages))} disabled={page === totalPages}><i class="fa-solid fa-angle-right"></i></button>
       </div>
