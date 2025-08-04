@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useRef, useState } from 'react'
 import {toast } from "react-toastify"
-import Lightbox, { label } from "yet-another-react-lightbox";
+import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loading, setLoading }) => {
 
@@ -18,20 +18,7 @@ export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loadin
     //all categories
     const [selectedMarkTax, setSelectedMarkTax] = useState('');
 const [selectedNicotineTax, setSelectedNicotineTax] = useState('');
-    const taxonomyLabels = {
-  'mark': 'Марка',
-  'puffs-nicotine': 'Затяжки / % Никотина',
-  'information': 'Информация',
-  'strength-quantity':'Крепость / Количество',
-  'liquid-mark': 'Макра',
-  'snus-mark': 'Макра',
-  'vape-mark': 'Макра',
-  'hookah-mark': 'Макра',
-'cartridge-mark': 'Марка',
-'amount-nicotine': 'Объём / % Никотина',
-'resistance': 'Сопротивление',
-'resistance-ammount': 'Сопротивление / Объём'
-};
+   
 
 
     //getting all tax
@@ -63,7 +50,7 @@ useEffect(() => {
  if (linkId==="cartridge") {
    setIsPod('КАРТРИДЖИ')
   }
-}, []);
+}, [linkId]);
 
 
 //additinal loading
@@ -74,6 +61,25 @@ const [additinalLoading, setAdditionalLoading]=useState(false)
   const [totalPages, setTotalPages] = useState(1);
 
 useEffect(() => {
+
+
+  //laberls
+   const taxonomyLabels = {
+  'mark': 'Марка',
+  'puffs-nicotine': 'Затяжки / % Никотина',
+  'information': 'Информация',
+  'strength-quantity':'Крепость / Количество',
+  'liquid-mark': 'Марка',
+  'snus-mark': 'Марка',
+  'vape-mark': 'Марка',
+  'hookah-mark': 'Марка',
+'cartridge-mark': 'Марка',
+'amount-nicotine': 'Объём / % Никотина',
+'resistance': 'Сопротивление',
+'resistance-ammount': 'Сопротивление / Объём'
+};
+
+
 
   if(!wasLoaded){
   setLoading(true);
@@ -128,7 +134,7 @@ let url = `https://primary-production-66e2f.up.railway.app/wp-json/wp/v2/${linkI
       setWasLoaded(true)
         setAdditionalLoading(false)
     });
-}, [linkId, page, selectedMark, selectedNicotine]);
+}, [linkId, page, selectedMark, selectedNicotine, selectedMarkTax, setLoading, selectedNicotineTax, wasLoaded]);
 
 
     const [discount,setDiscount]=useState(0)
