@@ -223,10 +223,11 @@ useEffect(() => {
                                     const notify = () => toast("корзина полная");
                                     return notify()
                                 }
-                                setCart([...cart, { mark: obj._embedded['wp:term'][1][0].name, name: obj.acf.name, nicotine: obj._embedded['wp:term'][0][0].name, cost: Number(obj.acf.cost), isPod: isPod }]);
+                                setCart([...cart, { mark: obj._embedded['wp:term'][1][0].name, name: obj.acf.product_name, nicotine: obj._embedded['wp:term'][0][0].name, cost: Number(obj.acf.cost), isPod: isPod }]);
                                 setAmountsInCart(prev => prev + 1)
                             };
-                            const productObject={ mark:  obj._embedded['wp:term'][1][0].name, name: obj.acf.name, nicotine: obj._embedded['wp:term'][0][0].name, cost: Number(obj.acf.cost)}
+                            const productObject={ mark:  obj._embedded['wp:term'][1][0].name, name: obj.acf.product_name, nicotine: obj._embedded['wp:term'][0][0].name, cost: Number(obj.acf.cost)}
+                            console.log(obj.acf)
                             const isProductInCart = cart.some(item => (
                                 item.mark === productObject.mark &&
                                 item.name === productObject.name &&
