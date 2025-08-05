@@ -4,6 +4,10 @@ import {toast } from "react-toastify"
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 export const Product = ({ setCart, cart, ammountInCart, setAmountsInCart, loading, setLoading }) => {
+
+
+  
+
 //cpt list
 const taxonomyMap = {
   vape: {
@@ -90,6 +94,17 @@ const [additinalLoading, setAdditionalLoading]=useState(false)
     //pagination
       const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+
+  useEffect(() => {
+  const el = document.querySelector('#body__wrapper'); // или другой ID 
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}, [page]);
+
 
 useEffect(() => {
 
@@ -253,7 +268,7 @@ useEffect(() => {
     return (
         <>
             {loading ? <img className='loading__animation absolute translate-x-2/4 duration-300' style={{top: "150px", right: "50%"}} src="/load.gif" alt="" /> :
-                <div className=" text-white mt-5">
+                <div id="body__wrapper" className=" text-white mt-5">
                     <div className="flex gap-4 flex-wrap px-4 py-5 bg-primary rounded-3xl">
   <select
     value={selectedMark}
@@ -362,9 +377,29 @@ if (obj?.acf?.extra_photo_copy?.link) {
                     </div>
                     
                       <div className="pagination__wrapper" style={{ marginTop: "20px" }}>
-        <button className="py-6 px-4 bg-slate-900" onClick={() => setPage(p => Math.max(p - 1, 1))} disabled={page === 1}><i class="fa-solid fa-angle-left"></i></button>
+      <button
+  className="py-6 px-4 bg-slate-900"
+  onClick={() => {
+    const newPage = Math.max(page - 1, 1);
+    setPage(newPage);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }}
+  disabled={page === 1}
+>
+  <i className="fa-solid fa-angle-left"></i>
+</button>
         <span style={{ margin: "0 10px" }}>{page} из {totalPages}</span>
-        <button className="p-2" onClick={() => setPage(p => Math.min(p + 1, totalPages))} disabled={page === totalPages}><i class="fa-solid fa-angle-right"></i></button>
+        <button
+  className="p-2"
+  onClick={() => {
+    const newPage = Math.min(page + 1, totalPages);
+    setPage(newPage);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }}
+  disabled={page === totalPages}
+>
+  <i className="fa-solid fa-angle-right"></i>
+</button>
       </div>
                 </div>
             }
