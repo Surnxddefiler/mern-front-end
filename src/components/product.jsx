@@ -295,10 +295,11 @@ useEffect(() => {
 
                     <div className={`last:pb-2 ${additinalLoading ? "additional__loading" : ""}`}>
                         {data.map((obj, i) => {
-
+console.log(obj)
  //getting right taxonomy
                             const flatTerms = obj?._embedded?.['wp:term']?.flat() || [];
                             const map = taxonomyMap[linkId] || {};
+                            console.log(map)
 const markTerm = flatTerms.find(t => t.taxonomy === map.mark);
 const nicotineTerm = flatTerms.find(t => t.taxonomy === map.nicotine);
                             //обаботчик для колечества в складе
@@ -367,8 +368,8 @@ if (obj?.acf?.extra_photo_copy?.link) {
                                         ''
                         }
                                     </div>
-                                    <div className="text-secondary">{filterName[1]} - {obj._embedded['wp:term'][0][0].name}</div>
-                                    <div className="text-fourth">{filterName[1]==="Сопротивление" ? "" : `${filterName[0]} - ${obj._embedded['wp:term'][1][0].name}`}</div>
+                                    <div className="text-secondary">{filterName[0]} - {markTerm?.name}</div>
+                                    <div className="text-fourth">{filterName[1]==="Сопротивление" ? "" : `${filterName[1]} - ${nicotineTerm?.name}`}</div>
                                     <div className="text-fifth" >Стоимость - {obj.acf.cost} ₴</div>
                                     <div className="flex justify-end">Наличие - {obj.acf.stock ? '✅' : '❌'}</div>
                                 </div>

@@ -276,8 +276,9 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
         <div className="pb-80 text-white mt-5">
             <div className="">
             {cart.map((obj, index) => {
+                console.log(obj)
                 return <div className="flex justify-between mb-5 items-center">
-                    <div className="w-1/3" > <span>{obj.isPod ? '' : obj.mark}</span> <span>{obj.name}</span></div>
+                    <div className="w-1/3" > <span>{obj.isPod ? '' : obj.mark}</span> <span>{obj.name}</span><span> {obj.isPod==="КАРТРИДЖИ" ? obj.nicotine:""}</span></div>
                     <div className="w-1/3">{obj.cost} ₴</div>
                     <div
                         onClick={() => {
