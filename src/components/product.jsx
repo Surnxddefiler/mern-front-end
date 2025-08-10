@@ -294,7 +294,7 @@ useEffect(() => {
 </div>
 
                     <div className={`last:pb-2 ${additinalLoading ? "additional__loading" : ""}`}>
-                        {data.map((obj, i) => {
+                        {data.length>0 ? data.map((obj, i) => {
 console.log(obj)
  //getting right taxonomy
                             const flatTerms = obj?._embedded?.['wp:term']?.flat() || [];
@@ -369,12 +369,12 @@ if (obj?.acf?.extra_photo_copy?.link) {
                         }
                                     </div>
                                     <div className="text-secondary">{filterName[0]} - {markTerm?.name}</div>
-                                    <div className="text-fourth">{filterName[1]==="Сопротивление" ? "" : `${filterName[1]} - ${nicotineTerm?.name}`}</div>
+                                    <div className="text-fourth">{`${filterName[1]} - ${nicotineTerm?.name}`}</div>
                                     <div className="text-fifth" >Стоимость - {obj.acf.cost} ₴</div>
                                     <div className="flex justify-end">Наличие - {obj.acf.stock ? '✅' : '❌'}</div>
                                 </div>
                             )
-                        })}
+                        }): <div className="error__message" >Продуктов не найдено</div>}
                     </div>
                     
                       <div className="pagination__wrapper" style={{ marginTop: "20px" }}>
