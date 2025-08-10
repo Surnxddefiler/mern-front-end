@@ -374,7 +374,8 @@ if (obj?.acf?.extra_photo_copy?.link) {
                                     <div className="flex justify-end">Наличие - {obj.acf.stock ? '✅' : '❌'}</div>
                                 </div>
                             )
-                        }): <div className="error__message" >Продуктов не найдено</div>}
+                        }): <div className="error__message" >Продуктов не найдено 
+( попробуйте другой тип фильтрации )</div>}
                     </div>
                     
                       <div className="pagination__wrapper" style={{ marginTop: "20px" }}>
