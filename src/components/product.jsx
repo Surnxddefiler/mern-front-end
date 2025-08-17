@@ -164,7 +164,7 @@ useEffect(() => {
   else{
     setAdditionalLoading(true)
   }
-let url = `https://primary-production-66e2f.up.railway.app/wp-json/wp/v2/${linkId}?_embed&per_page=10&page=${page}&orderby=menu_order&order=asc`;
+let url = `https://primary-production-66e2f.up.railway.app/wp-json/wp/v2/${linkId}?_embed&per_page=15&page=${page}&orderby=menu_order&order=asc`;
 
   if (selectedMark) url += `&${selectedMarkTax}=${selectedMark}`;
   if (selectedNicotine) url += `&${selectedNicotineTax}=${selectedNicotine}`;
