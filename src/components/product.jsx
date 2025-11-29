@@ -331,11 +331,11 @@ if (Array.isArray(featuredMedia) && featuredMedia[0]?.source_url) {
 }
 
 // Проверка на наличие дополнительной фотографии
-if (obj?.acf?.extra_photo?.link) {
-  gallery.push({src:obj.acf.extra_photo.link}); // не надо повторно пушить featured
+if (obj?.acf?.extra_photo?.url) {
+  gallery.push({src:obj.acf.extra_photo.url}); // не надо повторно пушить featured
 }
-if (obj?.acf?.extra_photo_copy?.link) {
-  gallery.push({src:obj.acf.extra_photo_copy.link}); // не надо повторно пушить featured
+if (obj?.acf?.extra_photo_copy?.url) {
+  gallery.push({src:obj.acf.extra_photo_copy.url}); // не надо повторно пушить featured
 }
 
                             
