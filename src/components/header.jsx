@@ -357,8 +357,8 @@ const ModalWindow = ({ cart, setCart, setAmountsInCart, restoredOrder }) => {
                             <Field className="placeholder:opacity-70 w-full bg-fifth placeholder:text-white p-5" placeholder={"Отделение :"}  type="text" name={"compartment"}/>
                             <Field name="payment" as="select" className="bg-fifth placeholder:text-white text-input p-5">
                             <option value="" disabled hidden>Выберите способ оплаты : </option>
-  <option value="Наложенный платёж">Наложенный платёж</option>
-  <option value="Предоплата">Предоплата</option>
+  {/* <option value="Наложенный платёж">Наложенный платёж</option>
+  <option value="Предоплата">Предоплата</option> */}
   <option value="Полная оплата">Полная оплата</option>
                             </Field>
                             <div className="mt-5 rounded-2xl bg-secondary duration-200 px-4 py-1 w-fit" onClick={() => { setNovaPoshta(false) }}>Назад ⬅️</div>
